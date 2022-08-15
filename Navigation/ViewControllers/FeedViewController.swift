@@ -9,7 +9,13 @@
 import Foundation
 import UIKit
 
+struct Post {
+    var title : String
+}
+
 class FeedViewController : UIViewController {
+
+    var postTitle = Post(title: "hi everybody")
 
     private let titleLabel: UILabel = {
            let label = UILabel()
@@ -55,8 +61,9 @@ class FeedViewController : UIViewController {
 
 
     @objc func showPostController() {
-            let detailController = PostViewController()
-            navigationController?.pushViewController(detailController, animated: false)
+        let detailController = PostViewController()
+        detailController.titlePost = postTitle.title
+        navigationController?.pushViewController(detailController, animated: false)
         }
 
 

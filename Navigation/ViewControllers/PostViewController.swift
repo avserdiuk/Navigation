@@ -11,6 +11,8 @@ import UIKit
 
 class PostViewController : UIViewController {
 
+    var titlePost: String = ""
+
     private let titleLabel: UILabel = {
            let label = UILabel()
            label.text = "Post"
@@ -26,6 +28,7 @@ class PostViewController : UIViewController {
         view.backgroundColor = .cyan
 
         view.addSubview(titleLabel)
+        titleLabel.text = titlePost
 
         NSLayoutConstraint.activate([
                    titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
