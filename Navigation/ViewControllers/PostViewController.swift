@@ -12,6 +12,7 @@ import UIKit
 class PostViewController : UIViewController {
 
     var titlePost: String = ""
+    // let alertController = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert) ДЛЯ СЛЕД ЗАДАНИЯ
 
     private let titleLabel: UILabel = {
            let label = UILabel()
@@ -27,6 +28,10 @@ class PostViewController : UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .cyan
 
+       // alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                   //print("alert")
+               // })) ДЛЯ СЛЕД ЗАДАНИЯ
+
         view.addSubview(titleLabel)
         titleLabel.text = titlePost
 
@@ -35,5 +40,19 @@ class PostViewController : UIViewController {
                    titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
                ])
 
+        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
+        navigationItem.rightBarButtonItems = [add]
+
+
+
        }
+
+        @objc func addTapped() {
+           // self.present(alertController, animated: true, completion: nil) ДЛЯ СЛЕД ЗАДАНИЯ
+
+            let popupViewController = InfoViewController()
+            popupViewController.modalPresentationStyle = .fullScreen
+            self.present(popupViewController, animated: true, completion: nil)
+        }
+
 }
