@@ -14,6 +14,7 @@
 		4152699A28A8411900D5CFEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4152699828A8411900D5CFEC /* LaunchScreen.storyboard */; };
 		41729E8D28A9027300EF8DC5 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41729E8C28A9027300EF8DC5 /* FeedViewController.swift */; };
 		41729E8F28A902C700EF8DC5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41729E8E28A902C700EF8DC5 /* ProfileViewController.swift */; };
+		41729E9228AA2E3800EF8DC5 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41729E9128AA2E3800EF8DC5 /* PostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		4152699B28A8411900D5CFEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41729E8C28A9027300EF8DC5 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		41729E8E28A902C700EF8DC5 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		41729E9128AA2E3800EF8DC5 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,14 +62,23 @@
 			children = (
 				4152698D28A8411800D5CFEC /* AppDelegate.swift */,
 				4152698F28A8411800D5CFEC /* SceneDelegate.swift */,
-				41729E8C28A9027300EF8DC5 /* FeedViewController.swift */,
-				41729E8E28A902C700EF8DC5 /* ProfileViewController.swift */,
+				41729E9028AA2E2000EF8DC5 /* ViewControllers */,
 				4152699128A8411800D5CFEC /* ViewController.swift */,
 				4152699628A8411900D5CFEC /* Assets.xcassets */,
 				4152699828A8411900D5CFEC /* LaunchScreen.storyboard */,
 				4152699B28A8411900D5CFEC /* Info.plist */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		41729E9028AA2E2000EF8DC5 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				41729E9128AA2E3800EF8DC5 /* PostViewController.swift */,
+				41729E8C28A9027300EF8DC5 /* FeedViewController.swift */,
+				41729E8E28A902C700EF8DC5 /* ProfileViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41729E9228AA2E3800EF8DC5 /* PostViewController.swift in Sources */,
 				4152699228A8411800D5CFEC /* ViewController.swift in Sources */,
 				4152698E28A8411800D5CFEC /* AppDelegate.swift in Sources */,
 				41729E8F28A902C700EF8DC5 /* ProfileViewController.swift in Sources */,
