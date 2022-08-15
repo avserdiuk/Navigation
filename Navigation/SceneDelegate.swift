@@ -19,23 +19,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        // Инициализируем класс таббар контроллер
+        // создаем TabBarController
         let tabBarController = UITabBarController()
 
+        // создаем 2 контейнера и присваиваем им нужные представления ViewController
         feedTabNavigationController = UINavigationController.init(rootViewController: FeedViewController())
         profileTabNavigationController = UINavigationController.init(rootViewController: ProfileViewController())
 
         tabBarController.viewControllers = [feedTabNavigationController, profileTabNavigationController]
 
-        let item1 = UITabBarItem(title: "Feed", image: UIImage(systemName: "folder"), tag: 0)
-        let item2 = UITabBarItem(title: "Profile", image: UIImage(systemName: "folder.fill"), tag: 1)
+        // cтилизация контейнеров
+        let item1 = UITabBarItem(title: "Feed", image: UIImage(systemName: "text.bubble"), tag: 0)
+        let item2 = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
 
         feedTabNavigationController.tabBarItem = item1
         profileTabNavigationController.tabBarItem = item2
+        
+        // стилизация TabBar'a
+        UITabBar.appearance().tintColor = .systemBlue
+        UITabBar.appearance().backgroundColor = .secondarySystemBackground
 
-        UITabBar.appearance().tintColor = .blue
-        UITabBar.appearance().backgroundColor = .lightGray
-
+        // Запускаем созданный TabBarController как основное view представление
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()

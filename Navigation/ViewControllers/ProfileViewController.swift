@@ -11,6 +11,7 @@ import UIKit
 
 class ProfileViewController : UIViewController {
 
+    // создаем UILabel для заголовка
     private let titleLabel: UILabel = {
            let label = UILabel()
            label.text = "Profile"
@@ -21,14 +22,16 @@ class ProfileViewController : UIViewController {
 
     override func viewDidLoad() {
            super.viewDidLoad()
-        view.backgroundColor = .gray
+            view.backgroundColor = .systemBackground
 
-        view.addSubview(titleLabel)
+            // добавляем на экран
+            view.addSubview(titleLabel)
 
-        NSLayoutConstraint.activate([
-                   titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
-                   titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-               ])
+            // проставляем привязки для заголовка (можно вынести в функцию, как например в FeedViewController)
+            NSLayoutConstraint.activate([
+                       titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+                       titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+                   ])
 
        }
 }

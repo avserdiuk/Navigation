@@ -11,45 +11,38 @@ import UIKit
 
 class PostViewController : UIViewController {
 
+    // создаем переменную для текста заголовка, в нее будет передаваться заголовок из FeedViewController
     var titlePost: String = ""
-    // let alertController = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert) ДЛЯ СЛЕД ЗАДАНИЯ
 
-    private let titleLabel: UILabel = {
+    // создаем заголовок страницы
+    let titleLabel: UILabel = {
            let label = UILabel()
-           label.text = "Post"
            label.textColor = .black
            label.translatesAutoresizingMaskIntoConstraints = false
            return label
        }()
 
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .cyan
+        view.backgroundColor = .secondarySystemBackground
 
-       // alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                   //print("alert")
-               // })) ДЛЯ СЛЕД ЗАДАНИЯ
-
+        // добавляем элемент на страницу и меняем заголовок на вновь пришедший
         view.addSubview(titleLabel)
         titleLabel.text = titlePost
 
+        // добавляем расположение заголовка
         NSLayoutConstraint.activate([
-                   titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
+                   titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 55),
                    titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
                ])
 
-        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
-        navigationItem.rightBarButtonItems = [add]
-
-
-
+        // создаем UIBarButtonItem с 1 контейнером по заданию
+        let modal = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showModal))
+        navigationItem.rightBarButtonItems = [modal]
        }
 
-        @objc func addTapped() {
-           // self.present(alertController, animated: true, completion: nil) ДЛЯ СЛЕД ЗАДАНИЯ
-
+        // функция для отображения InfoViewController в модальном окне
+        @objc func showModal() {
             let popupViewController = InfoViewController()
             popupViewController.modalPresentationStyle = .fullScreen
             self.present(popupViewController, animated: true, completion: nil)
