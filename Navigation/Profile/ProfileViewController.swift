@@ -45,7 +45,7 @@ class ProfileViewController : UIViewController {
 
         addConstrains()
         
-
+        
     }
 
     // функция тестирования кнопки что она видна, нажимается
@@ -66,7 +66,7 @@ class ProfileViewController : UIViewController {
             newButton.bottomAnchor.constraint(equalTo: super.view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
             newButton.widthAnchor.constraint(equalToConstant: 340),
             newButton.heightAnchor.constraint(equalToConstant: 50),
-         ])
+        ])
     }
 
 }
