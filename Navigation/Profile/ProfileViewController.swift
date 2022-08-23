@@ -16,8 +16,8 @@ class ProfileViewController : UIViewController {
         let view = ProfileHeaderView()
 
         //добавляем обводку для визуальной проверки ДЗ, что выполнены условия отступов, высоты и привязки
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.black.cgColor
+        //view.layer.borderWidth = 1
+        //view.layer.borderColor = UIColor.black.cgColor
 
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -37,13 +37,14 @@ class ProfileViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .lightGray
+        view.backgroundColor = UIColor(red: 245/255.0, green: 248/255.0, blue: 250/255.0, alpha: 1)
         self.title = "Profile"
         
         view.addSubview(profileView)
         view.addSubview(newButton)
 
         addConstrains()
+        
 
     }
 

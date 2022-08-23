@@ -37,7 +37,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // стилизация TabBar'a
         UITabBar.appearance().tintColor = .systemBlue
-        UITabBar.appearance().backgroundColor = .secondarySystemBackground
+        UITabBar.appearance().backgroundColor = UIColor(red: 245/255.0, green: 248/255.0, blue: 250/255.0, alpha: 1)
 
         // Запускаем созданный TabBarController как основное view представление
         let window = UIWindow(windowScene: windowScene)
