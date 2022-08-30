@@ -17,6 +17,7 @@
 		41729E9228AA2E3800EF8DC5 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41729E9128AA2E3800EF8DC5 /* PostViewController.swift */; };
 		41729E9428AA3FEB00EF8DC5 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41729E9328AA3FEB00EF8DC5 /* InfoViewController.swift */; };
 		41B6EC6C28ACCC7B00BF4C5A /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B6EC6B28ACCC7B00BF4C5A /* FeedModel.swift */; };
+		41D2D77428BE2E5A00905066 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D2D77328BE2E5A00905066 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		41729E9128AA2E3800EF8DC5 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		41729E9328AA3FEB00EF8DC5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		41B6EC6B28ACCC7B00BF4C5A /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
+		41D2D77328BE2E5A00905066 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +52,7 @@
 			children = (
 				4149C4C728AB635000E3C87A /* ProfileHeaderView.swift */,
 				41729E8E28A902C700EF8DC5 /* ProfileViewController.swift */,
+				41D2D77328BE2E5A00905066 /* LoginViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 			files = (
 				41729E9228AA2E3800EF8DC5 /* PostViewController.swift in Sources */,
 				41B6EC6C28ACCC7B00BF4C5A /* FeedModel.swift in Sources */,
+				41D2D77428BE2E5A00905066 /* LoginViewController.swift in Sources */,
 				4152698E28A8411800D5CFEC /* AppDelegate.swift in Sources */,
 				41729E9428AA3FEB00EF8DC5 /* InfoViewController.swift in Sources */,
 				41729E8F28A902C700EF8DC5 /* ProfileViewController.swift in Sources */,
