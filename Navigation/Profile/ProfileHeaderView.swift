@@ -81,7 +81,7 @@ class ProfileHeaderView : UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.backgroundColor = UIColor(red: 209/255.0, green: 209/255.0, blue: 214/255.0, alpha: 1)
+       // self.backgroundColor = UIColor(red: 209/255.0, green: 209/255.0, blue: 214/255.0, alpha: 1)
 
         addViews()
         addConstraints()
