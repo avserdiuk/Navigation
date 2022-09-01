@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 
 class ProfileHeaderView : UIView {
-
+    
     var statusText : String = ""
-
+    
     // создаем аватарку
     private let avatarImageView: UIImageView = {
         let img = UIImageView()
@@ -24,7 +24,7 @@ class ProfileHeaderView : UIView {
         img.translatesAutoresizingMaskIntoConstraints = false
         return img
     }()
-
+    
     // создаем лейб для имени
     private let fullNameLabel: UILabel = {
         let label = UILabel()
@@ -34,7 +34,7 @@ class ProfileHeaderView : UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     // создаем лейб для статуса
     private let statusLabel: UILabel = {
         let label = UILabel()
@@ -44,7 +44,7 @@ class ProfileHeaderView : UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     // создаем текстовое поля для ввода нового статуса
     private let statusTextField : UITextField = {
         let textField = UITextField()
@@ -60,7 +60,7 @@ class ProfileHeaderView : UIView {
         textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         return textField
     }()
-
+    
     // создаем кнопку смены статуса
     private let setStatusButton: UIButton = {
         let button = UIButton()
@@ -77,22 +77,22 @@ class ProfileHeaderView : UIView {
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-
-       // self.backgroundColor = UIColor(red: 209/255.0, green: 209/255.0, blue: 214/255.0, alpha: 1)
-
+        
+        // self.backgroundColor = UIColor(red: 209/255.0, green: 209/255.0, blue: 214/255.0, alpha: 1)
+        
         addViews()
         addConstraints()
-
-
+        
+        
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-
+    
     // функция смены статуса по нажатию кнопки
     @objc func buttonPressed() {
         if let text = statusLabel.text {
@@ -102,14 +102,14 @@ class ProfileHeaderView : UIView {
             statusLabel.text = statusText
         }
     }
-
+    
     // функция сохранения значения из текстового поля
     @objc func statusTextChanged(_ textField: UITextField){
         if let text = textField.text {
             statusText = text
         }
     }
-
+    
     // добавляем вью
     func addViews(){
         addSubview(avatarImageView)
@@ -118,33 +118,33 @@ class ProfileHeaderView : UIView {
         addSubview(statusTextField)
         addSubview(setStatusButton)
     }
-
+    
     // добавляем привязки
     func addConstraints(){
         NSLayoutConstraint.activate([
-
+            
             avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             avatarImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
             avatarImageView.widthAnchor.constraint(equalToConstant: 100),
             avatarImageView.heightAnchor.constraint(equalToConstant: 100),
-
+            
             fullNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
             fullNameLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 140),
-
+            
             statusLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 54),
             statusLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 140),
-
+            
             statusTextField.topAnchor.constraint(equalTo: self.topAnchor, constant: 80),
             statusTextField.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 140),
             statusTextField.widthAnchor.constraint(equalToConstant: 220),
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
-
+            
             setStatusButton.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
             setStatusButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 132),
             setStatusButton.widthAnchor.constraint(equalToConstant: 340),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
-
+    
 }
 

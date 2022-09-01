@@ -59,6 +59,7 @@ class LoginViewController : UIViewController {
         return textField
     }()
 
+    // создаем стеквью для полей ввода
     private lazy var stackViewTextFields : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -100,6 +101,17 @@ class LoginViewController : UIViewController {
     // обработка открытия и закрытия клавиатуры
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        // для проверки изменения прозрачности кнопки при изменениии состояния снопки
+
+        //        loginButton.isHighlighted = true
+        //        loginButton.isSelected = true
+        //        loginButton.isEnabled = false
+
+        if !loginButton.isEnabled || loginButton.isSelected || loginButton.isHighlighted { loginButton.alpha = 0.8 }
+
+        // наблюдаем за уведомлениями об появлении или исчезнавении клавиатуры
+
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.didShowKeyboard(_:)),
                                                name: UIResponder.keyboardWillShowNotification,
@@ -110,11 +122,13 @@ class LoginViewController : UIViewController {
                                                object: nil)
     }
 
+    // функция для обработки тапа и сокрытия клавиатуры
     private func setupGestures() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.forcedHidingKeyboard))
         self.view.addGestureRecognizer(tapGesture)
     }
 
+    // функция когда скрывает клавиатура, тут мы все считаем и определяем перекрытие
     @objc func didShowKeyboard(_ notification: Notification){
         print("show keyboard")
 
@@ -135,6 +149,7 @@ class LoginViewController : UIViewController {
             self.scrollView.contentOffset = CGPoint(x: 0, y: yOffset)
         }
     }
+    // функции сокрытия клавиатуры
     @objc func didHideKeyboard(_ notification: Notification){
         self.forcedHidingKeyboard()
     }
@@ -146,7 +161,6 @@ class LoginViewController : UIViewController {
     // ------------------------------------------------------------------------------------------------
 
     // функция нажатия логин
-    
     @objc func login() {
         let profileViewController = ProfileViewController()
         navigationController?.pushViewController(profileViewController, animated: true)
