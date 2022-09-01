@@ -6,10 +6,18 @@
 //  Copyright © 2022 aserdiuk. All rights reserved.
 //
 
+
 import Foundation
 import UIKit
 
 class LoginViewController : UIViewController {
+
+    // создаем скролвью
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
 
     // создаем лого
     private lazy var logoImageView: UIImageView = {
@@ -51,7 +59,7 @@ class LoginViewController : UIViewController {
         return textField
     }()
 
-    private let stackViewTextFields : UIStackView = {
+    private lazy var stackViewTextFields : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .equalCentering
@@ -77,37 +85,97 @@ class LoginViewController : UIViewController {
         return button
     }()
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        self.setupGestures()
         self.navigationController?.navigationBar.isHidden = true
 
         addViews()
         addConstraints()
     }
 
+    // ------------------------------------------------------------------------------------------------
+
+    // обработка открытия и закрытия клавиатуры
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.didShowKeyboard(_:)),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.didHideKeyboard(_:)),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
+
+    private func setupGestures() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.forcedHidingKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+
+    @objc func didShowKeyboard(_ notification: Notification){
+        print("show keyboard")
+
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+
+            // считаем нужную точку и проверяем перекрывает ли клавиатура кнопку
+
+            let loginButtonBottomPointY = self.loginButton.frame.origin.y + loginButton.frame.height
+
+            let keyboardOriginY = self.view.frame.height - keyboardHeight
+
+            let yOffset = keyboardOriginY < loginButtonBottomPointY
+            ? loginButtonBottomPointY - keyboardOriginY + 32
+            : 0
+
+            self.scrollView.contentOffset = CGPoint(x: 0, y: yOffset)
+        }
+    }
+    @objc func didHideKeyboard(_ notification: Notification){
+        self.forcedHidingKeyboard()
+    }
+    @objc private func forcedHidingKeyboard() {
+        self.view.endEditing(true)
+        self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+    }
+
+    // ------------------------------------------------------------------------------------------------
+
     // функция нажатия логин
+    
     @objc func login() {
         let profileViewController = ProfileViewController()
         navigationController?.pushViewController(profileViewController, animated: true)
     }
 
     func addViews(){
-        view.addSubview(logoImageView)
+
+        view.addSubview(scrollView)
+
+        scrollView.addSubview(logoImageView)
 
         //обьединяем кнопки в стеквью
         stackViewTextFields.addArrangedSubview(emailTextField)
         stackViewTextFields.addArrangedSubview(horizontalLine)
         stackViewTextFields.addArrangedSubview(passwordTextField)
-        view.addSubview(stackViewTextFields)
+        scrollView.addSubview(stackViewTextFields)
 
-        view.addSubview(loginButton)
+        scrollView.addSubview(loginButton)
     }
 
     func addConstraints(){
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: super.view.safeAreaLayoutGuide.topAnchor, constant: 120),
+
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            logoImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 120),
             logoImageView.centerXAnchor.constraint(equalTo: super.view.centerXAnchor),
             logoImageView.heightAnchor.constraint(equalToConstant: 100),
             logoImageView.widthAnchor.constraint(equalToConstant: 100),
@@ -132,9 +200,7 @@ class LoginViewController : UIViewController {
             loginButton.centerXAnchor.constraint(equalTo: super.view.centerXAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
             loginButton.leftAnchor.constraint(equalTo: super.view.leftAnchor, constant: 16),
-
         ])
-        
     }
 }
 
