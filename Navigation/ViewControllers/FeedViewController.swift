@@ -12,7 +12,7 @@ import UIKit
 class FeedViewController : UIViewController {
     
     // создание обьекта по заданию
-    var postTitle : Post = Post(title: "Post Title")
+    var postTitle : PostFeed = PostFeed(title: "Post Title")
     
     // создаем кнопку для просмотра поста
     private let button: UIButton = {

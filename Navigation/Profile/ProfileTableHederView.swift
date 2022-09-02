@@ -1,5 +1,5 @@
 //
-//  ProfileHeaderView.swift
+//  ProfileTableHederView.swift
 //  Navigation
 //
 //  Created by Алексей Сердюк on 16.08.2022.

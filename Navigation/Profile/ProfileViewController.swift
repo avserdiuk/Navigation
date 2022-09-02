@@ -10,63 +10,47 @@ import Foundation
 import UIKit
 
 class ProfileViewController : UIViewController {
-    
-    // создаем вью с элементами профиля
-    let profileView: UIView = {
-        let view = ProfileHeaderView()
-        
-        //добавляем обводку для визуальной проверки ДЗ, что выполнены условия отступов, высоты и привязки
-        //view.layer.borderWidth = 1
-        //view.layer.borderColor = UIColor.black.cgColor
-        
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+
+    var posts : [Post] = [
+        Post(autor: "autor1", description: "description1", image: "image1", likes: 1, views: 1),
+        Post(autor: "autor2", description: "description2", image: "image2", likes: 2, views: 2),
+        Post(autor: "autor3", description: "description3", image: "image3", likes: 3, views: 3),
+        Post(autor: "autor4", description: "description4", image: "image4", likes: 4, views: 4)
+    ]
+
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
     }()
-    
-    // добавляем новую кнопку по заданию
-    private let newButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("New Button", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.backgroundColor = .systemBlue
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(pressButton), for: .touchUpInside)
-        return button
-    }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor(red: 245/255.0, green: 248/255.0, blue: 250/255.0, alpha: 1)
-        self.title = "Profile"
-        
-        view.addSubview(profileView)
-        view.addSubview(newButton)
-        
-        addConstrains()
-        
-        
+
+        view.addSubview(tableView)
+        tableView.backgroundColor = .systemBlue
+
+        addConstraints()
     }
-    
-    // функция тестирования кнопки что она видна, нажимается
-    @objc func pressButton() {
-        print("test button")
-    }
-    
-    // описываем все констрейнты
-    func addConstrains(){
+
+    func addConstraints(){
+
         NSLayoutConstraint.activate([
-            profileView.topAnchor.constraint(equalTo: super.view.safeAreaLayoutGuide.topAnchor, constant: 0),
-            profileView.leftAnchor.constraint(equalTo: super.view.leftAnchor, constant: 0),
-            profileView.centerXAnchor.constraint(equalTo: super.view.centerXAnchor),
-            profileView.heightAnchor.constraint(equalToConstant: 220),
-            
-            newButton.leftAnchor.constraint(equalTo: super.view.leftAnchor, constant: 0),
-            newButton.centerXAnchor.constraint(equalTo: super.view.centerXAnchor),
-            newButton.bottomAnchor.constraint(equalTo: super.view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-            newButton.widthAnchor.constraint(equalToConstant: 340),
-            newButton.heightAnchor.constraint(equalToConstant: 50),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
-    
+
 }
+
+//extension ProfileViewController : UITableViewDelegate {
+//
+//}
+//
+//extension ProfileViewController : UITableViewDataSource{
+//
+//}
