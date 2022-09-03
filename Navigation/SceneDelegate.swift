@@ -12,6 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var feedTabNavigationController : UINavigationController!
     var profileTabNavigationController : UINavigationController!
+    var loginTabNavigationController : UINavigationController!
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -25,8 +26,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // создаем 2 контейнера и присваиваем им нужные представления ViewController
         feedTabNavigationController = UINavigationController.init(rootViewController: FeedViewController())
         profileTabNavigationController = UINavigationController.init(rootViewController: ProfileViewController())
+        loginTabNavigationController = UINavigationController.init(rootViewController: LoginViewController())
 
-        tabBarController.viewControllers = [feedTabNavigationController, profileTabNavigationController]
+        //tabBarController.viewControllers = [feedTabNavigationController, profileTabNavigationController]
+        tabBarController.viewControllers = [feedTabNavigationController, loginTabNavigationController]
 
         // cтилизация контейнеров
         let item1 = UITabBarItem(title: "Feed", image: UIImage(systemName: "text.bubble"), tag: 0)
@@ -34,10 +37,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         feedTabNavigationController.tabBarItem = item1
         profileTabNavigationController.tabBarItem = item2
+        loginTabNavigationController.tabBarItem = item2
         
         // стилизация TabBar'a
         UITabBar.appearance().tintColor = .systemBlue
-        UITabBar.appearance().backgroundColor = .secondarySystemBackground
+        UITabBar.appearance().backgroundColor = UIColor(red: 245/255.0, green: 248/255.0, blue: 250/255.0, alpha: 1)
 
         // Запускаем созданный TabBarController как основное view представление
         let window = UIWindow(windowScene: windowScene)
