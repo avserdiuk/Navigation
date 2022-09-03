@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ProfileHeaderView : UIView {
+class ProfileHeaderView : UITableViewHeaderFooterView {
     
     var statusText : String = ""
     
@@ -77,16 +77,12 @@ class ProfileHeaderView : UIView {
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
     }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        // self.backgroundColor = UIColor(red: 209/255.0, green: 209/255.0, blue: 214/255.0, alpha: 1)
-        
+
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+
         addViews()
         addConstraints()
-        
-        
     }
     
     required init?(coder: NSCoder) {
@@ -122,6 +118,8 @@ class ProfileHeaderView : UIView {
     // добавляем привязки
     func addConstraints(){
         NSLayoutConstraint.activate([
+
+            self.heightAnchor.constraint(equalToConstant: 200),
             
             avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             avatarImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
