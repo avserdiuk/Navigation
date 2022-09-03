@@ -10,39 +10,40 @@ import Foundation
 import UIKit
 
 class ProfileViewController : UIViewController {
-
+    
     var posts : [Post] = [
-        Post(autor: "autor1", description: "description1", image: "image1", likes: 1, views: 1),
-        Post(autor: "autor2", description: "description2", image: "image2", likes: 2, views: 2),
-        Post(autor: "autor3", description: "description3", image: "image3", likes: 3, views: 3),
-        Post(autor: "autor4", description: "description4", image: "image4", likes: 4, views: 4)
+        Post(autor: "vedmak.official", description: "Новые кадры со сьемок второго сезона сериала \"Ведьмак \"", image: UIImage(named: "img1"), likes: 240, views: 312),
+        Post(autor: "Нетология. Меняем карьеру через образование.", description: "«Нетоло́гия» — российская компания и образовательная онлайн-платформа, запущенная в 2011 году. Одна из ведущих российских компаний онлайн-образования[1]. Входит в IT-холдинг TalentTech, объединяющий компании по трём направлениям: EdTech, HRTech и Freelance. EdTech-сегмент холдинга, наряду с «Нетологией» (включая EdMarket), представлен компаниями «Фоксфорд» и «TalentTech.Обучение».", image: UIImage(named: "img2"), likes: 766, views: 893),
+        Post(autor: "vedmak.official", description: "Новые кадры со сьемок второго сезона сериала \"Ведьмак \"", image: UIImage(named: "img1"), likes: 240, views: 312),
+        Post(autor: "Нетология. Меняем карьеру через образование.", description: "«Нетоло́гия» — российская компания и образовательная онлайн-платформа, запущенная в 2011 году. Одна из ведущих российских компаний онлайн-образования[1]. Входит в IT-холдинг TalentTech, объединяющий компании по трём направлениям: EdTech, HRTech и Freelance. EdTech-сегмент холдинга, наряду с «Нетологией» (включая EdMarket), представлен компаниями «Фоксфорд» и «TalentTech.Обучение».", image: UIImage(named: "img2"), likes: 766, views: 893),
+        Post(autor: "vedmak.official", description: "Новые кадры со сьемок второго сезона сериала \"Ведьмак \"", image: UIImage(named: "img1"), likes: 240, views: 312),
+        Post(autor: "Нетология. Меняем карьеру через образование.", description: "«Нетоло́гия» — российская компания и образовательная онлайн-платформа, запущенная в 2011 году. Одна из ведущих российских компаний онлайн-образования[1]. Входит в IT-холдинг TalentTech, объединяющий компании по трём направлениям: EdTech, HRTech и Freelance. EdTech-сегмент холдинга, наряду с «Нетологией» (включая EdMarket), представлен компаниями «Фоксфорд» и «TalentTech.Обучение».", image: UIImage(named: "img2"), likes: 766, views: 893),
     ]
     
-
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 580//UITableView.automaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "postTableCellIdentifier")
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellTypeIdentifier")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "defaultTableCellIdentifier")
         return tableView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor(red: 245/255.0, green: 248/255.0, blue: 250/255.0, alpha: 1)
-
+        
         view.addSubview(tableView)
-        //tableView.backgroundColor = .systemBlue
-
+        
         addConstraints()
     }
-
+    
     func addConstraints(){
-
+        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -50,66 +51,45 @@ class ProfileViewController : UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
-
+    
 }
 
 extension ProfileViewController : UITableViewDelegate {
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             return ProfileHeaderView()
         }
         return nil
     }
-
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        if section == 0 {
-//            return 210
-//        }
-//        return UITableView.automaticDimension
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.row == 0 {
-//            return 580
-//        }
-//        return UITableView.automaticDimension
-//    }
 }
 
 extension ProfileViewController : UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "postTableCellIdentifier", for: indexPath)
-//            cell.textLabel!.text = "Section: \(indexPath.section), Row: \(indexPath.row)"
-//            cell.textLabel!.text = "\(posts[indexPath.row].autor) \(posts[indexPath.row].description)"
-
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "postTableCellIdentifier", for: indexPath) as? PostTableViewCell else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "defaultTableCellIdentifier", for: indexPath)
             return cell
         }
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "postTableCellIdentifier", for: indexPath)
-        //cell.textLabel!.text = "\(posts[indexPath.row].autor) \(posts[indexPath.row].description)"
+        let post = self.posts[indexPath.row]
 
+        let viewModel = PostTableViewCell.ViewModel(
+            autor: post.autor,
+            descriptionText: post.description,
+            likes: "Likes: \(post.likes)",
+            views: "Views: \(post.views)",
+            image: post.image
+        )
+        cell.setup(with: viewModel)
+        
         return cell
     }
-
-
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        "Title"
-//    }
-//
-//    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-//        "Footer"
-//    }
-
-
 }

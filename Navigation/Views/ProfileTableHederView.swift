@@ -119,7 +119,8 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
     func addConstraints(){
         NSLayoutConstraint.activate([
 
-            self.heightAnchor.constraint(equalToConstant: 200),
+            //self.heightAnchor.constraint(equalToConstant: 200),
+            self.bottomAnchor.constraint(equalTo: setStatusButton.bottomAnchor, constant: 16),
             
             avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             avatarImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
