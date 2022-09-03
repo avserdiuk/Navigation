@@ -24,27 +24,57 @@ class FeedViewController : UIViewController {
         button.addTarget(self, action: #selector(showPostController), for: .touchUpInside)
         return button
     }()
-    
+
+    // создаем дополнительную кнопку
+    private let button2: UIButton = {
+        let button = UIButton()
+        button.setTitle(" View Post ", for: .normal)
+        button.backgroundColor = .systemBlue
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(showPostController), for: .touchUpInside)
+        return button
+    }()
+
+    // создаем стеквью
+    private let stackViewButton : UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .equalCentering
+        stackView.alignment = .center
+        stackView.spacing = 10.0
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
         self.title = "Feed"
-        
-        // отображаем все на экране
-        view.addSubview(button)
+
+        // собираем и добавляем на экран
+        addView()
         
         // проставляем привязки по расположению
         setConstraints()
         
     }
+
+    func addView(){
+        //обьединяем кнопки в стеквью
+        stackViewButton.addArrangedSubview(button)
+        stackViewButton.addArrangedSubview(button2)
+
+        // отображаем все на экране
+        view.addSubview(stackViewButton)
+    }
     
     // функция для привязой элементов
     func setConstraints(){
         NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            stackViewButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackViewButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
