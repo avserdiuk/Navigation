@@ -65,6 +65,7 @@ extension ProfileViewController : UITableViewDelegate {
 }
 
 extension ProfileViewController : UITableViewDataSource{
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -81,14 +82,14 @@ extension ProfileViewController : UITableViewDataSource{
 
         let post = self.posts[indexPath.row]
 
-        let viewModel = PostTableViewCell.ViewModel(
+        let PostViewModel = PostTableViewCell.ViewModel(
             autor: post.autor,
             descriptionText: post.description,
             likes: "Likes: \(post.likes)",
             views: "Views: \(post.views)",
             image: post.image
         )
-        cell.setup(with: viewModel)
+        cell.setup(with: PostViewModel)
         
         return cell
     }

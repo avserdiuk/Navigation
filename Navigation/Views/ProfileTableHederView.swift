@@ -48,7 +48,7 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
     // создаем текстовое поля для ввода нового статуса
     private let statusTextField : UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Enter text here"
+        textField.placeholder = "Set your status..."
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1
@@ -119,7 +119,6 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
     func addConstraints(){
         NSLayoutConstraint.activate([
 
-            //self.heightAnchor.constraint(equalToConstant: 200),
             self.bottomAnchor.constraint(equalTo: setStatusButton.bottomAnchor, constant: 16),
             
             avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
@@ -135,12 +134,12 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
             
             statusTextField.topAnchor.constraint(equalTo: self.topAnchor, constant: 80),
             statusTextField.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 140),
-            statusTextField.widthAnchor.constraint(equalToConstant: 220),
+            statusTextField.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
             
             setStatusButton.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
+            setStatusButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
             setStatusButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 132),
-            setStatusButton.widthAnchor.constraint(equalToConstant: 340),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
