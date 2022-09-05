@@ -1,5 +1,5 @@
 //
-//  ProfileHeaderView.swift
+//  ProfileTableHederView.swift
 //  Navigation
 //
 //  Created by Алексей Сердюк on 16.08.2022.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ProfileHeaderView : UIView {
+class ProfileHeaderView : UITableViewHeaderFooterView {
     
     var statusText : String = ""
     
@@ -48,7 +48,7 @@ class ProfileHeaderView : UIView {
     // создаем текстовое поля для ввода нового статуса
     private let statusTextField : UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Enter text here"
+        textField.placeholder = "Set your status..."
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1
@@ -77,16 +77,12 @@ class ProfileHeaderView : UIView {
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
     }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        // self.backgroundColor = UIColor(red: 209/255.0, green: 209/255.0, blue: 214/255.0, alpha: 1)
-        
+
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+
         addViews()
         addConstraints()
-        
-        
     }
     
     required init?(coder: NSCoder) {
@@ -122,6 +118,8 @@ class ProfileHeaderView : UIView {
     // добавляем привязки
     func addConstraints(){
         NSLayoutConstraint.activate([
+
+            self.bottomAnchor.constraint(equalTo: setStatusButton.bottomAnchor, constant: 16),
             
             avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             avatarImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
@@ -136,12 +134,12 @@ class ProfileHeaderView : UIView {
             
             statusTextField.topAnchor.constraint(equalTo: self.topAnchor, constant: 80),
             statusTextField.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 140),
-            statusTextField.widthAnchor.constraint(equalToConstant: 220),
+            statusTextField.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
             
             setStatusButton.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
+            setStatusButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
             setStatusButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 132),
-            setStatusButton.widthAnchor.constraint(equalToConstant: 340),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
