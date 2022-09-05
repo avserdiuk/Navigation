@@ -11,18 +11,8 @@ import UIKit
 
 class ProfileViewController : UIViewController {
     
-    var posts : [Post] = [
-        Post(autor: "vedmak.official", description: "Новые кадры со сьемок второго сезона сериала \"Ведьмак \"", image: UIImage(named: "img1"), likes: 240, views: 312),
-        Post(autor: "Нетология. Меняем карьеру через образование.", description: "«Нетоло́гия» — российская компания и образовательная онлайн-платформа, запущенная в 2011 году. Одна из ведущих российских компаний онлайн-образования[1]. Входит в IT-холдинг TalentTech, объединяющий компании по трём направлениям: EdTech, HRTech и Freelance. EdTech-сегмент холдинга, наряду с «Нетологией» (включая EdMarket), представлен компаниями «Фоксфорд» и «TalentTech.Обучение».", image: UIImage(named: "img2"), likes: 766, views: 893),
-        Post(autor: "vedmak.official", description: "Новые кадры со сьемок второго сезона сериала \"Ведьмак \"", image: UIImage(named: "img1"), likes: 240, views: 312),
-        Post(autor: "Нетология. Меняем карьеру через образование.", description: "«Нетоло́гия» — российская компания и образовательная онлайн-платформа, запущенная в 2011 году. Одна из ведущих российских компаний онлайн-образования[1]. Входит в IT-холдинг TalentTech, объединяющий компании по трём направлениям: EdTech, HRTech и Freelance. EdTech-сегмент холдинга, наряду с «Нетологией» (включая EdMarket), представлен компаниями «Фоксфорд» и «TalentTech.Обучение».", image: UIImage(named: "img2"), likes: 766, views: 893),
-        Post(autor: "vedmak.official", description: "Новые кадры со сьемок второго сезона сериала \"Ведьмак \"", image: UIImage(named: "img1"), likes: 240, views: 312),
-        Post(autor: "Нетология. Меняем карьеру через образование.", description: "«Нетоло́гия» — российская компания и образовательная онлайн-платформа, запущенная в 2011 году. Одна из ведущих российских компаний онлайн-образования[1]. Входит в IT-холдинг TalentTech, объединяющий компании по трём направлениям: EdTech, HRTech и Freelance. EdTech-сегмент холдинга, наряду с «Нетологией» (включая EdMarket), представлен компаниями «Фоксфорд» и «TalentTech.Обучение».", image: UIImage(named: "img2"), likes: 766, views: 893),
-    ]
-    
-    
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
@@ -65,7 +55,7 @@ extension ProfileViewController : UITableViewDelegate {
 }
 
 extension ProfileViewController : UITableViewDataSource{
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -80,7 +70,8 @@ extension ProfileViewController : UITableViewDataSource{
             return cell
         }
 
-        let post = self.posts[indexPath.row]
+        let post = posts[indexPath.row]
+        
 
         let PostViewModel = PostTableViewCell.ViewModel(
             autor: post.autor,
