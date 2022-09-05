@@ -57,31 +57,49 @@ extension ProfileViewController : UITableViewDelegate {
 extension ProfileViewController : UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
+        if section == 1 {
+            return posts.count
+        } else {
+            return 1
+        }
+    }
+
+    // обработка клика на секцию с фотографиями
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0{
+            let photosViewController = PhotosViewController()
+            navigationController?.pushViewController(photosViewController, animated: false)
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "postTableCellIdentifier", for: indexPath) as? PostTableViewCell else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "defaultTableCellIdentifier", for: indexPath)
+
+        if indexPath.section == 1{
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "postTableCellIdentifier", for: indexPath) as? PostTableViewCell else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "defaultTableCellIdentifier", for: indexPath)
+                return cell
+            }
+
+            let post = posts[indexPath.row]
+
+
+            let PostViewModel = PostTableViewCell.ViewModel(
+                autor: post.autor,
+                descriptionText: post.description,
+                likes: "Likes: \(post.likes)",
+                views: "Views: \(post.views)",
+                image: post.image
+            )
+            cell.setup(with: PostViewModel)
+
+            return cell
+        }   else {
+            let cell = PhotoTableViewCell()
             return cell
         }
-
-        let post = posts[indexPath.row]
-        
-
-        let PostViewModel = PostTableViewCell.ViewModel(
-            autor: post.autor,
-            descriptionText: post.description,
-            likes: "Likes: \(post.likes)",
-            views: "Views: \(post.views)",
-            image: post.image
-        )
-        cell.setup(with: PostViewModel)
-        
-        return cell
     }
 }

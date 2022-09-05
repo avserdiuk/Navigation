@@ -17,7 +17,6 @@ class PostTableViewCell: UITableViewCell {
         let likes : String
         let views: String
         let image: UIImage?
-
     }
 
     private lazy var autor : UILabel = {
@@ -27,7 +26,6 @@ class PostTableViewCell: UITableViewCell {
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 20.0)
         label.numberOfLines = 2
-        
         return label
     }()
     
@@ -67,8 +65,7 @@ class PostTableViewCell: UITableViewCell {
         views.font = UIFont.systemFont(ofSize: 16.0)
         return views
     }()
-    
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -89,7 +86,6 @@ class PostTableViewCell: UITableViewCell {
         self.img.image = viewModel.image
     }
 
-    
     func addViews(){
         self.contentView.addSubview(autor)
         self.contentView.addSubview(img)
