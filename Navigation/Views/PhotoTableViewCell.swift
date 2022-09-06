@@ -20,7 +20,7 @@ class PhotoTableViewCell: UITableViewCell {
         return titleLabel
     }()
 
-    private let arrowImageView: UIImageView = {
+    private lazy var arrowImageView: UIImageView = {
         let img = UIImageView()
         img.image = UIImage(systemName: "arrow.right")
         img.translatesAutoresizingMaskIntoConstraints = false
@@ -28,51 +28,43 @@ class PhotoTableViewCell: UITableViewCell {
         return img
     }()
 
-    private lazy var img1 : UIImageView = {
-        let img = UIImageView()
-        img.image =  UIImage(named: "img1")
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.clipsToBounds = true
-        img.layer.cornerRadius = 6
-        return img
+    // создаем коллекцию
+
+    private lazy var layout : UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 8
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+        return layout
     }()
-    private lazy var img2 : UIImageView = {
-        let img = UIImageView()
-        img.image =  UIImage(named: "img1")
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.clipsToBounds = true
-        img.layer.cornerRadius = 6
-        return img
-    }()
-    private lazy var img3 : UIImageView = {
-        let img = UIImageView()
-        img.image =  UIImage(named: "img1")
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.clipsToBounds = true
-        img.layer.cornerRadius = 6
-        return img
-    }()
-    private lazy var img4 : UIImageView = {
-        let img = UIImageView()
-        img.image =  UIImage(named: "img1")
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.clipsToBounds = true
-        img.layer.cornerRadius = 6
-        return img
+
+    private lazy var collectionView : UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "DefaultCell")
+        collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: "CustomCell")
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        return collectionView
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        //self.backgroundColor = .systemGray
-        self.addSubview(titleLabel)
-        self.addSubview(arrowImageView)
-        self.addSubview(img1)
-        self.addSubview(img2)
-        self.addSubview(img3)
-        self.addSubview(img4)
+        addViews()
+        addConstraints()
+    }
 
-        // TODO: разобраться с растановкой!
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func addViews(){
+        addSubview(titleLabel)
+        addSubview(arrowImageView)
+        addSubview(collectionView)
+    }
+
+    func addConstraints(){
         NSLayoutConstraint.activate([
 
             titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
@@ -81,33 +73,37 @@ class PhotoTableViewCell: UITableViewCell {
             arrowImageView.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             arrowImageView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -12),
 
-            img1.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
-            img1.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 12),
-            img1.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12),
-
-            img1.widthAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width-48)/4),
-            img1.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width-48)/4),
-
-            img2.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
-            img2.leftAnchor.constraint(equalTo: img1.rightAnchor, constant: 8),
-            img2.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width-48)/4),
-            img2.widthAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width-48)/4),
-
-            img3.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
-            img3.leftAnchor.constraint(equalTo: img2.rightAnchor, constant: 8),
-            img3.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width-48)/4),
-            img3.widthAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width-48)/4),
-
-            img4.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
-            img4.leftAnchor.constraint(equalTo: img3.rightAnchor, constant: 8),
-            img4.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width-48)/4),
-            img4.widthAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width-48)/4),
-
+            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
+            collectionView.leftAnchor.constraint(equalTo: self.leftAnchor),
+            collectionView.rightAnchor.constraint(equalTo: self.rightAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: itemSize),
+            collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12),
+            
         ])
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+}
+
+extension PhotoTableViewCell : UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        4
     }
 
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as? PhotosCollectionViewCell else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DefaultCell", for: indexPath)
+            return cell
+        }
+
+        cell.setup(with: "\(itamData[indexPath.row])")
+
+        return cell
+    }
+}
+
+extension PhotoTableViewCell : UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: itemSize, height: itemSize)
+    }
 }
