@@ -96,26 +96,25 @@ class PostTableViewCell: UITableViewCell {
     
     func addConstraints(){
         NSLayoutConstraint.activate([
-            self.autor.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
-            self.autor.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 16),
-            self.autor.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -16),
-            
-            self.img.topAnchor.constraint(equalTo: self.autor.bottomAnchor, constant: 12),
-            self.img.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 0),
-            self.img.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: 0),
-            self.img.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
-            
-            self.descriptionText.topAnchor.constraint(equalTo: self.img.bottomAnchor, constant: 16),
-            self.descriptionText.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 16),
-            self.descriptionText.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -16),
-            
-            self.likes.topAnchor.constraint(equalTo: self.descriptionText.bottomAnchor, constant: 16),
-            self.likes.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 16),
-            
-            self.views.topAnchor.constraint(equalTo: self.descriptionText.bottomAnchor, constant: 16),
-            self.views.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -16),
+            autor.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            autor.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
+            autor.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
 
-            self.contentView.bottomAnchor.constraint(equalTo: self.views.bottomAnchor, constant: 16)
+            img.topAnchor.constraint(equalTo: autor.bottomAnchor, constant: 12),
+            img.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 0),
+            img.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 0),
+            img.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
+
+            descriptionText.topAnchor.constraint(equalTo: img.bottomAnchor, constant: 16),
+            descriptionText.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
+            descriptionText.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
+
+            likes.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: 16),
+            likes.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
+            likes.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+
+            views.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: 16),
+            views.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
             
         ])
     }

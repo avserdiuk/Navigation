@@ -46,7 +46,7 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
     }()
     
     // создаем текстовое поля для ввода нового статуса
-    private let statusTextField : UITextField = {
+    private lazy var statusTextField : UITextField = {
         let textField = UITextField()
         textField.placeholder = "Set your status..."
         textField.backgroundColor = .white
@@ -62,16 +62,16 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
     }()
     
     // создаем кнопку смены статуса
-    private let setStatusButton: UIButton = {
+    private lazy var setStatusButton: UIButton = {
         let button = UIButton()
         button.setTitle("Show status", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 14
-        button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
-        button.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
-        button.layer.shadowOpacity = 0.7
-        button.layer.shadowRadius = 4.0
+//        button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+//        button.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
+//        button.layer.shadowOpacity = 0.7
+//        button.layer.shadowRadius = 4.0
         button.layer.masksToBounds = false
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
@@ -119,8 +119,6 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
     func addConstraints(){
         NSLayoutConstraint.activate([
 
-            self.bottomAnchor.constraint(equalTo: setStatusButton.bottomAnchor, constant: 16),
-            
             avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             avatarImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
             avatarImageView.widthAnchor.constraint(equalToConstant: 100),
@@ -139,6 +137,7 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
             
             setStatusButton.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
             setStatusButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
+            setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
             setStatusButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 132),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
         ])

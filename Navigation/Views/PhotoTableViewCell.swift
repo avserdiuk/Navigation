@@ -74,18 +74,19 @@ class PhotoTableViewCell: UITableViewCell {
 
         // TODO: разобраться с растановкой!
         NSLayoutConstraint.activate([
-            self.contentView.heightAnchor.constraint(equalToConstant: 165),
 
-            titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12),
-            titleLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 12),
+            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
+            titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 12),
 
             arrowImageView.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            arrowImageView.rightAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 325),
+            arrowImageView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -12),
 
             img1.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
-            img1.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 12),
-            img1.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width-48)/4),
+            img1.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 12),
+            img1.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12),
+
             img1.widthAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width-48)/4),
+            img1.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width-48)/4),
 
             img2.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
             img2.leftAnchor.constraint(equalTo: img1.rightAnchor, constant: 8),
