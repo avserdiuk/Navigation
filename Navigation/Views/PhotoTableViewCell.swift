@@ -96,6 +96,9 @@ extension PhotoTableViewCell : UICollectionViewDataSource {
             return cell
         }
 
+        cell.layer.cornerRadius = 8
+        cell.clipsToBounds = true
+
         cell.setup(with: "\(itamData[indexPath.row])")
 
         return cell
