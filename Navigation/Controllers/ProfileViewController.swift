@@ -65,7 +65,7 @@ class ProfileViewController : UIViewController {
         addConstraints()
         addGestures()
         addNotification()
-        
+
     }
 
     @objc func didAvatarClick(notification: Notification) {
@@ -117,7 +117,8 @@ class ProfileViewController : UIViewController {
             // возвращаем аву и ее размеры на место
             self.hiddenAvatar.transform = CGAffineTransform(scaleX: 1, y: 1)
 
-            self.hiddenAvatar.center = CGPoint(x: 66, y: 86) //ПОЧИНИТЬ!
+            // возвращаем аватарку на стартовую позицию по заранее известным точкам так как аватарка у нас статичка и ее размер не изменяется. НО вообще можно было бы сделать динамическое вычисление этих точек, но пока не додумался что то(
+            self.hiddenAvatar.center = CGPoint(x: 66, y: 86)
 
             self.hiddenView.alpha = 0 // скрываем бекграунд
 
