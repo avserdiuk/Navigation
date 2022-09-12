@@ -69,10 +69,10 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
         button.setTitleColor(UIColor.white, for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 14
-//        button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
-//        button.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
-//        button.layer.shadowOpacity = 0.7
-//        button.layer.shadowRadius = 4.0
+        //        button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        //        button.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
+        //        button.layer.shadowOpacity = 0.7
+        //        button.layer.shadowRadius = 4.0
         button.layer.masksToBounds = false
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
@@ -84,32 +84,13 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
 
         addViews()
         addConstraints()
+        addGestures()
+        addNotifications()
 
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGesture(_:)))
-        self.avatarImageView.addGestureRecognizer(tapGestureRecognizer)
-
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(methodOfReceivedNotification(notification:)),
-                                               name: Notification.Name("closeClick!"),
-                                               object: nil)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-    }
-
-    @objc func handleTapGesture(_ gestureRecognizer: UITapGestureRecognizer){
-
-        // кидаем уведомление для обновления коллекции
-        NotificationCenter.default.post(name: Notification.Name("avaClick!"), object: nil)
-
-        // и скрываем первоначальную аватарку
-
-        avatarImageView.isHidden = true
-    }
-
-    @objc func methodOfReceivedNotification(notification: Notification) {
-        avatarImageView.isHidden = false
     }
 
     // функция смены статуса по нажатию кнопки
@@ -164,6 +145,37 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
             setStatusButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 132),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
         ])
+    }
+
+
+    // РАБОТА С АВАТАРКОЙ ПРИ КЛИКЕ //
+
+    func addGestures(){
+        // ставим гестуру на клик аватарки
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGesture(_:)))
+        self.avatarImageView.addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    func addNotifications(){
+        // ловим уведомлении о закрытии
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didClickClose(notification:)),
+                                               name: Notification.Name("closeClick!"),
+                                               object: nil)
+    }
+
+    // при клике на авау делаем вот это:
+    @objc func handleTapGesture(_ gestureRecognizer: UITapGestureRecognizer){
+        // кидаем уведомление для обновления коллекции
+        NotificationCenter.default.post(name: Notification.Name("avaClick!"), object: nil)
+
+        // и скрываем первоначальную аватарку
+        avatarImageView.isHidden = true
+    }
+
+    // если поймали уведомление то выполянем вот это:
+    @objc func didClickClose(notification: Notification) {
+        avatarImageView.isHidden = false
     }
     
 }
