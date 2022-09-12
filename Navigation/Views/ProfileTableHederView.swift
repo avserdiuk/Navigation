@@ -22,6 +22,7 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
         img.layer.borderWidth = 3
         img.layer.borderColor = UIColor.white.cgColor
         img.translatesAutoresizingMaskIntoConstraints = false
+        img.isUserInteractionEnabled = true
         return img
     }()
     
@@ -83,12 +84,34 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
 
         addViews()
         addConstraints()
+
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGesture(_:)))
+        self.avatarImageView.addGestureRecognizer(tapGestureRecognizer)
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(methodOfReceivedNotification(notification:)),
+                                               name: Notification.Name("closeClick!"),
+                                               object: nil)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
+    @objc func handleTapGesture(_ gestureRecognizer: UITapGestureRecognizer){
+
+        // кидаем уведомление для обновления коллекции
+        NotificationCenter.default.post(name: Notification.Name("avaClick!"), object: nil)
+
+        // и скрываем первоначальную аватарку
+
+        avatarImageView.isHidden = true
+    }
+
+    @objc func methodOfReceivedNotification(notification: Notification) {
+        avatarImageView.isHidden = false
+    }
+
     // функция смены статуса по нажатию кнопки
     @objc func buttonPressed() {
         if let text = statusLabel.text {
