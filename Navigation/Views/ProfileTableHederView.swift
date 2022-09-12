@@ -166,7 +166,7 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
 
     // при клике на авау делаем вот это:
     @objc func handleTapGesture(_ gestureRecognizer: UITapGestureRecognizer){
-        // кидаем уведомление для обновления коллекции
+        // кидаем уведомление о клике на аву
         NotificationCenter.default.post(name: Notification.Name("avaClick!"), object: nil)
 
         // и скрываем первоначальную аватарку
