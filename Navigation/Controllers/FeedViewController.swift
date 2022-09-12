@@ -15,9 +15,9 @@ class FeedViewController : UIViewController {
     var postTitle : PostFeed = PostFeed(title: "Post Title")
     
     // создаем кнопку для просмотра поста
-    private let button: UIButton = {
+    private lazy var button: UIButton = {
         let button = UIButton()
-        button.setTitle(" View Post ", for: .normal)
+        button.setTitle(" View Post1 ", for: .normal)
         button.backgroundColor = .systemBlue
         button.setTitleColor(UIColor.white, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -26,7 +26,7 @@ class FeedViewController : UIViewController {
     }()
 
     // создаем дополнительную кнопку
-    private let button2: UIButton = {
+    private lazy var button2: UIButton = {
         let button = UIButton()
         button.setTitle(" View Post ", for: .normal)
         button.backgroundColor = .systemBlue

@@ -15,7 +15,7 @@ class InfoViewController : UIViewController{
     let alertController = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
 
     // создаем кнопку для закрытия модального кона
-    private let button: UIButton = {
+    private lazy var button: UIButton = {
         let button = UIButton()
         button.setTitle("Close", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
@@ -26,7 +26,7 @@ class InfoViewController : UIViewController{
     }()
 
     // создаем кнопку для показа алерта
-    private let buttonAlert: UIButton = {
+    private lazy var buttonAlert: UIButton = {
         let button = UIButton()
         button.setTitle("Alert", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
