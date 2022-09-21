@@ -28,7 +28,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         profileTabNavigationController = UINavigationController.init(rootViewController: ProfileViewController())
         loginTabNavigationController = UINavigationController.init(rootViewController: LoginViewController())
 
-        //tabBarController.viewControllers = [feedTabNavigationController, profileTabNavigationController]
         tabBarController.viewControllers = [feedTabNavigationController, loginTabNavigationController]
 
         // cтилизация контейнеров
