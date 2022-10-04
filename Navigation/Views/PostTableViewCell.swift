@@ -78,7 +78,7 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setup(with viewModel: ViewModel) {
+    public func setup(with viewModel: ViewModel) {
         self.autor.text = viewModel.autor
         self.descriptionText.text = viewModel.descriptionText
         self.likes.text = viewModel.likes

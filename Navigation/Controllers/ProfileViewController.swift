@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import StorageService
 
 class ProfileViewController : UIViewController {
     
@@ -56,15 +57,25 @@ class ProfileViewController : UIViewController {
         return img
     }()
 
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.navigationController?.navigationBar.isHidden = true
-        view.backgroundColor = UIColor(red: 245/255.0, green: 248/255.0, blue: 250/255.0, alpha: 1)
+
+        // если мы в дебаг версии то меняем цвет фона, иначе оставляем все как было
+        #if DEBUG
+            view.backgroundColor = .red
+        #else
+            view.backgroundColor = UIColor(red: 245/255.0, green: 248/255.0, blue: 250/255.0, alpha: 1)
+        #endif
 
         addViews()
         addConstraints()
         addGestures()
         addNotification()
+
+
 
     }
 
