@@ -173,7 +173,12 @@ class LoginViewController : UIViewController {
 
         let userLogin = emailTextField.text
 
-        let curUser = CurrentUserService(user: User(login: "login123", fio: "22", status: "33"))
+        // если мы в дебаг версии то меняем цвет фона, иначе оставляем все как было
+        #if DEBUG
+            let curUser = TestUserService(user: User(login: "loginTest", fio: "22", status: "33"))
+        #else
+            let curUser = CurrentUserService(user: User(login: "login123", fio: "22", status: "33"))
+        #endif
 
         if curUser.checkLogin(login: userLogin!) != nil {
             let profileViewController = ProfileViewController()
