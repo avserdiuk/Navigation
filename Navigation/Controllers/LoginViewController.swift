@@ -99,9 +99,7 @@ class LoginViewController : UIViewController {
         addConstraints()
 
         // добавляем события для алерта
-        alertController.addAction(UIAlertAction(title: "Повторить", style: .default, handler: { _ in
-            print("message in console")
-        }))
+        alertController.addAction(UIAlertAction(title: "Повторить", style: .default))
     }
 
     // ------------------------------------------------------------------------------------------------
@@ -171,18 +169,19 @@ class LoginViewController : UIViewController {
     // функция нажатия логин
     @objc func login() {
 
-        let userLogin = emailTextField.text
+        // берем то что вводит пользователь в поле "email"
+        let enteredUserLogin = emailTextField.text
 
         // если мы в дебаг версии то меняем цвет фона, иначе оставляем все как было
         #if DEBUG
-            let curUser = TestUserService(user: User(login: "loginTest", fio: "22", status: "33"))
+            let userLogin = TestUserService(user: User(login: "loginTest", fio: "Ivan Testov", avatar: UIImage(named: "avatarTest") ?? UIImage(), status: "Testing app..."))
         #else
-            let curUser = CurrentUserService(user: User(login: "login123", fio: "22", status: "33"))
+            let userLogin = CurrentUserService(user: User(login: "loginProd", fio: "Prod Petrovich", avatar: UIImage(named: "avatarProd") ?? UIImage(), status: "Go to AppStore! (-_-)"))
         #endif
 
-        if curUser.checkLogin(login: userLogin!) != nil {
+        if userLogin.checkLogin(login: enteredUserLogin ?? "") != nil {
             let profileViewController = ProfileViewController()
-            profileViewController.user_1 = curUser.user
+            profileViewController.user_1 = userLogin.user
             navigationController?.pushViewController(profileViewController, animated: true)
         } else {
             self.present(alertController, animated: true, completion: nil)

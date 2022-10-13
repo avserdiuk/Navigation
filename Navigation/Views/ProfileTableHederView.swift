@@ -113,6 +113,7 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
     func setup(user : User){
         fullNameLabel.text = user.fio
         statusLabel.text = user.status
+        avatarImageView.image = user.avatar
     }
     
     // добавляем вью

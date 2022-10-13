@@ -51,13 +51,13 @@ class CurrentUserService  : UserService {
 class User {
     let login : String
     let fio : String
-    //let avatar : UIImage
+    let avatar : UIImage
     let status : String
 
-    init(login: String, fio: String, status: String) {
+    init(login: String, fio: String, avatar: UIImage, status: String) {
         self.login = login
         self.fio = fio
-        //self.avatar = avatar
+        self.avatar = avatar
         self.status = status
     }
 
