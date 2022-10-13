@@ -12,7 +12,7 @@ import StorageService
 
 class ProfileViewController : UIViewController {
 
-    let user_1 : User = User(login: "alex", fio: "fiofio", status: "kyky!")
+    var user_1 : User = User(login: "alex", fio: "fiofio", status: "kyky!")
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -76,8 +76,6 @@ class ProfileViewController : UIViewController {
         addConstraints()
         addGestures()
         addNotification()
-
-
 
 
     }
@@ -207,8 +205,10 @@ extension ProfileViewController : UITableViewDelegate {
     // Настраиваем кастомный хэдер для 1 секции
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0  {
-            
-            return ProfileHeaderView()
+            // устанавливаем значения из нашего пользователя
+            let profile = ProfileHeaderView()
+            profile.setup(user: user_1)
+            return profile
         }
         return nil
     }

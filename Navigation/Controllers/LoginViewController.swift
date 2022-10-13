@@ -12,6 +12,9 @@ import UIKit
 
 class LoginViewController : UIViewController {
 
+    // создаем алерт c заголовок и сообщением
+    let alertController = UIAlertController(title: "Ошибка!", message: "Не правильный логин", preferredStyle: .alert)
+
     // создаем скролвью
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -94,6 +97,11 @@ class LoginViewController : UIViewController {
 
         addViews()
         addConstraints()
+
+        // добавляем события для алерта
+        alertController.addAction(UIAlertAction(title: "Повторить", style: .default, handler: { _ in
+            print("message in console")
+        }))
     }
 
     // ------------------------------------------------------------------------------------------------
@@ -162,8 +170,18 @@ class LoginViewController : UIViewController {
 
     // функция нажатия логин
     @objc func login() {
-        let profileViewController = ProfileViewController()
-        navigationController?.pushViewController(profileViewController, animated: true)
+
+        let userLogin = emailTextField.text
+
+        let curUser = CurrentUserService(user: User(login: "login123", fio: "22", status: "33"))
+
+        if curUser.checkLogin(login: userLogin!) != nil {
+            let profileViewController = ProfileViewController()
+            profileViewController.user_1 = curUser.user
+            navigationController?.pushViewController(profileViewController, animated: true)
+        } else {
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
 
     func addViews(){
