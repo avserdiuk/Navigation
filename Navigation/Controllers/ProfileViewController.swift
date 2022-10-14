@@ -12,6 +12,9 @@ import StorageService
 import iOSIntPackage
 
 class ProfileViewController : UIViewController {
+
+    // создаем пользователя по заданию
+    var user_1 : User = User(login: "myemail", fio: "Alex Alex ", avatar: UIImage(named: "avatarImage") ?? UIImage() ,status: "I like pizza!")
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -75,7 +78,6 @@ class ProfileViewController : UIViewController {
         addConstraints()
         addGestures()
         addNotification()
-
 
 
     }
@@ -205,7 +207,10 @@ extension ProfileViewController : UITableViewDelegate {
     // Настраиваем кастомный хэдер для 1 секции
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0  {
-            return ProfileHeaderView()
+            // устанавливаем значения из нашего пользователя
+            let profile = ProfileHeaderView()
+            profile.setup(user: user_1)
+            return profile
         }
         return nil
     }
