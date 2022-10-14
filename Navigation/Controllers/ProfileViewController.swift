@@ -206,7 +206,7 @@ extension ProfileViewController : UITableViewDelegate {
     // Настраиваем кастомный хэдер для 1 секции
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0  {
-            // устанавливаем значения из нашего пользователя
+            // устанавливаем значения из нашего пользователя по заданию
             let profile = ProfileHeaderView()
             profile.setup(user: user_1)
             return profile

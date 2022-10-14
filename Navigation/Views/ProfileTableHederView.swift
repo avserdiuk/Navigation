@@ -110,6 +110,7 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
         }
     }
 
+    // функция установки пользоваля по полям
     func setup(user : User){
         fullNameLabel.text = user.fio
         statusLabel.text = user.status

@@ -179,6 +179,7 @@ class LoginViewController : UIViewController {
             let userLogin = CurrentUserService(user: User(login: "loginProd", fio: "Prod Petrovich", avatar: UIImage(named: "avatarProd") ?? UIImage(), status: "Go to AppStore! (-_-)"))
         #endif
 
+        // проверка введеного логика на соответствие. Если все ок - переходим на другой контроллер, если нет - ошибка!
         if userLogin.checkLogin(login: enteredUserLogin ?? "") != nil {
             let profileViewController = ProfileViewController()
             profileViewController.user_1 = userLogin.user
