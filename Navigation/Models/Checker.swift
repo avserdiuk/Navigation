@@ -36,3 +36,15 @@ struct LoginInspector: LoginViewControllerDelegate {
         return Checker.shared.check(login: login, password: password)
     }
 }
+
+// --------------------------------------
+
+protocol LoginFactory {
+    func makeLoginInspector() -> LoginInspector
+}
+
+struct MyLoginFactory : LoginFactory {
+    func makeLoginInspector() -> LoginInspector {
+        return LoginInspector()
+    }
+}

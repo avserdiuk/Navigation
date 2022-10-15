@@ -27,7 +27,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         feedTabNavigationController = UINavigationController.init(rootViewController: FeedViewController())
 
         let lvc = LoginViewController()
-        lvc.loginDelegate = LoginInspector() // делаем зависимость LoginViewController от LoginInspector
+        //lvc.loginDelegate = LoginInspector() // делаем зависимость LoginViewController от LoginInspector
+        lvc.loginDelegate = MyLoginFactory().makeLoginInspector() // делаем зависимость LoginViewController от MyLoginFactory()
         loginTabNavigationController = UINavigationController.init(rootViewController: lvc)
 
 
