@@ -177,11 +177,11 @@ class LoginViewController : UIViewController {
         let enteredUserPassword = passwordTextField.text
 
         // если мы в дебаг версии то меняем цвет фона, иначе оставляем все как было
-        #if DEBUG
-            let userLogin = TestUserService(user: User(login: "loginTest", fio: "Ivan Testov", avatar: UIImage(named: "avatarTest") ?? UIImage(), status: "Testing app..."))
-        #else
-            let userLogin = CurrentUserService(user: User(login: "loginProd", fio: "Prod Petrovich", avatar: UIImage(named: "avatarProd") ?? UIImage(), status: "Go to AppStore! (-_-)"))
-        #endif
+#if DEBUG
+        let userLogin = TestUserService(user: User(fio: "Ivan Testov", avatar: UIImage(named: "avatarTest") ?? UIImage(), status: "Testing app..."))
+#else
+        let userLogin = CurrentUserService(user: User(fio: "Prod Petrovich", avatar: UIImage(named: "avatarProd") ?? UIImage(), status: "Go to AppStore! (-_-)"))
+#endif
 
         // проверка введеного логика на соответствие. Если все ок - переходим на другой контроллер, если нет - ошибка!
 
