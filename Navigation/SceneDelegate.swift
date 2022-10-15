@@ -25,8 +25,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // создаем 2 контейнера и присваиваем им нужные представления ViewController
         feedTabNavigationController = UINavigationController.init(rootViewController: FeedViewController())
-        profileTabNavigationController = UINavigationController.init(rootViewController: ProfileViewController())
-        loginTabNavigationController = UINavigationController.init(rootViewController: LoginViewController())
+
+        let lvc = LoginViewController()
+        lvc.loginDelegate = LoginInspector() // делаем зависимость LoginViewController от LoginInspector
+        loginTabNavigationController = UINavigationController.init(rootViewController: lvc)
+
 
         tabBarController.viewControllers = [feedTabNavigationController, loginTabNavigationController]
 
@@ -35,7 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let item2 = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
 
         feedTabNavigationController.tabBarItem = item1
-        profileTabNavigationController.tabBarItem = item2
+//        profileTabNavigationController.tabBarItem = item2
         loginTabNavigationController.tabBarItem = item2
         
         // стилизация TabBar'a

@@ -12,6 +12,9 @@ import UIKit
 
 class LoginViewController : UIViewController {
 
+    // добавляем делегата
+    var loginDelegate : LoginViewControllerDelegate?
+
     // создаем алерт c заголовок и сообщением
     let alertController = UIAlertController(title: "Ошибка!", message: "Не правильный логин", preferredStyle: .alert)
 
@@ -171,6 +174,7 @@ class LoginViewController : UIViewController {
 
         // берем то что вводит пользователь в поле "email"
         let enteredUserLogin = emailTextField.text
+        let enteredUserPassword = passwordTextField.text
 
         // если мы в дебаг версии то меняем цвет фона, иначе оставляем все как было
         #if DEBUG
@@ -180,13 +184,15 @@ class LoginViewController : UIViewController {
         #endif
 
         // проверка введеного логика на соответствие. Если все ок - переходим на другой контроллер, если нет - ошибка!
-        if userLogin.checkLogin(login: enteredUserLogin ?? "") != nil {
+
+        if loginDelegate?.check(self, login: enteredUserLogin ?? "", password: enteredUserPassword ?? "") == true {
             let profileViewController = ProfileViewController()
             profileViewController.user_1 = userLogin.user
             navigationController?.pushViewController(profileViewController, animated: true)
         } else {
             self.present(alertController, animated: true, completion: nil)
         }
+
     }
 
     func addViews(){

@@ -12,7 +12,7 @@ import UIKit
 // размер для ячеек в первой секции (по заданию)
 public let itemSize = (UIScreen.main.bounds.width - 48)/4
 
-// структора поста
+// структура поста
 public struct Post {
     public var autor: String
     public var description: String
