@@ -14,34 +14,16 @@
 import Foundation
 import UIKit
 
-protocol UserService {
-    func checkLogin (login : String) -> User?
-}
-
-class TestUserService : UserService {
+class TestUserService {
     let user : User
-
-    func checkLogin(login: String) -> User? {
-        if user.login == login {
-            return user
-        }
-        return nil
-    }
 
     init(user: User) {
         self.user = user
     }
 }
 
-class CurrentUserService  : UserService {
+class CurrentUserService {
     let user : User
-
-    func checkLogin(login: String) -> User? {
-        if user.login == login {
-            return user
-        }
-        return nil
-    }
 
     init(user: User) {
         self.user = user
@@ -49,13 +31,11 @@ class CurrentUserService  : UserService {
 }
 
 class User {
-    let login : String
     let fio : String
     let avatar : UIImage
     let status : String
 
-    init(login: String, fio: String, avatar: UIImage, status: String) {
-        self.login = login
+    init(fio: String, avatar: UIImage, status: String) {
         self.fio = fio
         self.avatar = avatar
         self.status = status

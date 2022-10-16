@@ -14,7 +14,7 @@ import iOSIntPackage
 class ProfileViewController : UIViewController {
 
     // создаем пользователя по заданию
-    var user_1 : User = User(login: "myemail", fio: "Alex Alex ", avatar: UIImage(named: "avatarImage") ?? UIImage() ,status: "I like pizza!")
+    var user_1 : User = User(fio: "", avatar: UIImage() ,status: "")
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -207,7 +207,7 @@ extension ProfileViewController : UITableViewDelegate {
     // Настраиваем кастомный хэдер для 1 секции
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0  {
-            // устанавливаем значения из нашего пользователя
+            // устанавливаем значения из нашего пользователя по заданию
             let profile = ProfileHeaderView()
             profile.setup(user: user_1)
             return profile
