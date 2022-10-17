@@ -8,8 +8,11 @@
 
 import Foundation
 import UIKit
+import iOSIntPackage
 
-class PhotosViewController : UIViewController {
+class PhotosViewController : UIViewController, ImageLibrarySubscriber {
+
+    let imageTest : ImagePublisherFacade = ImagePublisherFacade()
 
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -78,6 +81,12 @@ extension PhotosViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         return CGSize(width: itemSizeInCollection, height: itemSizeInCollection)
+    }
+}
+
+extension PhotosViewController {
+    func receive(images: [UIImage]) {
+
     }
 }
 
