@@ -40,8 +40,7 @@ class PhotosViewController : UIViewController, ImageLibrarySubscriber {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = false
         self.title = "Photo Gallery"
-        
-
+    
         view.backgroundColor = .white
 
         addViews()
@@ -52,17 +51,7 @@ class PhotosViewController : UIViewController, ImageLibrarySubscriber {
         imagePublisher.addImagesWithTimer(time: 0.5, repeat: 20)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        imagePublisher.subscribe(self)
-    }
-
     // отписываемся от наблюдения при смене статус контроллера или нажатии кнопки back
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        imagePublisher.removeSubscription(for: self)
-        imagePublisher.rechargeImageLibrary()
-    }
 
     override func didMove(toParent parent: UIViewController?) {
         super.didMove(toParent: parent)
