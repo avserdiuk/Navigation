@@ -239,6 +239,7 @@ extension ProfileViewController : UITableViewDataSource{
     // Обработка клика на секцию с фотографиями. При клике переходим на другое вью контроллер PhotosViewController
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0{
+
             let photosViewController = PhotosViewController()
             navigationController?.pushViewController(photosViewController, animated: false)
         }

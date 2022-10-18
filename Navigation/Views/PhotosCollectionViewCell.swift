@@ -15,6 +15,8 @@ class PhotosCollectionViewCell : UICollectionViewCell {
     private lazy var img : UIImageView = {
         let img = UIImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
+        img.contentMode = .scaleAspectFill
+        img.clipsToBounds = true
         return img
     }()
 
@@ -28,8 +30,12 @@ class PhotosCollectionViewCell : UICollectionViewCell {
     }
 
     // функция для понимания какую именно картинку отобразить
-    func setup(with name: String) {
+    func setupWithName(with name: String) {
         self.img.image = UIImage(named: name)
+    }
+
+    func setupWithImage(with image: UIImage){
+        self.img.image = image
     }
 
     // установка вью и констрейнтов
