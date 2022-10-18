@@ -257,7 +257,23 @@ extension ProfileViewController : UITableViewDataSource{
                 return cell
             }
 
-            let post = posts[indexPath.row]
+            var post = posts[indexPath.row]
+
+            // Добавляем фильтр на картинку поста (притом разные, так как это сказано в задании)
+            let imageFilter = ImageProcessor()
+
+            if let sImage = post.image { // решаем вопрос с опционалом
+                if indexPath.row % 2 == 0 {
+                    imageFilter.processImage(sourceImage: sImage, filter: .noir) {
+                        filteredImage in post.image = filteredImage
+                    }
+                } else {
+                    imageFilter.processImage(sourceImage: sImage, filter: .colorInvert) {
+                        filteredImage in post.image = filteredImage
+                    }
+                }
+
+            }
 
             let PostViewModel = PostTableViewCell.ViewModel(
                 autor: post.autor,

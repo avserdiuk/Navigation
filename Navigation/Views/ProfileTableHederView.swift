@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 class ProfileHeaderView : UITableViewHeaderFooterView {
     
@@ -21,7 +22,6 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
         img.layer.masksToBounds = true
         img.layer.borderWidth = 3
         img.layer.borderColor = UIColor.white.cgColor
-        img.translatesAutoresizingMaskIntoConstraints = false
         img.isUserInteractionEnabled = true
         return img
     }()
@@ -32,7 +32,7 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
         label.text = "Hipster Cat"
         label.textColor = .black
         label.font = UIFont(name: "HelveticaNeue-Bold", size: 18.0)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        //label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -42,7 +42,6 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
         label.text = "Waiting for something"
         label.textColor = .gray
         label.font = UIFont(name: "HelveticaNeue", size: 14.0)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -57,7 +56,6 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
         textField.font = UIFont(name: "HelveticaNeue", size: 15.0)
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftViewMode = .always
-        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         return textField
     }()
@@ -128,30 +126,40 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
     
     // добавляем привязки
     func addConstraints(){
-        NSLayoutConstraint.activate([
 
-            avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-            avatarImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
-            avatarImageView.heightAnchor.constraint(equalToConstant: 100),
-            
-            fullNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
-            fullNameLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 140),
-            
-            statusLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 54),
-            statusLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 140),
-            
-            statusTextField.topAnchor.constraint(equalTo: self.topAnchor, constant: 80),
-            statusTextField.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 140),
-            statusTextField.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
-            statusTextField.heightAnchor.constraint(equalToConstant: 40),
-            
-            setStatusButton.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
-            setStatusButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
-            setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
-            setStatusButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 132),
-            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
-        ])
+        // Новая реализация через SnapKit
+
+        avatarImageView.snp.makeConstraints { (make) -> Void in
+            make.height.width.equalTo(100)
+            make.top.equalTo(self.snp.top).offset(16)
+            make.left.equalTo(self.snp.left).offset(16)
+                }
+
+        fullNameLabel.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(self.snp.top).offset(27)
+            make.left.equalTo(self.snp.left).offset(140)
+        }
+
+        statusLabel.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(self.snp.top).offset(54)
+            make.left.equalTo(self.snp.left).offset(140)
+        }
+
+        statusTextField.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(self.snp.top).offset(80)
+            make.left.equalTo(self.snp.left).offset(140)
+            make.right.equalTo(self.snp.right).offset(-16)
+            make.height.equalTo(40)
+        }
+
+        setStatusButton.snp.makeConstraints { (make) -> Void in
+            make.left.equalTo(self.snp.left).offset(16)
+            make.right.equalTo(self.snp.right).offset(-16)
+            make.top.equalTo(self.snp.top).offset(132)
+            make.bottom.equalTo(self.snp.bottom).offset(-16)
+            make.height.equalTo(50)
+        }
+        
     }
 
 
