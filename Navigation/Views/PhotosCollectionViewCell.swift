@@ -15,6 +15,8 @@ class PhotosCollectionViewCell : UICollectionViewCell {
     private lazy var img : UIImageView = {
         let img = UIImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
+        img.contentMode = .scaleAspectFill
+        img.clipsToBounds = true
         return img
     }()
 
