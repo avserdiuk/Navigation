@@ -63,21 +63,7 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
     }()
     
     // создаем кнопку смены статуса
-    private lazy var setStatusButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Show status", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 14
-        //        button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
-        //        button.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
-        //        button.layer.shadowOpacity = 0.7
-        //        button.layer.shadowRadius = 4.0
-        button.layer.masksToBounds = false
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        return button
-    }()
+    private lazy var setStatusButton: CustomButton = CustomButton(title: "Show status", cornerRadius: 14, maskToBounds: false)
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -86,6 +72,7 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
         addConstraints()
         addGestures()
         addNotifications()
+        addBtnActions()
 
     }
     
@@ -94,12 +81,14 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
     }
 
     // функция смены статуса по нажатию кнопки
-    @objc func buttonPressed() {
-        if let text = statusLabel.text {
-            print(text)
-        }
-        if statusText != "" {
-            statusLabel.text = statusText
+    func addBtnActions() {
+        setStatusButton.btnAction = {
+            if let text = self.statusLabel.text {
+                print(text)
+            }
+            if self.statusText != "" {
+                self.statusLabel.text = self.statusText
+            }
         }
     }
     

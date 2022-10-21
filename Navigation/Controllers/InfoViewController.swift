@@ -12,29 +12,12 @@ import UIKit
 class InfoViewController : UIViewController{
 
     // создаем алерт c заголовок и сообщением
-    let alertController = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
+    let alertController = UIAlertController(title: "TitlPfujke", message: "Test Message", preferredStyle: .alert)
 
-    // создаем кнопку для закрытия модального кона
-    private lazy var button: UIButton = {
-        let button = UIButton()
-        button.setTitle("Close", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.backgroundColor = .systemBlue
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(showPostController), for: .touchUpInside)
-        return button
-    }()
+    // создаем кастомные кнопки для закрытия модального кона
+    private lazy var button: CustomButton = CustomButton(title: " Close ")
+    private lazy var buttonAlert: CustomButton = CustomButton(title: " Alert ")
 
-    // создаем кнопку для показа алерта
-    private lazy var buttonAlert: UIButton = {
-        let button = UIButton()
-        button.setTitle("Alert", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.backgroundColor = .systemBlue
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
-        return button
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,14 +28,11 @@ class InfoViewController : UIViewController{
         view.addSubview(buttonAlert)
 
         addConstraints()
+        addBtnActions()
 
         // добавляем события для алерта
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            print("message in console")
-        }))
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            print("message in console2")
-        }))
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default))
+        alertController.addAction(UIAlertAction(title: "Close", style: .default))
     }
 
     func addConstraints(){
@@ -65,14 +45,16 @@ class InfoViewController : UIViewController{
         ])
     }
 
-    // функция закрытия модального кона
-    @objc func showPostController() {
-        self.dismiss(animated: true, completion: nil)
+    func addBtnActions(){
+        button.btnAction = {
+            self.dismiss(animated: true, completion: nil)
+        }
+
+        buttonAlert.btnAction = {
+            self.present(self.alertController, animated: true, completion: nil)
+        }
     }
-    // функция показа алерта
-    @objc func showAlert() {
-        self.present(alertController, animated: true, completion: nil)
-    }
+
 
 
 

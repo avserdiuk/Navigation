@@ -13,28 +13,10 @@ class FeedViewController : UIViewController {
     
     // создание обьекта по заданию
     var postTitle : PostFeed = PostFeed(title: "Post Title")
-    
-    // создаем кнопку для просмотра поста
-    private lazy var button: UIButton = {
-        let button = UIButton()
-        button.setTitle(" View Post1 ", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(showPostController), for: .touchUpInside)
-        return button
-    }()
 
-    // создаем дополнительную кнопку
-    private lazy var button2: UIButton = {
-        let button = UIButton()
-        button.setTitle(" View Post ", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(showPostController), for: .touchUpInside)
-        return button
-    }()
+    // создаем КАСТОМНЫЕ кнопки
+    private lazy var button1 = CustomButton(title: " My custom button 1 ")
+    private lazy var button2 = CustomButton(title: " My custom button 2 ")
 
     // создаем стеквью
     private let stackViewButton : UIStackView = {
@@ -58,12 +40,15 @@ class FeedViewController : UIViewController {
         
         // проставляем привязки по расположению
         setConstraints()
+
+        // проставляем действия на кнопки
+        addBtnActions()
         
     }
 
     func addView(){
         //обьединяем кнопки в стеквью
-        stackViewButton.addArrangedSubview(button)
+        stackViewButton.addArrangedSubview(button1)
         stackViewButton.addArrangedSubview(button2)
 
         // отображаем все на экране
@@ -77,13 +62,16 @@ class FeedViewController : UIViewController {
             stackViewButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
-    
-    // функция обработки нажатия на кнопку
-    @objc func showPostController() {
-        let detailController = PostViewController()
-        detailController.titlePost = postTitle.title
-        navigationController?.pushViewController(detailController, animated: false)
+
+    // функция передачи действия на кнопки
+    func addBtnActions(){
+        button1.btnAction = {
+            let detailController = PostViewController()
+            detailController.titlePost = self.postTitle.title
+            self.navigationController?.pushViewController(detailController, animated: false)
+        }
+
+        // Т.к. действия одинаковые, что бы не дублировать код =)
+        button2.btnAction = button1.btnAction
     }
-    
-    
 }
