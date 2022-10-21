@@ -5,11 +5,18 @@
 //  Created by Алексей Сердюк on 17.08.2022.
 //  Copyright © 2022 aserdiuk. All rights reserved.
 
-//Создайте модель публикации Post, она должна содержать следующие поля: author: String - никнейм автора публикации description: String - текст публикации image: String - имя картинки из каталога Assets.xcassets likes: Int - количество лайков views: Int - количество просмотров
-
 import Foundation
 
-// создание структуры по заданию
+// создание структуры по старому заданию
 struct PostFeed {
     var title : String
+}
+
+// создание модели по новому заданию
+class FeedModel {
+    let password : String = "secretWord"
+
+    func check(word: String) -> Bool {
+        password == word ? true : false
+    }
 }
