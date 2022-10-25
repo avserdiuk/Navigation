@@ -13,7 +13,7 @@ struct PostFeed {
 }
 
 // создание модели по новому заданию
-class FeedModel {
+struct FeedModel {
     let password : String = "secretWord"
 
     func check(word: String) -> Bool {

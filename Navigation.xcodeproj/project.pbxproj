@@ -102,7 +102,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4149C4C628AB633400E3C87A /* Views */ = {
+		4149C4C628AB633400E3C87A /* View */ = {
 			isa = PBXGroup;
 			children = (
 				4149C4C728AB635000E3C87A /* ProfileTableHederView.swift */,
@@ -111,7 +111,7 @@
 				41B6793128C7C03C00F36950 /* PhotosCollectionViewCell.swift */,
 				411310FF2902B9240025DD7C /* CustomButton.swift */,
 			);
-			path = Views;
+			path = View;
 			sourceTree = "<group>";
 		};
 		4152698128A8411800D5CFEC = {
@@ -135,11 +135,10 @@
 		4152698C28A8411800D5CFEC /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				4152698D28A8411800D5CFEC /* AppDelegate.swift */,
-				4152698F28A8411800D5CFEC /* SceneDelegate.swift */,
-				41D8D57C28C1EF5300E62F40 /* Models */,
-				4149C4C628AB633400E3C87A /* Views */,
-				41729E9028AA2E2000EF8DC5 /* Controllers */,
+				41CC08D7290805E400430351 /* Application layer */,
+				41D8D57C28C1EF5300E62F40 /* Model */,
+				4149C4C628AB633400E3C87A /* View */,
+				41729E9028AA2E2000EF8DC5 /* Controller */,
 				4152699628A8411900D5CFEC /* Assets.xcassets */,
 				4152699B28A8411900D5CFEC /* Info.plist */,
 			);
@@ -155,7 +154,7 @@
 			path = StorageService;
 			sourceTree = "<group>";
 		};
-		41729E9028AA2E2000EF8DC5 /* Controllers */ = {
+		41729E9028AA2E2000EF8DC5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				41729E8E28A902C700EF8DC5 /* ProfileViewController.swift */,
@@ -165,10 +164,19 @@
 				41729E9328AA3FEB00EF8DC5 /* InfoViewController.swift */,
 				41A4866F28C5F38B00698734 /* PhotosViewController.swift */,
 			);
-			path = Controllers;
+			path = Controller;
 			sourceTree = "<group>";
 		};
-		41D8D57C28C1EF5300E62F40 /* Models */ = {
+		41CC08D7290805E400430351 /* Application layer */ = {
+			isa = PBXGroup;
+			children = (
+				4152698D28A8411800D5CFEC /* AppDelegate.swift */,
+				4152698F28A8411800D5CFEC /* SceneDelegate.swift */,
+			);
+			path = "Application layer";
+			sourceTree = "<group>";
+		};
+		41D8D57C28C1EF5300E62F40 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				41B6EC6B28ACCC7B00BF4C5A /* FeedModel.swift */,
@@ -176,7 +184,7 @@
 				41A2FCCF28F884E1009E3E57 /* UserModel.swift */,
 				41BE9FC228FB1ABE0085DEDB /* Checker.swift */,
 			);
-			path = Models;
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
