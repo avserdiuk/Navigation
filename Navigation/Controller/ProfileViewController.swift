@@ -6,7 +6,6 @@
 //  Copyright © 2022 aserdiuk. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import StorageService
 import iOSIntPackage

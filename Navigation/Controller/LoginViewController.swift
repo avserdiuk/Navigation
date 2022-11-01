@@ -6,11 +6,11 @@
 //  Copyright © 2022 aserdiuk. All rights reserved.
 //
 
-
-import Foundation
 import UIKit
 
 class LoginViewController : UIViewController {
+
+    var coordinator : Coordinator?
 
     // добавляем делегата
     var loginDelegate : LoginViewControllerDelegate?

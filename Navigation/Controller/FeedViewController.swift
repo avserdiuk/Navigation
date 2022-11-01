@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 class FeedViewController : UIViewController {
+
+    var coordinator : Coordinator?
     
     // создание обьекта по заданию
     var postTitle : PostFeed = PostFeed(title: "Post Title")
@@ -76,11 +78,6 @@ class FeedViewController : UIViewController {
         NSLayoutConstraint.activate([
             stackViewButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackViewButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-
-            textField.topAnchor.constraint(equalTo: button2.bottomAnchor, constant: 0),
-            textField.leftAnchor.constraint(equalTo: stackViewButton.leftAnchor, constant: 0),
-            textField.rightAnchor.constraint(equalTo: stackViewButton.rightAnchor, constant: 0),
-            textField.heightAnchor.constraint(equalToConstant: 44),
         ])
     }
 

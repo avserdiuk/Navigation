@@ -14,7 +14,7 @@ struct PostFeed {
 
 // создание модели по новому заданию
 struct FeedModel {
-    let password : String = "secretWord"
+    let password : String = "1"
 
     func check(word: String) -> Bool {
         password == word ? true : false

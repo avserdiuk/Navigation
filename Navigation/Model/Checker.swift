@@ -23,7 +23,8 @@ class Checker {
     private let password: String = ""
 
     func check(login : String, password: String) -> Bool {
-        self.login == login && self.password == password ? true : false
+        return self.login == login && self.password == password ? true : false
+
     }
 
     private init(){
