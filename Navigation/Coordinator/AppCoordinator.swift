@@ -12,7 +12,6 @@ import UIKit
 class AppCoordinator : Coordinator {
     var child: [Coordinator] = []
     var transitionHandler : UITabBarController
-    var name = "AppCoordinator"
 
     init(transitionHandler: UITabBarController) {
         self.transitionHandler = transitionHandler

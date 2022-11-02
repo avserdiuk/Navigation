@@ -12,7 +12,6 @@ class ChildLoginCoordinator : Coordinator {
     var transitionHandler: UITabBarController
 
     var child: [Coordinator] = []
-    var name = "ChildLoginCoordinator"
 
     init(transitionHandler: UITabBarController) {
         self.transitionHandler = transitionHandler
