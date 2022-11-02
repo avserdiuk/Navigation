@@ -12,6 +12,7 @@ class ChildLoginCoordinator : Coordinator {
     var transitionHandler: UITabBarController
 
     var child: [Coordinator] = []
+    var name = "ChildLoginCoordinator"
 
     init(transitionHandler: UITabBarController) {
         self.transitionHandler = transitionHandler
@@ -20,5 +21,11 @@ class ChildLoginCoordinator : Coordinator {
     func start(){
         print("Profile coordinator started")
     }
+
+    func check(login: String, password: String) -> Bool{
+        print("Checking login and pass")
+        return Checker.shared.check(login: login, password: password)
+    }
+
 }
 

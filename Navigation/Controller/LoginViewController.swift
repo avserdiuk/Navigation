@@ -10,7 +10,7 @@ import UIKit
 
 class LoginViewController : UIViewController {
 
-    var coordinator : Coordinator?
+    var coordinator : ChildLoginCoordinator?
 
     // добавляем делегата
     var loginDelegate : LoginViewControllerDelegate?
@@ -179,7 +179,7 @@ class LoginViewController : UIViewController {
 
             // проверка введеного логика на соответствие. Если все ок - переходим на другой контроллер, если нет - ошибка!
 
-            if self.loginDelegate?.check(self, login: enteredUserLogin ?? "", password: enteredUserPassword ?? "") == true {
+            if self.coordinator?.check(login: enteredUserLogin!, password: enteredUserPassword!) == true {
                 let profileViewController = ProfileViewController()
                 profileViewController.user_1 = userLogin.user
                 self.navigationController?.pushViewController(profileViewController, animated: true)
@@ -233,7 +233,7 @@ class LoginViewController : UIViewController {
             passwordTextField.heightAnchor.constraint(equalToConstant: 49.75),
             passwordTextField.centerXAnchor.constraint(equalTo: super.view.centerXAnchor),
             passwordTextField.leftAnchor.constraint(equalTo: stackViewTextFields.leftAnchor, constant: 0),
-
+            
             loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
             loginButton.centerXAnchor.constraint(equalTo: super.view.centerXAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: 50),

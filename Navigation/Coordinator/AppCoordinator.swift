@@ -12,6 +12,7 @@ import UIKit
 class AppCoordinator : Coordinator {
     var child: [Coordinator] = []
     var transitionHandler : UITabBarController
+    var name = "AppCoordinator"
 
     init(transitionHandler: UITabBarController) {
         self.transitionHandler = transitionHandler
@@ -39,6 +40,7 @@ class AppCoordinator : Coordinator {
         let loginVC = LoginViewController()
         loginVC.coordinator = loginCoordinator
         let loginTabNavigationController = UINavigationController.init(rootViewController: loginVC)
+
 
         loginTabNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
 

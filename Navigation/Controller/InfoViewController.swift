@@ -49,7 +49,7 @@ class InfoViewController : UIViewController{
         button.btnAction = {
             self.dismiss(animated: true, completion: nil)
         }
-
+        
         buttonAlert.btnAction = {
             self.present(self.alertController, animated: true, completion: nil)
         }
