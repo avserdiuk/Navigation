@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class FeedViewController : UIViewController {
-
-    var coordinator : Coordinator?
+    
+    var coordinator : FeedCoordinator?
     
     // создание обьекта по заданию
     var postTitle : PostFeed = PostFeed(title: "Post Title")

@@ -11,44 +11,31 @@ import UIKit
 
 class AppCoordinator : Coordinator {
     var child: [Coordinator] = []
-    var transitionHandler : UITabBarController
+    weak var transitionHandler : UITabBarController?
 
     init(transitionHandler: UITabBarController) {
         self.transitionHandler = transitionHandler
     }
 
     func start(){
-        print("App coordinator started")
+        print("App coordinator started \n")
 
-        let feedCoordinator = ChildFeedCoordinator(transitionHandler: transitionHandler)
-        child.append(feedCoordinator)
-        feedCoordinator.start()
+        startFeedCoordinator()
+        startLoginCoordinator()
 
-        let feedVC = FeedViewController()
-        feedVC.coordinator = feedCoordinator
-        let feedTabNavigationController = UINavigationController.init(rootViewController: feedVC)
-
-        feedTabNavigationController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "text.bubble"), tag: 0)
-
-        // ---- //
-
-        let loginCoordinator = ChildLoginCoordinator(transitionHandler: transitionHandler)
-        child.append(loginCoordinator)
-        loginCoordinator.start()
-
-        let loginVC = LoginViewController()
-        loginVC.coordinator = loginCoordinator
-        let loginTabNavigationController = UINavigationController.init(rootViewController: loginVC)
-
-
-        loginTabNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
-
-        transitionHandler.viewControllers = [feedTabNavigationController, loginTabNavigationController]
-
-        UITabBar.appearance().tintColor = .systemBlue
-        UITabBar.appearance().backgroundColor = .secondarySystemBackground
     }
 
+    func startFeedCoordinator() {
+        let feedCoordinator = FeedCoordinator(transitionHandler: transitionHandler!)
+        child.append(feedCoordinator)
+        feedCoordinator.start()
+    }
 
+    func startLoginCoordinator() {
+        let profileCoordinator = ProfileCoordinator(transitionHandler: transitionHandler!)
+        child.append(profileCoordinator)
+        profileCoordinator.coordinator = self
+        profileCoordinator.start()
+    }
 
 }

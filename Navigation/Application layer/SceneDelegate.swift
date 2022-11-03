@@ -18,13 +18,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
 
         let transitionHandler = UITabBarController()
+
         coordinator = AppCoordinator(transitionHandler: transitionHandler)
         coordinator?.start()
 
+        UITabBar.appearance().tintColor = .systemBlue
+        UITabBar.appearance().backgroundColor = .secondarySystemBackground
+        
         window.rootViewController = transitionHandler
         window.makeKeyAndVisible()
 
         self.window = window
+
+        
     }
     
 }
