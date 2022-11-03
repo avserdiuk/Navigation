@@ -13,13 +13,14 @@ class FeedCoordinator : Coordinator {
 
     var child: [Coordinator] = []
 
+    weak var coordinator : AppCoordinator?
+
     init(transitionHandler: UITabBarController) {
         self.transitionHandler = transitionHandler
     }
 
     func start(){
         print("Feed coordinator started")
-
         showFeedScreen()
     }
 

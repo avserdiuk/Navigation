@@ -14,16 +14,16 @@
 import Foundation
 import UIKit
 
-class TestUserService {
-    let user : User
+class TestUserService: AppUser {
+    var user : User
 
     init(user: User) {
         self.user = user
     }
 }
 
-class CurrentUserService {
-    let user : User
+class CurrentUserService: AppUser{
+    var user : User
 
     init(user: User) {
         self.user = user
@@ -41,5 +41,9 @@ class User {
         self.status = status
     }
 
+}
 
+protocol AppUser {
+
+    var user : User {get set}
 }

@@ -28,6 +28,7 @@ class AppCoordinator : Coordinator {
     func startFeedCoordinator() {
         let feedCoordinator = FeedCoordinator(transitionHandler: transitionHandler!)
         child.append(feedCoordinator)
+        feedCoordinator.coordinator = self
         feedCoordinator.start()
     }
 

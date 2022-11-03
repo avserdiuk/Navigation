@@ -32,11 +32,10 @@ class ProfileCoordinator : Coordinator {
         transitionHandler?.viewControllers?.append(profileTabNavigationController)
     }
 
-    func showProfileScreen(transitionHandler : UINavigationController){
-        print("11")
-        let profileViewController = ProfileViewController()
-        //profileViewController.user_1 = userLogin.user
-        transitionHandler.pushViewController(ProfileViewController(), animated: true)
+    func showProfileScreen(transitionHandler : UINavigationController, user : AppUser){
+        let controller = ProfileViewController()
+        controller.user_1 = user.user
+        transitionHandler.pushViewController(controller, animated: true)
     }
 
 }
