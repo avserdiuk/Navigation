@@ -21,7 +21,7 @@ class AppCoordinator : Coordinator {
         print("App coordinator started \n")
 
         startFeedCoordinator()
-        startLoginCoordinator()
+        startProfileCoordinator()
 
     }
 
@@ -32,7 +32,7 @@ class AppCoordinator : Coordinator {
         feedCoordinator.start()
     }
 
-    func startLoginCoordinator() {
+    func startProfileCoordinator() {
         let profileCoordinator = ProfileCoordinator(transitionHandler: transitionHandler!)
         child.append(profileCoordinator)
         profileCoordinator.coordinator = self

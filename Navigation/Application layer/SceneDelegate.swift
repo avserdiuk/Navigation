@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let transitionHandler = UITabBarController()
 
-        coordinator = AppCoordinator(transitionHandler: transitionHandler)
+        coordinator = AppCoordinator.init(transitionHandler: transitionHandler)
         coordinator?.start()
 
         UITabBar.appearance().tintColor = .systemBlue

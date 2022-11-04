@@ -84,9 +84,11 @@ class FeedViewController : UIViewController {
     // функция передачи действия на кнопки
     func addBtnActions(){
         button1.btnAction = {
-            let detailController = PostViewController()
-            detailController.titlePost = self.postTitle.title
-            self.navigationController?.pushViewController(detailController, animated: false)
+//            let detailController = PostViewController()
+//            detailController.titlePost = self.postTitle.title
+//            self.navigationController?.pushViewController(detailController, animated: false)
+
+            self.coordinator?.showPostScreen(navigationController: self.navigationController!, title: self.postTitle.title)
         }
 
         // т.к. действия одинаковые, что бы не дублировать код =)

@@ -25,9 +25,25 @@ class FeedCoordinator : Coordinator {
     }
 
     func showFeedScreen() {
-        let feedNavigationController = UINavigationController.init(rootViewController: FeedViewController())
-        feedNavigationController.tabBarItem = TabBarItems[0]
-        transitionHandler?.viewControllers = [feedNavigationController]
+        let viewController = FeedViewController()
+        viewController.coordinator = self
+
+        let navigationController = UINavigationController.init(rootViewController: viewController)
+        navigationController.tabBarItem = TabBarItems[0]
+        transitionHandler?.viewControllers = [navigationController]
+    }
+
+    func showPostScreen(navigationController : UINavigationController, title: String){
+        let viewController = PostViewController()
+        viewController.titlePost = title
+        viewController.coordinator = self
+        navigationController.pushViewController(viewController, animated: false)
+    }
+
+    func showInfoScreen(sender : UIViewController){
+        let popupViewController = InfoViewController()
+        popupViewController.modalPresentationStyle = .fullScreen
+        sender.present(popupViewController, animated: true, completion: nil)
     }
 }
 

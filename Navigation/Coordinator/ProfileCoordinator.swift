@@ -24,12 +24,13 @@ class ProfileCoordinator : Coordinator {
         showLoginScreen()
     }
 
-    func showLoginScreen() {
-        let controller = LoginViewController()
-        controller.coordinator = self
-        let profileTabNavigationController = UINavigationController.init(rootViewController: controller)
-        profileTabNavigationController.tabBarItem = TabBarItems[1]
-        transitionHandler?.viewControllers?.append(profileTabNavigationController)
+    func showLoginScreen(){
+        let viewController = LoginViewController()
+        viewController.coordinator = self
+
+        let navigationController = UINavigationController.init(rootViewController: viewController)
+        navigationController.tabBarItem = TabBarItems[1]
+        transitionHandler?.viewControllers?.append(navigationController)
     }
 
     func showProfileScreen(transitionHandler : UINavigationController, user : AppUser){

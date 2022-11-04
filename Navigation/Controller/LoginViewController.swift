@@ -178,7 +178,6 @@ class LoginViewController : UIViewController {
 #endif
 
             // проверка введеного логика на соответствие. Если все ок - переходим на другой контроллер, если нет - ошибка!
-
             if Checker.shared.check(login: enteredUserLogin ?? "", password: enteredUserPassword ?? "") == true {
                 self.coordinator?.showProfileScreen(transitionHandler: self.navigationController!, user: userLogin)
             } else {

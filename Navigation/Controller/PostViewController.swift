@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 class PostViewController : UIViewController {
+
+    var coordinator : FeedCoordinator?
     
     // Создаем переменную для текста заголовка, в нее будет передаваться заголовок из FeedViewController
     var titlePost: String = ""
@@ -28,8 +30,6 @@ class PostViewController : UIViewController {
     
     // Функция для отображения InfoViewController в модальном окне
     @objc func showModal() {
-        let popupViewController = InfoViewController()
-        popupViewController.modalPresentationStyle = .fullScreen
-        self.present(popupViewController, animated: true, completion: nil)
+        coordinator?.showInfoScreen(sender: self)
     }
 }
