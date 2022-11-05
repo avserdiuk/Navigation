@@ -10,12 +10,9 @@ import Foundation
 import UIKit
 import iOSIntPackage
 
-class PhotosViewController : UIViewController, ImageLibrarySubscriber {
+class PhotosViewController : UIViewController {
 
-    // нужное для реализация заполнения коллекции через паттерн фасад
-    var itemInSection : Int = 0
-    var itemImageMassive : [UIImage] = []
-    var imagePublisher = ImagePublisherFacade()
+    var filteredImage : [CGImage?] = []
 
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -40,24 +37,30 @@ class PhotosViewController : UIViewController, ImageLibrarySubscriber {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = false
         self.title = "Photo Gallery"
-    
+
         view.backgroundColor = .white
 
         addViews()
         addConstraints()
 
-        // запускаем подписку и генерацию картинок
-        imagePublisher.subscribe(self)
-        imagePublisher.addImagesWithTimer(time: 0.5, repeat: 20)
+        magic()
     }
 
-    // отписываемся от наблюдения при смене статус контроллера или нажатии кнопки back
+    func magic(){
+        ImageProcessor.init().processImagesOnThread(sourceImages: photos, filter: .chrome, qos: .background) { img in
+            self.filteredImage = img
+            self.result()
+        }
+    }
 
-    override func didMove(toParent parent: UIViewController?) {
-        super.didMove(toParent: parent)
-        if parent == nil {
-            imagePublisher.removeSubscription(for: self)
-            imagePublisher.rechargeImageLibrary()
+    func result(){
+
+        for (index,item) in filteredImage.enumerated() {
+            photos[index] = UIImage.init(cgImage: item!)
+        }
+
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
         }
     }
 
@@ -78,7 +81,7 @@ class PhotosViewController : UIViewController, ImageLibrarySubscriber {
 
 extension PhotosViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemInSection
+        return photos.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -88,8 +91,7 @@ extension PhotosViewController : UICollectionViewDataSource {
             return cell
         }
 
-        cell.setupWithImage(with: itemImageMassive[indexPath.row])
-        // test
+        cell.setupWithIndex(with: indexPath.row)
         return cell
     }
 }
@@ -100,12 +102,3 @@ extension PhotosViewController : UICollectionViewDelegateFlowLayout {
         return CGSize(width: itemSizeInCollection, height: itemSizeInCollection)
     }
 }
-
-extension PhotosViewController  {
-    func receive(images: [UIImage]) {
-        itemImageMassive = images
-        itemInSection = images.count
-        collectionView.reloadData()
-    }
-}
-

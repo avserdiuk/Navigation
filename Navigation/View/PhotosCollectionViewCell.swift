@@ -38,6 +38,10 @@ class PhotosCollectionViewCell : UICollectionViewCell {
         self.img.image = image
     }
 
+    func setupWithIndex(with index : Int){
+        self.img.image = photos[index]
+    }
+
     // установка вью и констрейнтов
     private func setupView() {
         self.addSubview(img)
