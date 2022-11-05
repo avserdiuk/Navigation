@@ -47,9 +47,11 @@ class PhotosViewController : UIViewController {
     }
 
     func magic(){
-        ImageProcessor.init().processImagesOnThread(sourceImages: photos, filter: .chrome, qos: .background) { img in
+        print(DispatchTime.now())
+        ImageProcessor.init().processImagesOnThread(sourceImages: photos, filter: .chrome, qos: .default) { img in
             self.filteredImage = img
             self.result()
+            print(DispatchTime.now())
         }
     }
 
