@@ -53,6 +53,7 @@ class PhotoTableViewCell: UITableViewCell {
 
         addViews()
         addConstraints()
+
     }
 
     required init?(coder: NSCoder) {
@@ -91,7 +92,6 @@ extension PhotoTableViewCell : UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as? PhotosCollectionViewCell else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DefaultCell", for: indexPath)
             return cell

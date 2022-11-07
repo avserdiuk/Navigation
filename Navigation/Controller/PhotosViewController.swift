@@ -33,6 +33,10 @@ class PhotosViewController : UIViewController {
         return collectionView
     }()
 
+    // нужное для задания
+    var runCount : Int = 0
+    let filters : [ColorFilter] = [.colorInvert, .fade, .chrome, .noir]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = false
@@ -43,15 +47,25 @@ class PhotosViewController : UIViewController {
         addViews()
         addConstraints()
 
-        magic()
+        Timer.scheduledTimer(
+            withTimeInterval: 1.0,
+            repeats: true
+        ) { timer in
+
+            self.magic(self.filters[Int.random(in: 0..<self.filters.count-1)])
+
+            self.runCount += 1
+            if self.runCount == 10 {
+                timer.invalidate()
+            }
+        }
+
     }
 
-    func magic(){
-        print(DispatchTime.now())
-        ImageProcessor.init().processImagesOnThread(sourceImages: photos, filter: .chrome, qos: .default) { img in
+    func magic(_ filer: ColorFilter){
+        ImageProcessor.init().processImagesOnThread(sourceImages: photos, filter: filer, qos: .default) { img in
             self.filteredImage = img
             self.result()
-            print(DispatchTime.now())
         }
     }
 
