@@ -82,6 +82,14 @@ class LoginViewController : UIViewController {
     // добавляем кнопку Login
     private lazy var loginButton: CustomButton = CustomButton(title: "Log In", backgroundColor:  UIColor(patternImage: UIImage(named: "blue_pixel.png")!), cornerRadius: 10)
 
+    private lazy var generatePasswordButton: CustomButton = CustomButton(title: "Generate password (-_-)", backgroundColor:  UIColor(patternImage: UIImage(named: "blue_pixel.png")!), cornerRadius: 10)
+
+    private lazy var activityIndicator : UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -188,6 +196,44 @@ class LoginViewController : UIViewController {
             }
 
         }
+
+        generatePasswordButton.btnAction = {
+            self.passwordTextField.text = nil
+            self.generatePasswordButton.isEnabled = false
+            self.generatePasswordButton.backgroundColor = .systemGray
+
+            self.activityIndicator.startAnimating()
+
+            var password : String {
+                let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                return String((0..<3).map{ _ in letters.randomElement()! })
+            }
+
+            DispatchQueue.global(qos: .userInitiated).async {
+                self.bruteForce(passwordToUnlock: password)
+            }
+        }
+    }
+
+    func bruteForce(passwordToUnlock: String) {
+        let ALLOWED_CHARACTERS:   [String] = String().printable.map { String($0) }
+
+        var password: String = ""
+
+        // Will strangely ends at 0000 instead of ~~~
+        while password != passwordToUnlock { // Increase MAXIMUM_PASSWORD_SIZE value for more
+            password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
+        }
+
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.isHidden = true
+            self.passwordTextField.isSecureTextEntry = false
+            self.passwordTextField.text = password
+            self.generatePasswordButton.isEnabled = true
+            self.generatePasswordButton.backgroundColor = UIColor(patternImage: UIImage(named: "blue_pixel.png")!)
+        }
+
     }
 
     func addViews(){
@@ -203,6 +249,8 @@ class LoginViewController : UIViewController {
         scrollView.addSubview(stackViewTextFields)
 
         scrollView.addSubview(loginButton)
+        scrollView.addSubview(generatePasswordButton)
+        scrollView.addSubview(activityIndicator)
     }
 
     func addConstraints(){
@@ -238,7 +286,16 @@ class LoginViewController : UIViewController {
             loginButton.centerXAnchor.constraint(equalTo: super.view.centerXAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
             loginButton.leftAnchor.constraint(equalTo: super.view.leftAnchor, constant: 16),
+
+            generatePasswordButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
+            generatePasswordButton.centerXAnchor.constraint(equalTo: super.view.centerXAnchor),
+            generatePasswordButton.heightAnchor.constraint(equalToConstant: 50),
+            generatePasswordButton.leftAnchor.constraint(equalTo: super.view.leftAnchor, constant: 16),
+
+            activityIndicator.centerYAnchor.constraint(equalTo: passwordTextField.centerYAnchor),
+            activityIndicator.rightAnchor.constraint(equalTo: passwordTextField.rightAnchor, constant: -16),
         ])
     }
+
 }
 

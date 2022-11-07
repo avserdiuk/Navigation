@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		411311002902B9240025DD7C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411310FF2902B9240025DD7C /* CustomButton.swift */; };
+		4139BF342918166900383676 /* magic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4139BF332918166900383676 /* magic.swift */; };
 		4149C4C828AB635000E3C87A /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4149C4C728AB635000E3C87A /* ProfileTableHederView.swift */; };
 		414D654B28FDB41A008C062A /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 414D654A28FDB41A008C062A /* iOSIntPackage */; };
 		4152698E28A8411800D5CFEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4152698D28A8411800D5CFEC /* AppDelegate.swift */; };
@@ -58,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		411310FF2902B9240025DD7C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		4139BF332918166900383676 /* magic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = magic.swift; sourceTree = "<group>"; };
 		4149C4C728AB635000E3C87A /* ProfileTableHederView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHederView.swift; sourceTree = "<group>"; };
 		4152698A28A8411800D5CFEC /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4152698D28A8411800D5CFEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				41B6792F28C7BA3E00F36950 /* PhotoModel.swift */,
 				41A2FCCF28F884E1009E3E57 /* UserModel.swift */,
 				41BE9FC228FB1ABE0085DEDB /* Checker.swift */,
+				4139BF332918166900383676 /* magic.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				41729E8F28A902C700EF8DC5 /* ProfileViewController.swift in Sources */,
 				41A4866E28C5E1B500698734 /* PhotoTableViewCell.swift in Sources */,
 				41B6793228C7C03C00F36950 /* PhotosCollectionViewCell.swift in Sources */,
+				4139BF342918166900383676 /* magic.swift in Sources */,
 				4152699028A8411800D5CFEC /* SceneDelegate.swift in Sources */,
 				41729E8D28A9027300EF8DC5 /* FeedViewController.swift in Sources */,
 				411311002902B9240025DD7C /* CustomButton.swift in Sources */,
