@@ -12,6 +12,10 @@ import UIKit
 
 class LoginViewController : UIViewController {
 
+    enum AuthorisationErrors: Error {
+        case userNotFound
+    }
+
     // добавляем делегата
     var loginDelegate : LoginViewControllerDelegate?
 
@@ -95,6 +99,7 @@ class LoginViewController : UIViewController {
 
         // добавляем события для алерта
         alertController.addAction(UIAlertAction(title: "Повторить", style: .default))
+
     }
 
     // ------------------------------------------------------------------------------------------------
@@ -161,14 +166,24 @@ class LoginViewController : UIViewController {
 
     // ------------------------------------------------------------------------------------------------
 
+    func checkingAccess(_ login : String, _ password : String) throws {
+
+        if (self.loginDelegate?.check(self, login: login, password: password)) == false {
+            throw AuthorisationErrors.userNotFound
+        }
+
+    }
+
+
     // функция нажатия логин
     func addBtnActions() {
 
-        loginButton.btnAction = {
+        loginButton.btnAction =  {
 
             // берем то что вводит пользователь в поле "email"
             let enteredUserLogin = self.emailTextField.text
             let enteredUserPassword = self.passwordTextField.text
+
 
             // если мы в дебаг версии то меняем цвет фона, иначе оставляем все как было
 #if DEBUG
@@ -177,15 +192,30 @@ class LoginViewController : UIViewController {
             let userLogin = CurrentUserService(user: User(fio: "Prod Petrovich", avatar: UIImage(named: "avatarProd") ?? UIImage(), status: "Go to AppStore! (-_-)"))
 #endif
 
-            // проверка введеного логика на соответствие. Если все ок - переходим на другой контроллер, если нет - ошибка!
 
-            if self.loginDelegate?.check(self, login: enteredUserLogin ?? "", password: enteredUserPassword ?? "") == true {
+            do {
+                try self.checkingAccess(enteredUserLogin!, enteredUserPassword!)
+
                 let profileViewController = ProfileViewController()
                 profileViewController.user_1 = userLogin.user
                 self.navigationController?.pushViewController(profileViewController, animated: true)
-            } else {
-                self.present(self.alertController, animated: true, completion: nil)
+                print("No Error")
             }
+
+            catch AuthorisationErrors.userNotFound {
+                self.present(self.alertController, animated: true, completion: nil)
+                print("Error: user not found")
+            }
+
+            // проверка введеного логика на соответствие. Если все ок - переходим на другой контроллер, если нет - ошибка!
+
+            //            if self.loginDelegate?.check(self, login: enteredUserLogin ?? "", password: enteredUserPassword ?? "") == true {
+            //                let profileViewController = ProfileViewController()
+            //                profileViewController.user_1 = userLogin.user
+            //                self.navigationController?.pushViewController(profileViewController, animated: true)
+            //            } else {
+            //                self.present(self.alertController, animated: true, completion: nil)
+            //            }
 
         }
     }

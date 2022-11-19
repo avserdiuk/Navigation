@@ -11,10 +11,10 @@ import UIKit
 
 class CustomButton : UIButton {
 
-    var btnAction : () -> Void = {}
+    var btnAction : () throws -> Void = {}
 
-    @objc private func buttonTapped(){
-        btnAction()
+    @objc private func buttonTapped() throws {
+        try btnAction()
     }
 
     // иннициализатор с дефолтными параметрами кнопки, но если нужно задать какое то свойста - делаем это при создании кнопки
