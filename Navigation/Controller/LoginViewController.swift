@@ -136,7 +136,7 @@ class LoginViewController : UIViewController {
 
     // функция когда скрывает клавиатура, тут мы все считаем и определяем перекрытие
     @objc func didShowKeyboard(_ notification: Notification){
-        print("show keyboard")
+        //print("show keyboard")
 
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue

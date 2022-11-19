@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 
 class ProfileHeaderView : UITableViewHeaderFooterView {
+
+    enum StatusError : Error {
+        case newStatusNotEntered
+    }
     
     var statusText : String = ""
     
@@ -80,14 +84,30 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
         super.init(coder: coder)
     }
 
+    // функция с Result
+
+    func changeStatus(newStatus status : String, complition: @escaping (Result<String, StatusError>)-> Void ) {
+
+        if status == "" {
+            complition(.failure(.newStatusNotEntered))
+        } else {
+            complition(.success(status))
+        }
+    }
+
     // функция смены статуса по нажатию кнопки
     func addBtnActions() {
+
         setStatusButton.btnAction = {
-            if let text = self.statusLabel.text {
-                print(text)
-            }
-            if self.statusText != "" {
-                self.statusLabel.text = self.statusText
+
+            self.changeStatus(newStatus: self.statusTextField.text ?? "") { result in
+                switch result {
+                case .success(let status):
+                    self.statusLabel.text = status
+
+                case .failure(let error):
+                    print("Error: \(error)")
+                }
             }
         }
     }
