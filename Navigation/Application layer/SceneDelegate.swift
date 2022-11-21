@@ -11,7 +11,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     var feedTabNavigationController : UINavigationController!
-    var profileTabNavigationController : UINavigationController!
+    var mediaTabNavigationController : UINavigationController!
     var loginTabNavigationController : UINavigationController!
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -25,21 +25,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // создаем 2 контейнера и присваиваем им нужные представления ViewController
         feedTabNavigationController = UINavigationController.init(rootViewController: FeedViewController())
-        
+        mediaTabNavigationController = UINavigationController.init(rootViewController: MediaViewController())
+
         let loginVC = LoginViewController()
         //lvc.loginDelegate = LoginInspector() // делаем зависимость LoginViewController от LoginInspector (задание 1)
         loginVC.loginDelegate = MyLoginFactory().makeLoginInspector() // делаем зависимость LoginViewController от LoginInspector() (задание 2)
         loginTabNavigationController = UINavigationController.init(rootViewController: loginVC)
 
         // заполняем таббар контроллер
-        tabBarController.viewControllers = [feedTabNavigationController, loginTabNavigationController]
+        tabBarController.viewControllers = [feedTabNavigationController, mediaTabNavigationController, loginTabNavigationController]
         
         // cтилизация контейнеров
         let item1 = UITabBarItem(title: "Feed", image: UIImage(systemName: "text.bubble"), tag: 0)
-        let item2 = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
+        let item2 = UITabBarItem(title: "Media", image: UIImage(systemName: "play.square"), tag: 1)
+        let item3 = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 2)
         
         feedTabNavigationController.tabBarItem = item1
-        loginTabNavigationController.tabBarItem = item2
+        mediaTabNavigationController.tabBarItem = item2
+        loginTabNavigationController.tabBarItem = item3
         
         // стилизация TabBar'a
         UITabBar.appearance().tintColor = .systemBlue
