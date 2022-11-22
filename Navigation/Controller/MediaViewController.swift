@@ -11,7 +11,7 @@ import AVFoundation
 
 class MediaViewController : UIViewController {
 
-    let music = ["Queen", "Rene Amesz - Ah Na Na", "Corandcrank - La Alegria (Davtyan Beats Remix)", "DVRST - Close Eyes (Kevin Keat Remix)", "josh pan - Calvin Harris"]
+    let music = ["Queen"]
     var track = 0
 
 
