@@ -39,7 +39,6 @@ class MediaViewController : UIViewController {
     private lazy var stopBtn : UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(systemName: "stop"), for: .normal)
-        btn.tintColor = .systemGray
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.addTarget(self, action: #selector(stop), for: .touchUpInside)
         btn.isEnabled = false
@@ -63,7 +62,7 @@ class MediaViewController : UIViewController {
         return btn
     }()
 
-    var Player = AVAudioPlayer()
+    var player = AVAudioPlayer()
 
 
     override func viewDidLoad() {
@@ -115,8 +114,8 @@ class MediaViewController : UIViewController {
 
     func pp(track:String){
         do {
-            Player = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: track, ofType: "mp3")!))
-            Player.prepareToPlay()
+            player = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: track, ofType: "mp3")!))
+            player.prepareToPlay()
         }
         catch {
             print(error)
@@ -126,29 +125,25 @@ class MediaViewController : UIViewController {
     @objc
     func play(){
 
-        print(track, music.count-1)
-
         titleLable.text = music[track]
         stopBtn.isEnabled = true
 
-
-
-        if Player.isPlaying {
-            Player.pause()
+        if player.isPlaying {
+            player.pause()
             playBtn.setImage(UIImage(systemName: "play"), for: .normal)
         } else {
             pp(track: music[track])
-            Player.play()
+            player.play()
             playBtn.setImage(UIImage(systemName: "pause"), for: .normal)
-            stopBtn.tintColor = .systemBlue
+            stopBtn.isEnabled = true
         }
     }
 
     @objc
     func stop() {
-        if Player.currentTime != .zero {
-            Player.stop()
-            Player.currentTime = .zero
+        if player.currentTime != .zero {
+            player.stop()
+            player.currentTime = .zero
             stopBtn.isEnabled = false
             playBtn.setImage(UIImage(systemName: "play"), for: .normal)
             titleLable.text = ""

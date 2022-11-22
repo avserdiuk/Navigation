@@ -14,9 +14,9 @@ enum AppConfiguration : String {
     case third = "https://swapi.dev/api/planets/5"
 
     static func randomUrl() -> AppConfiguration {
-        let getRandom = [AppConfiguration.first, AppConfiguration.second, AppConfiguration.third]
-        let index = Int(arc4random_uniform(UInt32(getRandom.count)))
-        let url = getRandom[index]
+        let enumCases = [AppConfiguration.first, AppConfiguration.second, AppConfiguration.third]
+        let index = Int(arc4random_uniform(UInt32(enumCases.count)))
+        let url = enumCases[index]
         return url
     }
 }
@@ -27,12 +27,23 @@ struct NetworkManager {
 
         if let url = URL(string: configuration.rawValue) {
             let task = urlSession.dataTask(with: url, completionHandler: { data, responce, error in
-                print("🍏 \(data)")
-                print("🍏🍏 \(responce)")
-                print("🍏🍏🍏 \(error)")
+
+                if let parsedData = data {
+                    print("🍏 Data 🍏 \((String(data: parsedData, encoding: .utf8)))")
+                }
+
+                if let resrp = responce as? HTTPURLResponse {
+                    print("🍏 Responce 🍏")
+                    print("🍏 AllHeaderFields: \(resrp.allHeaderFields)")
+                    print("🍏 StatusCode: \(resrp.statusCode)")
+                }
+
+                print("🍏 Error: \(error)")
             })
 
             task.resume()
+
+            //Code=-1009 "The Internet connection appears to be offline."
         }
     }
 }
