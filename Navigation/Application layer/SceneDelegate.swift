@@ -57,7 +57,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
 
         // Генерируем рандомно элемент и выполняем запрос с сеть
-        appConfiguration = AppConfiguration.randomUrl()
+        appConfiguration = AppConfiguration.allCases.randomElement()
 
         if let config = appConfiguration {
             NetworkManager.request(for: config)

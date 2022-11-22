@@ -8,17 +8,10 @@
 
 import Foundation
 
-enum AppConfiguration : String {
+enum AppConfiguration : String, CaseIterable {
     case first = "https://swapi.dev/api/people/8"
     case second = "https://swapi.dev/api/starships/3"
     case third = "https://swapi.dev/api/planets/5"
-
-    static func randomUrl() -> AppConfiguration {
-        let enumCases = [AppConfiguration.first, AppConfiguration.second, AppConfiguration.third]
-        let index = Int(arc4random_uniform(UInt32(enumCases.count)))
-        let url = enumCases[index]
-        return url
-    }
 }
 
 struct NetworkManager {
