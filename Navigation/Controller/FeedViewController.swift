@@ -56,9 +56,10 @@ class FeedViewController : UIViewController {
 
         // проставляем действия на кнопки
         addBtnActions()
-        
-    }
 
+       
+    }
+    
     func addView(){
         //обьединяем кнопки в стеквью
         stackViewButton.addArrangedSubview(button1)

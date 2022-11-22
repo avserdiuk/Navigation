@@ -13,6 +13,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var feedTabNavigationController : UINavigationController!
     var mediaTabNavigationController : UINavigationController!
     var loginTabNavigationController : UINavigationController!
+
+    var appConfiguration: AppConfiguration?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -53,7 +55,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
         self.window = window
-        
+
+        // Генерируем рандомно элемент и выполняем запрос с сеть
+        appConfiguration = AppConfiguration.randomUrl()
+
+        if let config = appConfiguration {
+            NetworkManager.request(for: config)
+        } else {
+            print("❗️Bad url to request")
+        }
+
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
