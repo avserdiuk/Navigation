@@ -18,6 +18,14 @@ class InfoViewController : UIViewController{
     private lazy var button: CustomButton = CustomButton(title: " Close ")
     private lazy var buttonAlert: CustomButton = CustomButton(title: " Alert ")
 
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 18.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +34,7 @@ class InfoViewController : UIViewController{
         // проставляем элементы на экране
         view.addSubview(button)
         view.addSubview(buttonAlert)
+        view.addSubview(titleLabel)
 
         addConstraints()
         addBtnActions()
@@ -33,6 +42,9 @@ class InfoViewController : UIViewController{
         // добавляем события для алерта
         alertController.addAction(UIAlertAction(title: "Ok", style: .default))
         alertController.addAction(UIAlertAction(title: "Close", style: .default))
+
+        titleLabel.text = jsonUser.title
+
     }
 
     func addConstraints(){
@@ -41,7 +53,10 @@ class InfoViewController : UIViewController{
             buttonAlert.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 
             button.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
 

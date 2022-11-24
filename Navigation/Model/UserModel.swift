@@ -40,6 +40,7 @@ class User {
         self.avatar = avatar
         self.status = status
     }
-
-
 }
+
+
+
