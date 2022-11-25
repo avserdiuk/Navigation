@@ -26,6 +26,14 @@ class InfoViewController : UIViewController{
         return label
     }()
 
+    private let tatuinLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 18.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +43,7 @@ class InfoViewController : UIViewController{
         view.addSubview(button)
         view.addSubview(buttonAlert)
         view.addSubview(titleLabel)
+        view.addSubview(tatuinLabel)
 
         addConstraints()
         addBtnActions()
@@ -43,9 +52,10 @@ class InfoViewController : UIViewController{
         alertController.addAction(UIAlertAction(title: "Ok", style: .default))
         alertController.addAction(UIAlertAction(title: "Close", style: .default))
 
-        titleLabel.text = jsonUser.title
+        titleLabel.text = user.title
 
     }
+
 
     func addConstraints(){
         NSLayoutConstraint.activate([
@@ -57,6 +67,9 @@ class InfoViewController : UIViewController{
 
             titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+            tatuinLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 200),
+            tatuinLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
 
