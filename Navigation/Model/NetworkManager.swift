@@ -19,6 +19,10 @@ struct SomeData {
 
 var HW1 = SomeData()
 var HW2 = SomeData()
+var HW3 = SomeData()
+var residents : [String] = []
+var residentsName : [String] = []
+//var residentsName = [String] (repeating: "", count: 10)
 
 struct Planet : Codable {
     var name : String
@@ -46,7 +50,8 @@ struct NetworkManager {
 
                 if let parsedData = data { // разворачиваем опционал, проверяем полученные данные
 
-                    if configuration == AppConfiguration.first {
+                    switch configuration {
+                    case .first:
                         let str = String(data: parsedData, encoding: .utf8) // преобразовываем полученные даные в строку
 
                         if let stringToSerilization = str { // разворачиваем опционал, проверяем полученные данные
@@ -62,22 +67,53 @@ struct NetworkManager {
                                 print("Failed to load: \(error.localizedDescription)")
                             }
                         }
-                    } else {
+                    case .second:
                         do {
                             let decoder = JSONDecoder()
                             decoder.keyDecodingStrategy = .convertFromSnakeCase
                             let planet = try decoder.decode(Planet.self, from: parsedData)
                             HW2.data = planet.orbitalPeriod
+
+                            residents = planet.residents
+                            
                         }
                         catch let error {
-                            print(error)
+                            print(error.localizedDescription)
                         }
                     }
-
                 }
             })
             task.resume()
         }
     }
 
+    static func request2(for configuration: String, index: Int) {
+        let urlSession = URLSession(configuration: URLSessionConfiguration.default)
+
+        if let url = URL(string: configuration) { // получаем url для запроса
+            let task = urlSession.dataTask(with: url, completionHandler: { data, responce, error in
+
+                if let parsedData = data { // разворачиваем опционал, проверяем полученные данные
+
+                        let str = String(data: parsedData, encoding: .utf8) // преобразовываем полученные даные в строку
+
+                        if let stringToSerilization = str { // разворачиваем опционал, проверяем полученные данные
+                            let dataToSerilization = Data(stringToSerilization.utf8) // подготавливаем данные для преобразования в JSON
+
+                            do {
+                                if let json = try JSONSerialization.jsonObject(with: dataToSerilization, options: [] ) as? [String: Any] {
+                                    if let name = json["name"] as? String {
+                                        residents[index] = name
+                                        
+                                    }
+                                }
+                            } catch let error as NSError {
+                                print("Failed to load: \(error.localizedDescription)")
+                            }
+                        }
+                }
+            })
+            task.resume()
+        }
+    }
 }

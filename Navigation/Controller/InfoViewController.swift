@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class InfoViewController : UIViewController{
+class InfoViewController : UIViewController, UITableViewDelegate{
 
     // создаем алерт c заголовок и сообщением
     let alertController = UIAlertController(title: "TitlPfujke", message: "Test Message", preferredStyle: .alert)
@@ -34,16 +34,31 @@ class InfoViewController : UIViewController{
         return label
     }()
 
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.delegate = self
+        tableView.dataSource = self
+//        tableView.sectionHeaderHeight = UITableView.automaticDimension
+//        tableView.sectionFooterHeight = 0
+//        tableView.rowHeight = UITableView.automaticDimension
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "defaultTableCellIdentifier")
+        return tableView
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .tertiarySystemBackground
 
+
+
         // проставляем элементы на экране
         view.addSubview(button)
-        view.addSubview(buttonAlert)
+//        view.addSubview(buttonAlert)
         view.addSubview(titleLabel)
         view.addSubview(tatuinLabel)
+        view.addSubview(tableView)
 
         addConstraints()
         addBtnActions()
@@ -57,11 +72,19 @@ class InfoViewController : UIViewController{
 
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.tableView.reloadData()
+
+        }
+    }
+
 
     func addConstraints(){
         NSLayoutConstraint.activate([
-            buttonAlert.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            buttonAlert.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+//            buttonAlert.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            buttonAlert.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 
             button.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -71,6 +94,11 @@ class InfoViewController : UIViewController{
 
             tatuinLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 200),
             tatuinLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 250),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
 
@@ -84,9 +112,30 @@ class InfoViewController : UIViewController{
         }
     }
 
+}
+
+extension InfoViewController : UITableViewDataSource{
+
+    // Настраиваем кол-во секций в таблице
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    // Настраиваем кол-во строк в секциях
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return residents.count
+    }
+
+    // Заполняем данными таблицу.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "defaultTableCellIdentifier", for: indexPath)
+
+        NetworkManager.request2(for: residents[indexPath.row], index: indexPath.row)
+        cell.textLabel?.text = residents[indexPath.row]
 
 
-
-
-
+        return cell
+    
+    }
 }
