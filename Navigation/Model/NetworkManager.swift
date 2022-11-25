@@ -21,8 +21,6 @@ var HW1 = SomeData()
 var HW2 = SomeData()
 var HW3 = SomeData()
 var residents : [String] = []
-var residentsName : [String] = []
-//var residentsName = [String] (repeating: "", count: 10)
 
 struct Planet : Codable {
     var name : String
