@@ -19,7 +19,7 @@ struct SomeData {
 
 var HW1 = SomeData()
 var HW2 = SomeData()
-var HW3 = SomeData()
+
 var residents : [String] = []
 
 struct Planet : Codable {
@@ -93,22 +93,21 @@ struct NetworkManager {
 
                 if let parsedData = data { // разворачиваем опционал, проверяем полученные данные
 
-                        let str = String(data: parsedData, encoding: .utf8) // преобразовываем полученные даные в строку
+                    let str = String(data: parsedData, encoding: .utf8) // преобразовываем полученные даные в строку
 
-                        if let stringToSerilization = str { // разворачиваем опционал, проверяем полученные данные
-                            let dataToSerilization = Data(stringToSerilization.utf8) // подготавливаем данные для преобразования в JSON
+                    if let stringToSerilization = str { // разворачиваем опционал, проверяем полученные данные
+                        let dataToSerilization = Data(stringToSerilization.utf8) // подготавливаем данные для преобразования в JSON
 
-                            do {
-                                if let json = try JSONSerialization.jsonObject(with: dataToSerilization, options: [] ) as? [String: Any] {
-                                    if let name = json["name"] as? String {
-                                        residents[index] = name
-                                        
-                                    }
+                        do {
+                            if let json = try JSONSerialization.jsonObject(with: dataToSerilization, options: [] ) as? [String: Any] {
+                                if let name = json["name"] as? String {
+                                    residents[index] = name
                                 }
-                            } catch let error as NSError {
-                                print("Failed to load: \(error.localizedDescription)")
                             }
+                        } catch let error as NSError {
+                            print("Failed to load: \(error.localizedDescription)")
                         }
+                    }
                 }
             })
             task.resume()
