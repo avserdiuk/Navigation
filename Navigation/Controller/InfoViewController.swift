@@ -52,7 +52,8 @@ class InfoViewController : UIViewController{
         alertController.addAction(UIAlertAction(title: "Ok", style: .default))
         alertController.addAction(UIAlertAction(title: "Close", style: .default))
 
-        titleLabel.text = user.title
+        titleLabel.text = HW1.data
+        tatuinLabel.text = HW2.data
 
     }
 

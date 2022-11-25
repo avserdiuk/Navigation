@@ -55,8 +55,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
         self.window = window
 
-        // Генерируем рандомно элемент и выполняем запрос с сеть
+        // Выполняем запросы в сеть
         appConfiguration = AppConfiguration.first
+
+        if let config = appConfiguration {
+            NetworkManager.request(for: config)
+        } else {
+            print("❗️Bad url to request")
+        }
+
+        appConfiguration = AppConfiguration.second
 
         if let config = appConfiguration {
             NetworkManager.request(for: config)
