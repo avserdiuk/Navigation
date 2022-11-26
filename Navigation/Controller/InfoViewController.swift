@@ -80,7 +80,6 @@ class InfoViewController : UIViewController, UITableViewDelegate{
         }
     }
 
-
     func addConstraints(){
         NSLayoutConstraint.activate([
 //            buttonAlert.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -131,7 +130,7 @@ extension InfoViewController : UITableViewDataSource{
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "defaultTableCellIdentifier", for: indexPath)
 
-        NetworkManager.request2(for: residents[indexPath.row], index: indexPath.row)
+        NetworkManager.request(for: residents[indexPath.row], index: indexPath.row)
         cell.textLabel?.text = residents[indexPath.row]
 
 

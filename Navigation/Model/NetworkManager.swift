@@ -85,7 +85,7 @@ struct NetworkManager {
         }
     }
 
-    static func request2(for configuration: String, index: Int) {
+    static func request(for configuration: String, index: Int) {
         let urlSession = URLSession(configuration: URLSessionConfiguration.default)
 
         if let url = URL(string: configuration) { // получаем url для запроса
