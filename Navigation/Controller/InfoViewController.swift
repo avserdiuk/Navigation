@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class InfoViewController : UIViewController{
+class InfoViewController : UIViewController, UITableViewDelegate{
 
     // создаем алерт c заголовок и сообщением
     let alertController = UIAlertController(title: "TitlPfujke", message: "Test Message", preferredStyle: .alert)
@@ -18,6 +18,31 @@ class InfoViewController : UIViewController{
     private lazy var button: CustomButton = CustomButton(title: " Close ")
     private lazy var buttonAlert: CustomButton = CustomButton(title: " Alert ")
 
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 18.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private let tatuinLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 18.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "defaultTableCellIdentifier")
+        return tableView
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +50,10 @@ class InfoViewController : UIViewController{
 
         // проставляем элементы на экране
         view.addSubview(button)
-        view.addSubview(buttonAlert)
+        //        view.addSubview(buttonAlert)
+        view.addSubview(titleLabel)
+        view.addSubview(tatuinLabel)
+        view.addSubview(tableView)
 
         addConstraints()
         addBtnActions()
@@ -33,15 +61,38 @@ class InfoViewController : UIViewController{
         // добавляем события для алерта
         alertController.addAction(UIAlertAction(title: "Ok", style: .default))
         alertController.addAction(UIAlertAction(title: "Close", style: .default))
+
+        titleLabel.text = HW1.data
+        tatuinLabel.text = HW2.data
+
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.tableView.reloadData()
+
+        }
     }
 
     func addConstraints(){
         NSLayoutConstraint.activate([
-            buttonAlert.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            buttonAlert.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+//            buttonAlert.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            buttonAlert.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 
             button.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+            tatuinLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 200),
+            tatuinLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 250),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
 
@@ -55,9 +106,29 @@ class InfoViewController : UIViewController{
         }
     }
 
+}
 
+extension InfoViewController : UITableViewDataSource{
 
+    // Настраиваем кол-во секций в таблице
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
 
+    // Настраиваем кол-во строк в секциях
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return residents.count
+    }
 
+    // Заполняем данными таблицу.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
+        let cell = tableView.dequeueReusableCell(withIdentifier: "defaultTableCellIdentifier", for: indexPath)
+
+        NetworkManager.request(for: residents[indexPath.row], index: indexPath.row)
+        cell.textLabel?.text = residentsName[indexPath.row]
+
+        return cell
+
+    }
 }

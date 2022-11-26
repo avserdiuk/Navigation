@@ -13,7 +13,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var feedTabNavigationController : UINavigationController!
     var mediaTabNavigationController : UINavigationController!
     var loginTabNavigationController : UINavigationController!
-
     var appConfiguration: AppConfiguration?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -56,14 +55,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
         self.window = window
 
-        // Генерируем рандомно элемент и выполняем запрос с сеть
-        appConfiguration = AppConfiguration.allCases.randomElement()
+        // Выполняем запросы в сеть
+        appConfiguration = AppConfiguration.first
 
         if let config = appConfiguration {
             NetworkManager.request(for: config)
         } else {
             print("❗️Bad url to request")
         }
+
+        appConfiguration = AppConfiguration.second
+
+        if let config = appConfiguration {
+            NetworkManager.request(for: config)
+        } else {
+            print("❗️Bad url to request")
+        }
+
 
     }
     
