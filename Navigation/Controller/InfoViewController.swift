@@ -48,8 +48,6 @@ class InfoViewController : UIViewController, UITableViewDelegate{
         super.viewDidLoad()
         view.backgroundColor = .tertiarySystemBackground
 
-
-
         // проставляем элементы на экране
         view.addSubview(button)
         //        view.addSubview(buttonAlert)
