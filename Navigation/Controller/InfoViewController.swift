@@ -69,7 +69,7 @@ class InfoViewController : UIViewController, UITableViewDelegate{
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.tableView.reloadData()
 
         }
@@ -126,7 +126,7 @@ extension InfoViewController : UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "defaultTableCellIdentifier", for: indexPath)
 
         NetworkManager.request(for: residents[indexPath.row], index: indexPath.row)
-        cell.textLabel?.text = residents[indexPath.row]
+        cell.textLabel?.text = residentsName[indexPath.row]
 
         return cell
 

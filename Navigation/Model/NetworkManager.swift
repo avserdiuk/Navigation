@@ -21,6 +21,7 @@ var HW1 = SomeData()
 var HW2 = SomeData()
 
 var residents : [String] = []
+var residentsName : [String] = []
 
 struct Planet : Codable {
     var name : String
@@ -73,6 +74,7 @@ struct NetworkManager {
                             HW2.data = planet.orbitalPeriod
 
                             residents = planet.residents
+                            residentsName = [String](repeating: "", count: residents.count)
                             
                         }
                         catch let error {
@@ -101,7 +103,7 @@ struct NetworkManager {
                         do {
                             if let json = try JSONSerialization.jsonObject(with: dataToSerilization, options: [] ) as? [String: Any] {
                                 if let name = json["name"] as? String {
-                                    residents[index] = name
+                                    residentsName[index] = name
                                 }
                             }
                         } catch let error as NSError {
