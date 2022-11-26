@@ -39,9 +39,6 @@ class InfoViewController : UIViewController, UITableViewDelegate{
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
-//        tableView.sectionHeaderHeight = UITableView.automaticDimension
-//        tableView.sectionFooterHeight = 0
-//        tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "defaultTableCellIdentifier")
         return tableView
     }()
@@ -55,7 +52,7 @@ class InfoViewController : UIViewController, UITableViewDelegate{
 
         // проставляем элементы на экране
         view.addSubview(button)
-//        view.addSubview(buttonAlert)
+        //        view.addSubview(buttonAlert)
         view.addSubview(titleLabel)
         view.addSubview(tatuinLabel)
         view.addSubview(tableView)
@@ -133,8 +130,7 @@ extension InfoViewController : UITableViewDataSource{
         NetworkManager.request(for: residents[indexPath.row], index: indexPath.row)
         cell.textLabel?.text = residents[indexPath.row]
 
-
         return cell
-    
+
     }
 }
