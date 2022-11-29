@@ -33,6 +33,8 @@
 		41D2D77428BE2E5A00905066 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D2D77328BE2E5A00905066 /* LoginViewController.swift */; };
 		41D8D57E28C1EFDC00E62F40 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8D57D28C1EFDC00E62F40 /* PostTableViewCell.swift */; };
 		41DFC364292D0AB3009E746D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DFC363292D0AB3009E746D /* NetworkManager.swift */; };
+		41F70A052936A3D800FF8142 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41F70A042936A3D800FF8142 /* GoogleService-Info.plist */; };
+		41F70A082936A6DF00FF8142 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 41F70A072936A6DF00FF8142 /* FirebaseAuth */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +88,7 @@
 		41D8D57A28C1E92500E62F40 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		41D8D57D28C1EFDC00E62F40 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		41DFC363292D0AB3009E746D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		41F70A042936A3D800FF8142 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +97,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				416AA99728EB76B400077493 /* StorageService.framework in Frameworks */,
+				41F70A082936A6DF00FF8142 /* FirebaseAuth in Frameworks */,
 				414D654B28FDB41A008C062A /* iOSIntPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,6 +152,7 @@
 				41C03578292B549700E5C52A /* Music */,
 				4152699628A8411900D5CFEC /* Assets.xcassets */,
 				4152699B28A8411900D5CFEC /* Info.plist */,
+				41F70A042936A3D800FF8142 /* GoogleService-Info.plist */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -235,6 +240,7 @@
 			name = Navigation;
 			packageProductDependencies = (
 				414D654A28FDB41A008C062A /* iOSIntPackage */,
+				41F70A072936A6DF00FF8142 /* FirebaseAuth */,
 			);
 			productName = Navigation;
 			productReference = 4152698A28A8411800D5CFEC /* Navigation.app */;
@@ -288,6 +294,7 @@
 			mainGroup = 4152698128A8411800D5CFEC;
 			packageReferences = (
 				414D654928FDB41A008C062A /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
+				41F70A062936A6DF00FF8142 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 4152698B28A8411800D5CFEC /* Products */;
 			projectDirPath = "";
@@ -306,6 +313,7 @@
 			files = (
 				4152699728A8411900D5CFEC /* Assets.xcassets in Resources */,
 				41C0357E292B54E400E5C52A /* Queen.mp3 in Resources */,
+				41F70A052936A3D800FF8142 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,6 +647,14 @@
 				kind = branch;
 			};
 		};
+		41F70A062936A6DF00FF8142 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -646,6 +662,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 414D654928FDB41A008C062A /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
 			productName = iOSIntPackage;
+		};
+		41F70A072936A6DF00FF8142 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41F70A062936A6DF00FF8142 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
