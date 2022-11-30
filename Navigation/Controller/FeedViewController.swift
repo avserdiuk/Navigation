@@ -58,15 +58,6 @@ class FeedViewController : UIViewController {
         // проставляем действия на кнопки
         addBtnActions()
 
-
-
-       
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        do { try Auth.auth().signOut() }
-            catch { print("already logged out") }
     }
     
     func addView(){
