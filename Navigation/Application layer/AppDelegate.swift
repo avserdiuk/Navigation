@@ -21,22 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Auth.auth().addStateDidChangeListener { auth, user in
             if user == nil {
                 print("No authorized users")
-            } else {
-                if let user = user {
-                    let uid = user.uid
-                    let email = user.email
-                    let photoURL = user.photoURL
-                    var multiFactorString = "MultiFactor: "
-                    for info in user.multiFactor.enrolledFactors {
-                        multiFactorString += info.displayName ?? "[DispayName]"
-                        multiFactorString += " "
-                    }
-                    // ...
-//                    print("Authorized user: ")
-//                    print(uid, email, photoURL)
-                }
             }
-
         }
 
         return true
