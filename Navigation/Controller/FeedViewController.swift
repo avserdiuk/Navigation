@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class FeedViewController : UIViewController {
     
@@ -57,7 +58,6 @@ class FeedViewController : UIViewController {
         // проставляем действия на кнопки
         addBtnActions()
 
-       
     }
     
     func addView(){

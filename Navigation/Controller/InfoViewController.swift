@@ -50,7 +50,7 @@ class InfoViewController : UIViewController, UITableViewDelegate{
 
         // проставляем элементы на экране
         view.addSubview(button)
-        //        view.addSubview(buttonAlert)
+        //view.addSubview(buttonAlert)
         view.addSubview(titleLabel)
         view.addSubview(tatuinLabel)
         view.addSubview(tableView)
