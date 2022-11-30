@@ -35,6 +35,8 @@
 		41DFC364292D0AB3009E746D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DFC363292D0AB3009E746D /* NetworkManager.swift */; };
 		41F70A052936A3D800FF8142 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41F70A042936A3D800FF8142 /* GoogleService-Info.plist */; };
 		41F70A082936A6DF00FF8142 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 41F70A072936A6DF00FF8142 /* FirebaseAuth */; };
+		41F70A0A293749EC00FF8142 /* AuthMethods Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F70A09293749EC00FF8142 /* AuthMethods Temp.swift */; };
+		41F70A0C2937587500FF8142 /* CheckerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F70A0B2937587500FF8142 /* CheckerService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,8 @@
 		41D8D57D28C1EFDC00E62F40 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		41DFC363292D0AB3009E746D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		41F70A042936A3D800FF8142 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		41F70A09293749EC00FF8142 /* AuthMethods Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthMethods Temp.swift"; sourceTree = "<group>"; };
+		41F70A0B2937587500FF8142 /* CheckerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +209,8 @@
 				41A2FCCF28F884E1009E3E57 /* UserModel.swift */,
 				41BE9FC228FB1ABE0085DEDB /* Checker.swift */,
 				41DFC363292D0AB3009E746D /* NetworkManager.swift */,
+				41F70A09293749EC00FF8142 /* AuthMethods Temp.swift */,
+				41F70A0B2937587500FF8142 /* CheckerService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -341,6 +347,7 @@
 				41B6793028C7BA3E00F36950 /* PhotoModel.swift in Sources */,
 				41C03577292B536200E5C52A /* MediaViewController.swift in Sources */,
 				41729E9428AA3FEB00EF8DC5 /* InfoViewController.swift in Sources */,
+				41F70A0C2937587500FF8142 /* CheckerService.swift in Sources */,
 				41729E8F28A902C700EF8DC5 /* ProfileViewController.swift in Sources */,
 				41A4866E28C5E1B500698734 /* PhotoTableViewCell.swift in Sources */,
 				41B6793228C7C03C00F36950 /* PhotosCollectionViewCell.swift in Sources */,
@@ -349,6 +356,7 @@
 				411311002902B9240025DD7C /* CustomButton.swift in Sources */,
 				41BE9FC328FB1ABE0085DEDB /* Checker.swift in Sources */,
 				41A2FCD028F884E1009E3E57 /* UserModel.swift in Sources */,
+				41F70A0A293749EC00FF8142 /* AuthMethods Temp.swift in Sources */,
 				4149C4C828AB635000E3C87A /* ProfileTableHederView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

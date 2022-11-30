@@ -9,6 +9,8 @@
 
 import Foundation
 import UIKit
+import Firebase
+
 
 class LoginViewController : UIViewController {
 
@@ -100,9 +102,13 @@ class LoginViewController : UIViewController {
         // добавляем события для алерта
         alertController.addAction(UIAlertAction(title: "Повторить", style: .default))
 
+
+
+
     }
 
     // ------------------------------------------------------------------------------------------------
+
 
     // обработка открытия и закрытия клавиатуры
     override func viewWillAppear(_ animated: Bool) {
@@ -174,18 +180,33 @@ class LoginViewController : UIViewController {
 
     }
 
+    func alertBadPassword(message : String){
+        let alert = UIAlertController(title: "Error!", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Try again", style: .default))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func alertSuccess(message : String){
+        let alert = UIAlertController(title: "Done!", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Thx!", style: .default))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func alertBadLogin(message : String, complition: @escaping (Bool) -> Void) {
+        let alert = UIAlertController(title: "Error!", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Register new user", style: .default) { action in
+                complition(true)
+            })
+            alert.addAction(UIAlertAction(title: "Try again", style: .default))
+            self.present(alert, animated: true, completion: nil)
+    }
+
 
     // функция нажатия логин
     func addBtnActions() {
 
         loginButton.btnAction =  {
 
-            // берем то что вводит пользователь в поле "email"
-            let enteredUserLogin = self.emailTextField.text
-            let enteredUserPassword = self.passwordTextField.text
-
-
-            // если мы в дебаг версии то меняем цвет фона, иначе оставляем все как было
 #if DEBUG
             let userLogin = TestUserService(user: User(fio: "Ivan Testov", avatar: UIImage(named: "avatarTest") ?? UIImage(), status: "Testing app..."))
 #else
@@ -193,20 +214,55 @@ class LoginViewController : UIViewController {
 #endif
 
 
-            do {
-                try self.checkingAccess(enteredUserLogin!, enteredUserPassword!)
+            // берем то что вводит пользователь в поле "email"
+                        let enteredUserLogin = self.emailTextField.text!
+                        let enteredUserPassword = self.passwordTextField.text!
 
-                let profileViewController = ProfileViewController()
-                profileViewController.user_1 = userLogin.user
-                self.navigationController?.pushViewController(profileViewController, animated: true)
-                print("No Error")
+            CheckerService().checkCredentials(email: enteredUserLogin, password: enteredUserPassword) { result in
+                if result == "Success authorization" {
+                    let profileViewController = ProfileViewController()
+                    profileViewController.user_1 = userLogin.user
+                    self.navigationController?.pushViewController(profileViewController, animated: true)
+                } else if result == "There is no user record corresponding to this identifier. The user may have been deleted." {
+                    self.alertBadLogin(message: result) { result in
+                        CheckerService().signUp(email: enteredUserLogin, password: enteredUserPassword) { result in
+                            if result == "Success registration" {
+                                self.alertSuccess(message: result)
+
+                            } else {
+                                self.alertBadPassword(message: result)
+                            }
+                        }
+                    }
+                } else {
+                    self.alertBadPassword(message: result)
+                }
             }
 
-            catch AuthorisationErrors.userNotFound {
-                self.present(self.alertController, animated: true, completion: nil)
-                print("Error: user not found")
-            }
 
+            /*
+             // если мы в дебаг версии то меняем цвет фона, иначе оставляем все как было
+             #if DEBUG
+             let userLogin = TestUserService(user: User(fio: "Ivan Testov", avatar: UIImage(named: "avatarTest") ?? UIImage(), status: "Testing app..."))
+             #else
+             let userLogin = CurrentUserService(user: User(fio: "Prod Petrovich", avatar: UIImage(named: "avatarProd") ?? UIImage(), status: "Go to AppStore! (-_-)"))
+             #endif
+
+
+             do {
+             try self.checkingAccess(enteredUserLogin!, enteredUserPassword!)
+
+             let profileViewController = ProfileViewController()
+             profileViewController.user_1 = userLogin.user
+             self.navigationController?.pushViewController(profileViewController, animated: true)
+             print("No Error")
+             }
+
+             catch AuthorisationErrors.userNotFound {
+             self.present(self.alertController, animated: true, completion: nil)
+             print("Error: user not found")
+             }
+             */
             // проверка введеного логика на соответствие. Если все ок - переходим на другой контроллер, если нет - ошибка!
 
             //            if self.loginDelegate?.check(self, login: enteredUserLogin ?? "", password: enteredUserPassword ?? "") == true {
