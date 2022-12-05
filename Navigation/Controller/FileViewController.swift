@@ -14,7 +14,6 @@ class FileViewController: UIViewController, UIImagePickerControllerDelegate & UI
     var currentDirectory : URL = FileManagerService().documentsDirectoryUrl
     var content : [String] = []
 
-
     private lazy var tableView : UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -25,9 +24,12 @@ class FileViewController: UIViewController, UIImagePickerControllerDelegate & UI
     }()
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
+
         view.backgroundColor = .white
+
+        let createFolderItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createFolder))
+        navigationItem.rightBarButtonItems = [createFolderItem]
 
         view.addSubview(tableView)
 
@@ -39,10 +41,22 @@ class FileViewController: UIViewController, UIImagePickerControllerDelegate & UI
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
 
-        print("Current dir: \(currentDirectory)")
-
     }
 
+    @objc
+    func createFolder(){
+
+        //TODO: вызвать алерт с текстовым полем для ввода имени новой папки
+
+        let url = currentDirectory.appendingPathComponent("New Folder")
+
+        FileManagerService().createDirectory(url) {
+            self.content = FileManagerService().contentsOfDirectory(self.currentDirectory)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
 
 }
 
@@ -64,12 +78,12 @@ extension FileViewController : UITableViewDataSource{
     // Обработка клика на строку в таблице. При клике переходим на другое вью контроллер
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let rowURL = currentDirectory.appendingPathComponent(content[indexPath.row])
+        let URL = currentDirectory.appendingPathComponent(content[indexPath.row])
 
-        if FileManagerService().checkDirectory(url: rowURL) {
+        if FileManagerService().checkDirectory(URL) {
 
             let viewController = FileViewController()
-            viewController.currentDirectory = rowURL
+            viewController.currentDirectory = URL
             viewController.content = FileManagerService().contentsOfDirectory(viewController.currentDirectory)
             viewController.title = "\(content[indexPath.row])"
             navigationController?.pushViewController(viewController, animated: true)
@@ -82,7 +96,7 @@ extension FileViewController : UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "defaultTableCellIdentifier", for: indexPath)
         cell.textLabel?.text = content[indexPath.row]
 
-        if FileManagerService().checkDirectory(url: currentDirectory.appendingPathComponent(content[indexPath.row])) {
+        if FileManagerService().checkDirectory(currentDirectory.appendingPathComponent(content[indexPath.row])) {
             cell.accessoryType = .disclosureIndicator
         }
 
