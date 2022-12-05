@@ -15,6 +15,7 @@
 		4152699728A8411900D5CFEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4152699628A8411900D5CFEC /* Assets.xcassets */; };
 		416AA966293BA79900667306 /* FileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AA965293BA79900667306 /* FileViewController.swift */; };
 		416AA968293BD2FD00667306 /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AA967293BD2FD00667306 /* FileManagerService.swift */; };
+		416AA96A293E815600667306 /* temp in Resources */ = {isa = PBXBuildFile; fileRef = 416AA969293E815600667306 /* temp */; };
 		416AA99428EB76B400077493 /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = 416AA99328EB76B400077493 /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		416AA99728EB76B400077493 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 416AA99128EB76B400077493 /* StorageService.framework */; };
 		416AA99828EB76B400077493 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 416AA99128EB76B400077493 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -75,6 +76,7 @@
 		4152699B28A8411900D5CFEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		416AA965293BA79900667306 /* FileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileViewController.swift; sourceTree = "<group>"; };
 		416AA967293BD2FD00667306 /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
+		416AA969293E815600667306 /* temp */ = {isa = PBXFileReference; lastKnownFileType = text; path = temp; sourceTree = "<group>"; };
 		416AA99128EB76B400077493 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		416AA99328EB76B400077493 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
 		41729E8C28A9027300EF8DC5 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				41A4866F28C5F38B00698734 /* PhotosViewController.swift */,
 				41C03576292B536200E5C52A /* MediaViewController.swift */,
 				416AA965293BA79900667306 /* FileViewController.swift */,
+				416AA969293E815600667306 /* temp */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 			files = (
 				4152699728A8411900D5CFEC /* Assets.xcassets in Resources */,
 				41C0357E292B54E400E5C52A /* Queen.mp3 in Resources */,
+				416AA96A293E815600667306 /* temp in Resources */,
 				41F70A0E2937B50600FF8142 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

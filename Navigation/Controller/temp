@@ -1,0 +1,97 @@
+
+//        let createFolderItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createFolder))
+//        let addPhotoItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(addPhoto))
+//        navigationItem.rightBarButtonItems = [addPhotoItem, createFolderItem]
+
+
+
+        print("------------------")
+
+
+        do {
+            let documentsDirectoryUrl = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+
+            //print(documentsDirectoryUrl)
+            //print(documentsDirectoryUrl.path)
+
+            let test = documentsDirectoryUrl.appendingPathComponent("Test")
+            //print(test)
+            // создание директории
+            //            do {
+            //                try FileManager.default.createDirectory(at: test, withIntermediateDirectories: false)
+            //            } catch {
+            //                print(error)
+            //            }
+
+            // создание файла в директории
+
+            let test2 = test.appendingPathComponent("myFile2")
+            //print(test2)
+
+            //            do {
+            //                try FileManager.default.createFile(atPath: test2.path, contents: Data())
+            //            } catch {
+            //                print(error)
+            //            }
+
+            // Удаление файла или директории
+
+            //            do {
+            //                try FileManager.default.removeItem(at: test)
+            //            } catch {
+            //                print(error)
+            //            }
+
+            //Запросить все файлы в директории
+
+            //            do {
+            //                let content = try FileManager.default.contentsOfDirectory(atPath: documentsDirectoryUrl.path)
+            //
+            //                for (index, item) in content.enumerated() {
+            //                    print(item)
+            //                }
+            //            } catch {
+            //                print(error)
+            //            }
+
+
+        } catch {
+            print(error)
+        }
+        print("------------------")
+
+
+
+    @objc
+    func createFolder(){
+        print("createFolder")
+
+        showInputDialog(title: "Add new folder",
+                        subtitle: "Please enter the name",
+                        actionTitle: "Add",
+                        cancelTitle: "Cancel",
+                        inputPlaceholder: "New folder name",
+                        inputKeyboardType: .default, actionHandler:
+                            { (input:String?) in
+                FileManagerService().createDirectory(name: input ?? "") { result in
+
+                self.content = FileManagerService().contentsOfDirectory(dir: self.rootDirectory)
+
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+
+
+        })
+
+    }
+
+    @objc
+    func addPhoto(){
+        print("addPhoto")
+        let picker = UIImagePickerController()
+        //           picker.allowsEditing = true
+        picker.delegate = self
+        present(picker, animated: true)
+    }

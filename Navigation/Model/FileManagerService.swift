@@ -9,29 +9,28 @@
 import Foundation
 import UIKit
 
-
-//struct Content {
-//    var url : URL
-//    var isDirectory : Bool
-//    var name : String
-//}
-//
-//var content : [Content] = []
-
 protocol FileManagerServiceProtocol {
-    func contentsOfDirectory() -> [String]
-    //    func createDirectory()
+    func contentsOfDirectory(_ url : URL) -> [String]
+    //    func createDirectory(name: String, complition: (String) -> Void)
     //    func createFile()
     //    func removeContent()
 }
 
 class FileManagerService : FileManagerServiceProtocol{
 
-    private let documentsDirectoryUrl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+    let documentsDirectoryUrl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
 
-    func contentsOfDirectory() -> [String]{
+    func contentsOfDirectory(_ url : URL) -> [String]{
+        print("Get content for: \(url)")
+        var content : [String] = []
+
         do {
-            let content = try FileManager.default.contentsOfDirectory(atPath: documentsDirectoryUrl.path)
+            let URLs = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: [], options: .skipsHiddenFiles)
+
+            for url in URLs {
+                content.append(url.lastPathComponent)
+            }
+
             return content
         } catch {
             print(error)
@@ -40,23 +39,34 @@ class FileManagerService : FileManagerServiceProtocol{
         return []
     }
 
-    func createDirectory(name: String, complition: (String) -> Void) {
-        let name = documentsDirectoryUrl.appendingPathComponent(name)
+    //    func createDirectory(name: String, complition: (String) -> Void) {
+    //        let name = documentsDirectoryUrl.appendingPathComponent(name)
+    //
+    //        do {
+    //            try FileManager.default.createDirectory(at: name, withIntermediateDirectories: false)
+    //            complition("success")
+    //        } catch {
+    //            complition("\(error)")
+    //        }
+    //    }
 
-        do {
-            try FileManager.default.createDirectory(at: name, withIntermediateDirectories: false)
-            complition("success")
-        } catch {
-            complition("\(error)")
-        }
-    }
-
-    func checkDirectory(name : String) -> Bool {
-        let URL = documentsDirectoryUrl.appendingPathComponent(name)
-        return URL.isDirectory
+    func checkDirectory(url : URL) -> Bool {
+        url.isDirectory
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 extension URL {
     var isDirectory: Bool {

@@ -30,8 +30,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // создаем 2 контейнера и присваиваем им нужные представления ViewController
         feedTabNavigationController = UINavigationController.init(rootViewController: FeedViewController())
         mediaTabNavigationController = UINavigationController.init(rootViewController: MediaViewController())
-        fileTabNavigationController = UINavigationController.init(rootViewController: FileViewController())
 
+
+
+        let url = FileManagerService().documentsDirectoryUrl
+        let fileVC = FileViewController()
+        fileVC.title = "File Manager"
+        fileVC.content = FileManagerService().contentsOfDirectory(url)
+        fileTabNavigationController = UINavigationController.init(rootViewController: fileVC)
+
+
+
+        
         let loginVC = LoginViewController()
         //lvc.loginDelegate = LoginInspector() // делаем зависимость LoginViewController от LoginInspector (задание 1)
         loginVC.loginDelegate = MyLoginFactory().makeLoginInspector() // делаем зависимость LoginViewController от LoginInspector() (задание 2)
