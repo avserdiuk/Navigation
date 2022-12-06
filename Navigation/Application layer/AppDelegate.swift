@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         Auth.auth().addStateDidChangeListener { auth, user in
             if user == nil {
-                print("No authorized users")
+                //print("No authorized users")
             }
         }
 
