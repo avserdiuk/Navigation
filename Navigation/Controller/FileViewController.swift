@@ -11,8 +11,23 @@ import UIKit
 
 class FileViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
+//    let alertController = UIAlertController(title: "TitlPfujke", message: "Test Message", preferredStyle: .alert)
+//    alertController.addAction(UIAlertAction(title: "Ok", style: .default))
+//    alertController.addAction(UIAlertAction(title: "Close", style: .default))
+
     var currentDirectory : URL = FileManagerService().documentsDirectoryUrl
     var content : [String] = []
+
+//    private lazy var alert : UIAlertController = {
+//        let alert = UIAlertController(title: "Create a new folder", message: "Please write name for a new folder", preferredStyle: .alert)
+//        alert.addTextField()
+//        alert.addAction(UIAlertAction(title: "Create", style: .default, handler: { res in
+//            print(alert.textFields![0])
+//        }))
+//        alert.addAction(UIAlertAction(title: "Cancel", style: .default))
+//
+//        return alert
+//    }()
 
     private lazy var tableView : UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -46,16 +61,21 @@ class FileViewController: UIViewController, UIImagePickerControllerDelegate & UI
     @objc
     func createFolder(){
 
-        //TODO: вызвать алерт с текстовым полем для ввода имени новой папки
+    //TODO: разобраться как работает алерт и обработать ошибки ввода
 
-        let url = currentDirectory.appendingPathComponent("New Folder")
+        showInputDialog(title: "Create a new folder", actionHandler:  { text in
+            if let result = text {
+                let url = self.currentDirectory.appendingPathComponent(result)
 
-        FileManagerService().createDirectory(url) {
-            self.content = FileManagerService().contentsOfDirectory(self.currentDirectory)
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+                FileManagerService().createDirectory(url) {
+                    self.content = FileManagerService().contentsOfDirectory(self.currentDirectory)
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
             }
-        }
+        })
+
     }
 
 }
