@@ -9,25 +9,16 @@
 import Foundation
 import UIKit
 
-class FileViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
-
-//    let alertController = UIAlertController(title: "TitlPfujke", message: "Test Message", preferredStyle: .alert)
-//    alertController.addAction(UIAlertAction(title: "Ok", style: .default))
-//    alertController.addAction(UIAlertAction(title: "Close", style: .default))
+class FileViewController: UIViewController, UITableViewDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
     var currentDirectory : URL = FileManagerService().documentsDirectoryUrl
     var content : [String] = []
 
-//    private lazy var alert : UIAlertController = {
-//        let alert = UIAlertController(title: "Create a new folder", message: "Please write name for a new folder", preferredStyle: .alert)
-//        alert.addTextField()
-//        alert.addAction(UIAlertAction(title: "Create", style: .default, handler: { res in
-//            print(alert.textFields![0])
-//        }))
-//        alert.addAction(UIAlertAction(title: "Cancel", style: .default))
-//
-//        return alert
-//    }()
+    private lazy var imagePicker : UIImagePickerController = {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        return picker
+    }()
 
     private lazy var tableView : UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -44,7 +35,8 @@ class FileViewController: UIViewController, UIImagePickerControllerDelegate & UI
         view.backgroundColor = .white
 
         let createFolderItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createFolder))
-        navigationItem.rightBarButtonItems = [createFolderItem]
+        let addPhotoItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(addPhoto))
+        navigationItem.rightBarButtonItems = [addPhotoItem, createFolderItem]
 
         view.addSubview(tableView)
 
@@ -55,14 +47,10 @@ class FileViewController: UIViewController, UIImagePickerControllerDelegate & UI
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
-
     }
 
     @objc
     func createFolder(){
-
-    //TODO: разобраться как работает алерт и обработать ошибки ввода
-
         showInputDialog(title: "Create a new folder", actionHandler:  { text in
             if let result = text {
                 let url = self.currentDirectory.appendingPathComponent(result)
@@ -75,12 +63,35 @@ class FileViewController: UIViewController, UIImagePickerControllerDelegate & UI
                 }
             }
         })
+    }
+
+    @objc
+    func addPhoto(){
+        present(imagePicker, animated: true)
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+        if let rawURL = info[.imageURL] {
+            let stringURL = String(describing: rawURL)
+            let url = URL(string: stringURL)
+
+            if let url = url {
+                let destination = currentDirectory.appendingPathComponent(url.lastPathComponent)
+
+                FileManagerService().copyFile(from: url, to: destination) {
+                    self.content = FileManagerService().contentsOfDirectory(self.currentDirectory)
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+
+                    imagePicker.dismiss(animated: true)
+                }
+            }
+        }
 
     }
 
-}
-
-extension FileViewController : UITableViewDelegate {
 }
 
 extension FileViewController : UITableViewDataSource{
@@ -110,6 +121,19 @@ extension FileViewController : UITableViewDataSource{
         }
     }
 
+    // Удаление элемента
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+
+            let url = currentDirectory.appendingPathComponent(content[indexPath.row])
+
+            FileManagerService().removeContent(url) {
+                self.content = FileManagerService().contentsOfDirectory(self.currentDirectory)
+                self.tableView.reloadData()
+            }
+        }
+    }
+
     // Заполняем данными таблицу.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
@@ -118,10 +142,13 @@ extension FileViewController : UITableViewDataSource{
 
         if FileManagerService().checkDirectory(currentDirectory.appendingPathComponent(content[indexPath.row])) {
             cell.accessoryType = .disclosureIndicator
+        } else {
+            cell.accessoryType = .none
         }
 
         return cell
     }
+
 }
 
 

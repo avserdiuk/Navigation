@@ -12,8 +12,8 @@ import UIKit
 protocol FileManagerServiceProtocol {
     func contentsOfDirectory(_ url : URL) -> [String]
     func createDirectory(_ url: URL, complition: () -> Void)
-    //    func createFile()
-    //    func removeContent()
+    func copyFile(from url: URL, to destination: URL, complition: () -> Void)
+    func removeContent(_ url: URL, complition: () -> Void)
 }
 
 class FileManagerService : FileManagerServiceProtocol{
@@ -41,6 +41,24 @@ class FileManagerService : FileManagerServiceProtocol{
     func createDirectory(_ url: URL, complition: () -> Void) {
         do {
             try FileManager.default.createDirectory(at: url, withIntermediateDirectories: false)
+            complition()
+        } catch {
+            print(error)
+        }
+    }
+
+    func copyFile(from url: URL, to destination: URL, complition: () -> Void){
+        do {
+            try FileManager.default.copyItem(at: url, to: destination)
+            complition()
+        } catch {
+            print(error)
+        }
+    }
+
+    func removeContent(_ url: URL, complition: () -> Void){
+        do {
+            try FileManager.default.removeItem(at: url)
             complition()
         } catch {
             print(error)
