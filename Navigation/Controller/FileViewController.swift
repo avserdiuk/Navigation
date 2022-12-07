@@ -49,6 +49,24 @@ class FileViewController: UIViewController, UITableViewDelegate, UIImagePickerCo
         ])
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let sort = UserDefaults.standard.bool(forKey: "sortStatus")
+        if sort == true {
+            content.sort(by: <)
+            print("sort(by: <)")
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        } else {
+            content.sort(by: >)
+            print("sort(by: >)")
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+
     @objc
     func createFolder(){
         showInputDialog(title: "Create a new folder", actionHandler:  { text in

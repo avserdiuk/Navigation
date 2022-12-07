@@ -75,8 +75,9 @@ class PasswordViewController : UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        status = false
-        tryCount = 0
+        //        status = false
+        //        tryCount = 0
+        //        keychain["password"] = ""
 
         if status == false {
             button.setTitle("create password", for: .normal)
@@ -158,9 +159,7 @@ class PasswordViewController : UIViewController {
 
                     tabBarController.viewControllers = [fileTabNavigationController, settingsTabNavigationController]
 
-
                     self.navigationController?.pushViewController(tabBarController, animated: true)
-                    //self.present(tabBarController, animated: false)
                 }
 
             } else {
