@@ -75,9 +75,9 @@ class PasswordViewController : UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        //        status = false
-        //        tryCount = 0
-        //        keychain["password"] = ""
+//                status = false
+//                tryCount = 0
+//                keychain["password"] = ""
 
         if status == false {
             button.setTitle("create password", for: .normal)
@@ -103,6 +103,7 @@ class PasswordViewController : UIViewController {
                     print("success")
 
                     DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
+                        self.dismiss(animated: true)
                         self.button.setTitle("enter password", for: .normal)
                         self.button.backgroundColor = .systemBlue
                     }

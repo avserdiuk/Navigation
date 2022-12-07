@@ -93,6 +93,8 @@ class SettingViewController: UIViewController {
     @objc
     func changePassword(){
         print("show modal")
-        present(PasswordViewController(), animated: true)
+        let vc = PasswordViewController()
+        vc.status = false
+        present(vc, animated: true)
     }
 }
