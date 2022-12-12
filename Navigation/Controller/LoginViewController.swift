@@ -10,9 +10,16 @@
 import Foundation
 import UIKit
 import Firebase
+import RealmSwift
 
 
 class LoginViewController : UIViewController {
+
+#if DEBUG
+    var userLogin : TestUserService?
+#else
+    var userLogin : CurrentUserService?
+#endif
 
     enum AuthorisationErrors: Error {
         case userNotFound
@@ -114,6 +121,27 @@ class LoginViewController : UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+#if DEBUG
+        userLogin = TestUserService(user: User(fio: "Ivan Testov", avatar: UIImage(named: "avatarTest") ?? UIImage(), status: "Testing app..."))
+#else
+        userLogin = CurrentUserService(user: User(fio: "Prod Petrovich", avatar: UIImage(named: "avatarProd") ?? UIImage(), status: "Go to AppStore! (-_-)"))
+#endif
+
+
+        let realm = try! Realm()
+        let user = realm.objects(RealmUser.self)
+
+        if user.isEmpty {
+            print("user is emtpy")
+        } else {
+            if user[0].lastAuth != nil {
+                let profileViewController = ProfileViewController()
+                profileViewController.user_1 = userLogin!.user
+                self.navigationController?.pushViewController(profileViewController, animated: true)
+            }
+        }
+
+
         // для проверки изменения прозрачности кнопки при изменениии состояния снопки
 
         //        loginButton.isHighlighted = true
@@ -194,11 +222,11 @@ class LoginViewController : UIViewController {
 
     func alertBadLogin(message : String, complition: @escaping (Bool) -> Void) {
         let alert = UIAlertController(title: "Error!", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Register new user", style: .default) { action in
-                complition(true)
-            })
-            alert.addAction(UIAlertAction(title: "Try again", style: .default))
-            self.present(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: "Register new user", style: .default) { action in
+            complition(true)
+        })
+        alert.addAction(UIAlertAction(title: "Try again", style: .default))
+        self.present(alert, animated: true, completion: nil)
     }
 
 
@@ -207,27 +235,44 @@ class LoginViewController : UIViewController {
 
         loginButton.btnAction =  {
 
-#if DEBUG
-            let userLogin = TestUserService(user: User(fio: "Ivan Testov", avatar: UIImage(named: "avatarTest") ?? UIImage(), status: "Testing app..."))
-#else
-            let userLogin = CurrentUserService(user: User(fio: "Prod Petrovich", avatar: UIImage(named: "avatarProd") ?? UIImage(), status: "Go to AppStore! (-_-)"))
-#endif
+
 
 
             // берем то что вводит пользователь в поле "email"
-                        let enteredUserLogin = self.emailTextField.text!
-                        let enteredUserPassword = self.passwordTextField.text!
+            let enteredUserLogin = self.emailTextField.text!
+            let enteredUserPassword = self.passwordTextField.text!
 
             CheckerService().checkCredentials(email: enteredUserLogin, password: enteredUserPassword) { result in
                 if result == "Success authorization" {
+
+                    let realm = try! Realm()
+                    let todos = realm.objects(RealmUser.self)
+                    try! realm.write {
+                        todos[0].lastAuth = NSDate().timeIntervalSince1970
+                    }
+
                     let profileViewController = ProfileViewController()
-                    profileViewController.user_1 = userLogin.user
+                    profileViewController.user_1 = self.userLogin!.user
                     self.navigationController?.pushViewController(profileViewController, animated: true)
+
+
+
                 } else if result == "There is no user record corresponding to this identifier. The user may have been deleted." {
                     self.alertBadLogin(message: result) { result in
                         CheckerService().signUp(email: enteredUserLogin, password: enteredUserPassword) { result in
                             if result == "Success registration" {
                                 self.alertSuccess(message: result)
+
+
+                                let realm = try! Realm()
+                                let todo = RealmUser(login: enteredUserLogin, password: enteredUserPassword)
+
+                                //print("❗️\(realm)")
+                                try! realm.write {
+                                    realm.add(todo)
+                                    //print("❗️❗️\(realm)")
+                                }
+
 
                             } else {
                                 self.alertBadPassword(message: result)

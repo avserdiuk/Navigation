@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import RealmSwift
 
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -73,6 +74,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else {
             print("❗️Bad url to request")
         }
+
+        let config = Realm.Configuration(
+            schemaVersion: 4)
+        Realm.Configuration.defaultConfiguration = config
+        
+        let realm = try! Realm()
+
+        let todos = realm.objects(RealmUser.self)
+        print("❗️\(todos)")
+
+
+//        //delete user
+//        let todoToDelete = todos[0]
+//        try! realm.write {
+//            realm.delete(todoToDelete)
+//        }
+
 
 
     }
