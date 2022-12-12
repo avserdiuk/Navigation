@@ -12,10 +12,14 @@ import FirebaseAuth
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
+
+    let tabBarController = UITabBarController()
     var feedTabNavigationController : UINavigationController!
     var mediaTabNavigationController : UINavigationController!
     var loginTabNavigationController : UINavigationController!
     var fileTabNavigationController : UINavigationController!
+    var settingsTabNavigationController : UINavigationController!
+    var passwordNavigationController : UINavigationController!
     var appConfiguration: AppConfiguration?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -25,7 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         // создаем TabBarController
-        let tabBarController = UITabBarController()
+
         
         // создаем 2 контейнера и присваиваем им нужные представления ViewController
         feedTabNavigationController = UINavigationController.init(rootViewController: FeedViewController())
@@ -38,6 +42,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         fileVC.title = "File Manager"
         fileVC.content = FileManagerService().contentsOfDirectory(url)
         fileTabNavigationController = UINavigationController.init(rootViewController: fileVC)
+        settingsTabNavigationController = UINavigationController.init(rootViewController: SettingViewController())
+
+        passwordNavigationController = UINavigationController.init(rootViewController: PasswordViewController())
+        passwordNavigationController.isNavigationBarHidden = true
 
 
 
@@ -48,18 +56,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         loginTabNavigationController = UINavigationController.init(rootViewController: loginVC)
 
         // заполняем таббар контроллер
-        tabBarController.viewControllers = [fileTabNavigationController,feedTabNavigationController, mediaTabNavigationController, loginTabNavigationController]
+//        tabBarController.viewControllers = [fileTabNavigationController,feedTabNavigationController, mediaTabNavigationController, loginTabNavigationController]
+        tabBarController.viewControllers = [fileTabNavigationController, settingsTabNavigationController]
         
         // cтилизация контейнеров
         let item1 = UITabBarItem(title: "Feed", image: UIImage(systemName: "text.bubble"), tag: 0)
         let item2 = UITabBarItem(title: "Media", image: UIImage(systemName: "play.square"), tag: 1)
         let item3 = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 2)
+
         let item4 = UITabBarItem(title: "File", image: UIImage(systemName: "folder.fill"), tag: 3)
+        let item5 = UITabBarItem(title: "Settings", image: UIImage(systemName: "slider.horizontal.3"), tag: 4)
         
         feedTabNavigationController.tabBarItem = item1
         mediaTabNavigationController.tabBarItem = item2
         loginTabNavigationController.tabBarItem = item3
         fileTabNavigationController.tabBarItem = item4
+        settingsTabNavigationController.tabBarItem = item5
         
         // стилизация TabBar'a
         UITabBar.appearance().tintColor = .systemBlue
@@ -67,7 +79,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Запускаем созданный TabBarController как основное view представление
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = tabBarController
+        window.rootViewController = passwordNavigationController //tabBarController
         window.makeKeyAndVisible()
         self.window = window
 
