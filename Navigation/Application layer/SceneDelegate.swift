@@ -37,7 +37,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         loginTabNavigationController = UINavigationController.init(rootViewController: loginVC)
 
         // заполняем таббар контроллер
+//        if UserDefaults.standard.string(forKey: "userLogin") == nil {
+//            tabBarController.viewControllers = [feedTabNavigationController, mediaTabNavigationController, loginTabNavigationController]
+//        } else {
+//            tabBarController.viewControllers = [feedTabNavigationController, mediaTabNavigationController, loginTabNavigationController]
+//        }
+
         tabBarController.viewControllers = [feedTabNavigationController, mediaTabNavigationController, loginTabNavigationController]
+
         
         // cтилизация контейнеров
         let item1 = UITabBarItem(title: "Feed", image: UIImage(systemName: "text.bubble"), tag: 0)
@@ -86,10 +93,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 //        //delete user
-//        let todoToDelete = todos[0]
+//        let todoToDelete = todos
 //        try! realm.write {
 //            realm.delete(todoToDelete)
 //        }
+//        UserDefaults.standard.set(nil, forKey: "userLogin")
 
 
 

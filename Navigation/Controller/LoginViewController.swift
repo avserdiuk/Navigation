@@ -129,10 +129,14 @@ class LoginViewController : UIViewController {
 
 
         let realm = try! Realm()
-        let user = realm.objects(RealmUser.self)
+        let users = realm.objects(RealmUser.self)
+
+        let user = users.where {
+            $0.login == UserDefaults.standard.string(forKey: "userLogin")
+        }
 
         if user.isEmpty {
-            print("user is emtpy")
+            print("user not found")
         } else {
             if user[0].lastAuth != nil {
                 let profileViewController = ProfileViewController()
@@ -140,6 +144,8 @@ class LoginViewController : UIViewController {
                 self.navigationController?.pushViewController(profileViewController, animated: true)
             }
         }
+
+        print("--> \(user)")
 
 
         // для проверки изменения прозрачности кнопки при изменениии состояния снопки
@@ -246,11 +252,19 @@ class LoginViewController : UIViewController {
                 if result == "Success authorization" {
 
                     let realm = try! Realm()
-                    let todos = realm.objects(RealmUser.self)
-                    try! realm.write {
-                        todos[0].lastAuth = NSDate().timeIntervalSince1970
+                    let users = realm.objects(RealmUser.self)
+
+                    let user = users.where {
+                        $0.login == enteredUserLogin && $0.password == enteredUserPassword
                     }
 
+                    print(user)
+                    try! realm.write {
+                        user[0].lastAuth = NSDate().timeIntervalSince1970
+                        UserDefaults.standard.set(user[0].login, forKey: "userLogin")
+                    }
+                    print(user)
+                    
                     let profileViewController = ProfileViewController()
                     profileViewController.user_1 = self.userLogin!.user
                     self.navigationController?.pushViewController(profileViewController, animated: true)
@@ -265,11 +279,11 @@ class LoginViewController : UIViewController {
 
 
                                 let realm = try! Realm()
-                                let todo = RealmUser(login: enteredUserLogin, password: enteredUserPassword)
+                                let newUser = RealmUser(login: enteredUserLogin, password: enteredUserPassword)
 
                                 //print("❗️\(realm)")
                                 try! realm.write {
-                                    realm.add(todo)
+                                    realm.add(newUser)
                                     //print("❗️❗️\(realm)")
                                 }
 
