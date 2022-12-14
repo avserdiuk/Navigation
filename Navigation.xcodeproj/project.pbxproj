@@ -24,6 +24,7 @@
 		4181F5E72947606200BA4FDF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 4181F5E62947606200BA4FDF /* Realm */; };
 		4181F5E92947606200BA4FDF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4181F5E82947606200BA4FDF /* RealmSwift */; };
 		4181F5EB2947611600BA4FDF /* RealmAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4181F5EA2947611600BA4FDF /* RealmAuthModel.swift */; };
+		419B94A5294A33CA001B2E67 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419B94A4294A33CA001B2E67 /* FavoriteViewController.swift */; };
 		41A2FCD028F884E1009E3E57 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A2FCCF28F884E1009E3E57 /* UserModel.swift */; };
 		41A4866E28C5E1B500698734 /* PhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A4866D28C5E1B500698734 /* PhotoTableViewCell.swift */; };
 		41A4867028C5F38B00698734 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A4866F28C5F38B00698734 /* PhotosViewController.swift */; };
@@ -80,6 +81,7 @@
 		41729E9128AA2E3800EF8DC5 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		41729E9328AA3FEB00EF8DC5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		4181F5EA2947611600BA4FDF /* RealmAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmAuthModel.swift; sourceTree = "<group>"; };
+		419B94A4294A33CA001B2E67 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		41A2FCCF28F884E1009E3E57 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		41A4866D28C5E1B500698734 /* PhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTableViewCell.swift; sourceTree = "<group>"; };
 		41A4866F28C5F38B00698734 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				41729E9328AA3FEB00EF8DC5 /* InfoViewController.swift */,
 				41A4866F28C5F38B00698734 /* PhotosViewController.swift */,
 				41C03576292B536200E5C52A /* MediaViewController.swift */,
+				419B94A4294A33CA001B2E67 /* FavoriteViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				419B94A5294A33CA001B2E67 /* FavoriteViewController.swift in Sources */,
 				41DFC364292D0AB3009E746D /* NetworkManager.swift in Sources */,
 				41D8D57E28C1EFDC00E62F40 /* PostTableViewCell.swift in Sources */,
 				41A4867028C5F38B00698734 /* PhotosViewController.swift in Sources */,

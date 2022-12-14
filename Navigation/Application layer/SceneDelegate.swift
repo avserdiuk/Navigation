@@ -16,6 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var feedTabNavigationController : UINavigationController!
     var mediaTabNavigationController : UINavigationController!
     var loginTabNavigationController : UINavigationController!
+    var favoriteTabNavigationController : UINavigationController!
     var appConfiguration: AppConfiguration?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -36,6 +37,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         loginVC.loginDelegate = MyLoginFactory().makeLoginInspector() // делаем зависимость LoginViewController от LoginInspector() (задание 2)
         loginTabNavigationController = UINavigationController.init(rootViewController: loginVC)
 
+        favoriteTabNavigationController = UINavigationController.init(rootViewController: FavoriteViewController())
+
         // заполняем таббар контроллер
 //        if UserDefaults.standard.string(forKey: "userLogin") == nil {
 //            tabBarController.viewControllers = [feedTabNavigationController, mediaTabNavigationController, loginTabNavigationController]
@@ -43,17 +46,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            tabBarController.viewControllers = [feedTabNavigationController, mediaTabNavigationController, loginTabNavigationController]
 //        }
 
-        tabBarController.viewControllers = [feedTabNavigationController, mediaTabNavigationController, loginTabNavigationController]
+        tabBarController.viewControllers = [feedTabNavigationController, mediaTabNavigationController, loginTabNavigationController, favoriteTabNavigationController]
 
         
         // cтилизация контейнеров
         let item1 = UITabBarItem(title: "Feed", image: UIImage(systemName: "text.bubble"), tag: 0)
         let item2 = UITabBarItem(title: "Media", image: UIImage(systemName: "play.square"), tag: 1)
         let item3 = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 2)
+        let item4 = UITabBarItem(title: "Favorite", image: UIImage(systemName: "star.bubble"), tag: 3)
         
         feedTabNavigationController.tabBarItem = item1
         mediaTabNavigationController.tabBarItem = item2
         loginTabNavigationController.tabBarItem = item3
+        favoriteTabNavigationController.tabBarItem = item4
         
         // стилизация TabBar'a
         UITabBar.appearance().tintColor = .systemBlue
