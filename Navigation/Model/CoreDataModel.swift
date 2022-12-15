@@ -36,7 +36,7 @@ class CoreDataModel {
 
     var favoritePosts : [Favorite] = []
 
-    func getPosts() -> [Favorite] {
+    @discardableResult func getPosts() -> [Favorite] {
         let answer = Favorite.fetchRequest()
         do {
             let posts = try persistentContainer.viewContext.fetch(answer)
