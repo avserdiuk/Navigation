@@ -25,8 +25,8 @@
 		4181F5E92947606200BA4FDF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4181F5E82947606200BA4FDF /* RealmSwift */; };
 		4181F5EB2947611600BA4FDF /* RealmAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4181F5EA2947611600BA4FDF /* RealmAuthModel.swift */; };
 		419B94A5294A33CA001B2E67 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419B94A4294A33CA001B2E67 /* FavoriteViewController.swift */; };
-		419B94CB294A35AF001B2E67 /* Navigator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 419B94C9294A35AF001B2E67 /* Navigator.xcdatamodeld */; };
 		419B94CD294A3701001B2E67 /* CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419B94CC294A3701001B2E67 /* CoreDataModel.swift */; };
+		419B94D4294B2C45001B2E67 /* Navigator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 419B94D2294B2C45001B2E67 /* Navigator.xcdatamodeld */; };
 		41A2FCD028F884E1009E3E57 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A2FCCF28F884E1009E3E57 /* UserModel.swift */; };
 		41A4866E28C5E1B500698734 /* PhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A4866D28C5E1B500698734 /* PhotoTableViewCell.swift */; };
 		41A4867028C5F38B00698734 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A4866F28C5F38B00698734 /* PhotosViewController.swift */; };
@@ -84,8 +84,8 @@
 		41729E9328AA3FEB00EF8DC5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		4181F5EA2947611600BA4FDF /* RealmAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmAuthModel.swift; sourceTree = "<group>"; };
 		419B94A4294A33CA001B2E67 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
-		419B94CA294A35AF001B2E67 /* CoreDateProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDateProject.xcdatamodel; sourceTree = "<group>"; };
 		419B94CC294A3701001B2E67 /* CoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModel.swift; sourceTree = "<group>"; };
+		419B94D3294B2C45001B2E67 /* CoreDateProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDateProject.xcdatamodel; sourceTree = "<group>"; };
 		41A2FCCF28F884E1009E3E57 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		41A4866D28C5E1B500698734 /* PhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTableViewCell.swift; sourceTree = "<group>"; };
 		41A4866F28C5F38B00698734 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
@@ -167,7 +167,7 @@
 				4152699628A8411900D5CFEC /* Assets.xcassets */,
 				4152699B28A8411900D5CFEC /* Info.plist */,
 				41F70A0D2937B50600FF8142 /* GoogleService-Info.plist */,
-				419B94C9294A35AF001B2E67 /* Navigator.xcdatamodeld */,
+				419B94D2294B2C45001B2E67 /* Navigator.xcdatamodeld */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -356,7 +356,6 @@
 				419B94A5294A33CA001B2E67 /* FavoriteViewController.swift in Sources */,
 				41DFC364292D0AB3009E746D /* NetworkManager.swift in Sources */,
 				41D8D57E28C1EFDC00E62F40 /* PostTableViewCell.swift in Sources */,
-				419B94CB294A35AF001B2E67 /* Navigator.xcdatamodeld in Sources */,
 				41A4867028C5F38B00698734 /* PhotosViewController.swift in Sources */,
 				41729E9228AA2E3800EF8DC5 /* PostViewController.swift in Sources */,
 				41B6EC6C28ACCC7B00BF4C5A /* FeedModel.swift in Sources */,
@@ -371,6 +370,7 @@
 				41B6793228C7C03C00F36950 /* PhotosCollectionViewCell.swift in Sources */,
 				4152699028A8411800D5CFEC /* SceneDelegate.swift in Sources */,
 				41729E8D28A9027300EF8DC5 /* FeedViewController.swift in Sources */,
+				419B94D4294B2C45001B2E67 /* Navigator.xcdatamodeld in Sources */,
 				419B94CD294A3701001B2E67 /* CoreDataModel.swift in Sources */,
 				411311002902B9240025DD7C /* CustomButton.swift in Sources */,
 				4181F5EB2947611600BA4FDF /* RealmAuthModel.swift in Sources */,
@@ -716,14 +716,13 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		419B94C9294A35AF001B2E67 /* Navigator.xcdatamodeld */ = {
+		419B94D2294B2C45001B2E67 /* Navigator.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				419B94CA294A35AF001B2E67 /* CoreDateProject.xcdatamodel */,
+				419B94D3294B2C45001B2E67 /* CoreDateProject.xcdatamodel */,
 			);
-			currentVersion = 419B94CA294A35AF001B2E67 /* CoreDateProject.xcdatamodel */;
-			name = Navigator.xcdatamodeld;
-			path = ../../../../CoreDateProject/CoreDateProject/Navigator.xcdatamodeld;
+			currentVersion = 419B94D3294B2C45001B2E67 /* CoreDateProject.xcdatamodel */;
+			path = Navigator.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
