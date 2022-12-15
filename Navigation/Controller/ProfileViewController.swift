@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import StorageService
 import iOSIntPackage
+import CoreData
 
 class ProfileViewController : UIViewController {
 
@@ -26,6 +27,8 @@ class ProfileViewController : UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "postTableCellIdentifier")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "defaultTableCellIdentifier")
+        tableView.isUserInteractionEnabled = true
+
         return tableView
     }()
 
@@ -97,6 +100,7 @@ class ProfileViewController : UIViewController {
     @objc func tabClose(_ gestureRecognizer: UITapGestureRecognizer){
         closeAnimation()
     }
+
 
     // функция анимации аватарки
     private func showAnimation() {
@@ -200,6 +204,8 @@ class ProfileViewController : UIViewController {
         // для клика на кнопвку закрыть
         let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(self.tabClose(_:)))
         self.hiddenCloseView.addGestureRecognizer(tapGestureRecognizer2)
+
+
     }
     
 }
@@ -262,11 +268,12 @@ extension ProfileViewController : UITableViewDataSource{
             let post = posts[indexPath.row]
 
             let PostViewModel = PostTableViewCell.ViewModel(
+                pid : indexPath.row,
                 autor: post.autor,
                 descriptionText: post.description,
-                likes: "Likes: \(post.likes)",
-                views: "Views: \(post.views)",
-                image: post.image
+                likes: "\(post.likes)",
+                views: "\(post.views)",
+                image: "\(post.image)"
             )
             cell.setup(with: PostViewModel)
             return cell

@@ -8,15 +8,22 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class PostTableViewCell: UITableViewCell {
 
+    var pid : Int = 0
+    var imgPost : String = ""
+    var likesPost : Int = 0
+    var viewsPost : Int = 0
+
     struct ViewModel {
+        let pid : Int
         let autor: String
         let descriptionText: String
         let likes : String
         let views: String
-        let image: UIImage?
+        let image: String
     }
 
     private lazy var autor : UILabel = {
@@ -71,6 +78,10 @@ class PostTableViewCell: UITableViewCell {
         
         addViews()
         addConstraints()
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(addToFavotire(_:)))
+        tap.numberOfTapsRequired = 2
+        self.addGestureRecognizer(tap)
         
     }
     
@@ -78,12 +89,42 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // функция выполняющаяся при двойном нажатие на пост в ленте постов
+    @objc func addToFavotire(_ sender: UITapGestureRecognizer){
+
+        let posts = CoreDataModel().getPosts()
+        var postIndexes : [Int] = []
+
+        if posts.isEmpty {
+            print("post is empty")
+            CoreDataModel().addToFavorite(pid: pid, autor: autor.text!, desc: descriptionText.text!, likes: likesPost, views: viewsPost, img: imgPost)
+        } else {
+            for p in posts {
+                postIndexes.append(Int(p.pid))
+            }
+
+            if let index = postIndexes.firstIndex(of: pid) {
+                print("Post-\(index) already in favorite")
+
+            } else {
+                CoreDataModel().addToFavorite(pid: pid, autor: autor.text!, desc: descriptionText.text!, likes: likesPost, views: viewsPost, img: imgPost)
+            }
+        }
+
+    }
+
     public func setup(with viewModel: ViewModel) {
         self.autor.text = viewModel.autor
         self.descriptionText.text = viewModel.descriptionText
-        self.likes.text = viewModel.likes
-        self.views.text = viewModel.views
-        self.img.image = viewModel.image
+        self.likes.text = "Likes: \(viewModel.likes)"
+        self.views.text = "Views: \(viewModel.views)"
+        self.img.image = UIImage(named: "\(viewModel.image)")
+
+        self.pid = viewModel.pid
+        self.imgPost = viewModel.image
+        self.likesPost = Int(viewModel.likes) ?? 0
+        self.viewsPost = Int(viewModel.views) ?? 0
+
     }
 
     func addViews(){
@@ -93,7 +134,7 @@ class PostTableViewCell: UITableViewCell {
         self.contentView.addSubview(likes)
         self.contentView.addSubview(views)
     }
-    
+
     func addConstraints(){
         NSLayoutConstraint.activate([
             autor.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
@@ -115,7 +156,7 @@ class PostTableViewCell: UITableViewCell {
 
             views.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: 16),
             views.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
-            
+
         ])
     }
 }

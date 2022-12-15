@@ -91,10 +91,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             schemaVersion: 4)
         Realm.Configuration.defaultConfiguration = config
         
-        let realm = try! Realm()
+        //let realm = try! Realm()
 
-        let todos = realm.objects(RealmUser.self)
-        print("❗️\(todos)")
+        //let todos = realm.objects(RealmUser.self)
+        //print("❗️\(todos)")
 
 
 //        //delete user
@@ -137,7 +137,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
 
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        //(UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        CoreDataModel().saveContext()
     }
     
     
