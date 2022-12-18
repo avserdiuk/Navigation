@@ -82,7 +82,20 @@ class CoreDataModel {
         } catch {
             print(error)
         }
+    }
 
+    func deleteFromFavorite(index : Int){
+        let answer = Favorite.fetchRequest()
+        do {
+            let posts = try persistentContainer.viewContext.fetch(answer)
+            let context = persistentContainer.viewContext
+
+            context.delete(posts[index])
+
+            saveContext()
+        } catch {
+            print(error)
+        }
     }
 
     func addToFavorite(pid: Int, autor: String, desc: String, likes: Int, views: Int, img : String){

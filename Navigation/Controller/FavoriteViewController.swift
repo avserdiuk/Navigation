@@ -69,6 +69,22 @@ extension FavoriteViewController : UITableViewDataSource{
         return CoreDataModel().favoritePosts.count
     }
 
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        return UISwipeActionsConfiguration(actions: [
+            makeDeleteContextualAction(forRowAt: indexPath)
+        ])
+    }
+
+    private func makeDeleteContextualAction(forRowAt indexPath: IndexPath) -> UIContextualAction {
+            return UIContextualAction(style: .destructive, title: "Delete") { (action, swipeButtonView, completion) in
+                CoreDataModel().deleteFromFavorite(index: indexPath.row)
+                self.tableView.reloadData()
+                completion(true)
+            }
+        }
+
+
     // Заполняем данными таблицу.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
