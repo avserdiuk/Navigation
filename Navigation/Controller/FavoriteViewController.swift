@@ -10,6 +10,8 @@ import UIKit
 
 class FavoriteViewController : UIViewController {
 
+    var coreDataModel = CoreDataModel()
+
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -26,11 +28,12 @@ class FavoriteViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Favorite post"
+        self.title = "Favorite posts"
         view.backgroundColor = .white
 
+        let search = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(search))
         let clear = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(clear))
-        navigationItem.rightBarButtonItems = [clear]
+        navigationItem.rightBarButtonItems = [clear, search]
 
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
@@ -44,11 +47,18 @@ class FavoriteViewController : UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        coreDataModel.getPosts()
         tableView.reloadData()
     }
 
+    @objc func search() {
+        coreDataModel.getResults(query: "vedmak.official")
+        self.tableView.reloadData()
+
+    }
+
     @objc func clear() {
-        CoreDataModel().delete()
+        coreDataModel.getPosts()
         tableView.reloadData()
     }
 }
@@ -66,10 +76,11 @@ extension FavoriteViewController : UITableViewDataSource{
 
     // Настраиваем кол-во строк в секциях
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return CoreDataModel().favoritePosts.count
+        // return CoreDataModel().favoritePosts.count
+        return coreDataModel.favoritePosts.count
     }
 
-
+    // Удаление свайпом права
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         return UISwipeActionsConfiguration(actions: [
             makeDeleteContextualAction(forRowAt: indexPath)
@@ -77,34 +88,36 @@ extension FavoriteViewController : UITableViewDataSource{
     }
 
     private func makeDeleteContextualAction(forRowAt indexPath: IndexPath) -> UIContextualAction {
-            return UIContextualAction(style: .destructive, title: "Delete") { (action, swipeButtonView, completion) in
-                CoreDataModel().deleteFromFavorite(index: indexPath.row)
-                self.tableView.reloadData()
-                completion(true)
-            }
+        return UIContextualAction(style: .destructive, title: "Delete") { (action, swipeButtonView, completion) in
+            self.coreDataModel.deleteFromFavorite(index: indexPath.row)
+            self.coreDataModel.getPosts()
+            self.tableView.reloadData()
+            completion(true)
         }
+    }
 
 
     // Заполняем данными таблицу.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "postTableCellIdentifier", for: indexPath) as? PostTableViewCell else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "defaultTableCellIdentifier", for: indexPath)
-                return cell
-            }
-
-            let post = CoreDataModel().favoritePosts[indexPath.row]
-
-            let PostViewModel = PostTableViewCell.ViewModel(
-                pid: indexPath.row,
-                autor: post.autor!,
-                descriptionText: post.desc!,
-                likes: "\(post.likes)",
-                views: "\(post.views)",
-                image: "\(post.img!)"
-            )
-            cell.setup(with: PostViewModel)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "postTableCellIdentifier", for: indexPath) as? PostTableViewCell else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "defaultTableCellIdentifier", for: indexPath)
             return cell
+        }
+
+        let post = coreDataModel.favoritePosts[indexPath.row]
+
+        let PostViewModel = PostTableViewCell.ViewModel(
+            pid: indexPath.row,
+            autor: post.autor ?? "",
+            descriptionText: post.desc ?? "",
+            likes: "\(post.likes)",
+            views: "\(post.views)",
+            image: "\(post.img ?? "")"
+        )
+        cell.setup(with: PostViewModel)
+
+        return cell
 
     }
 }

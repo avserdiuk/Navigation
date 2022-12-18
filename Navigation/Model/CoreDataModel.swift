@@ -9,8 +9,6 @@
 import Foundation
 import CoreData
 
-
-
 class CoreDataModel {
 
     var favoritePosts : [Favorite] = []
@@ -32,7 +30,7 @@ class CoreDataModel {
     }()
 
     init() {
-        getPosts()
+
     }
 
     @discardableResult func getPosts() -> [Favorite] {
@@ -41,6 +39,20 @@ class CoreDataModel {
             let posts = try persistentContainer.viewContext.fetch(answer)
             favoritePosts = posts
             return favoritePosts
+        } catch {
+            print(error)
+        }
+        return []
+    }
+
+    @discardableResult func getResults(query : String) -> [Favorite]{
+        let answer = Favorite.fetchRequest()
+        answer.predicate = NSPredicate(format: "autor LIKE %@", query)
+        do {
+            let posts = try persistentContainer.viewContext.fetch(answer)
+            favoritePosts = posts
+            return favoritePosts
+            
         } catch {
             print(error)
         }
@@ -70,7 +82,7 @@ class CoreDataModel {
         }
     }
 
-    func delete(){
+    func deleteAll(){
         let answer = Favorite.fetchRequest()
         do {
             let posts = try persistentContainer.viewContext.fetch(answer)
@@ -91,7 +103,6 @@ class CoreDataModel {
             let context = persistentContainer.viewContext
 
             context.delete(posts[index])
-
             saveContext()
         } catch {
             print(error)
@@ -99,13 +110,15 @@ class CoreDataModel {
     }
 
     func addToFavorite(pid: Int, autor: String, desc: String, likes: Int, views: Int, img : String){
-        let post = Favorite(context: backgroundContext)
-        post.pid = Int32(pid)
-        post.autor = autor
-        post.desc = desc
-        post.likes = Int32(likes)
-        post.views = Int32(views)
-        post.img = img
-        saveBackgroundContext()
+        backgroundContext.perform {
+            let post = Favorite(context: self.backgroundContext)
+            post.pid = Int32(pid)
+            post.autor = autor
+            post.desc = desc
+            post.likes = Int32(likes)
+            post.views = Int32(views)
+            post.img = img
+            self.saveBackgroundContext()
+        }
     }
 }
