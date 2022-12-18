@@ -83,8 +83,8 @@ extension FavoriteViewController : UITableViewDataSource{
                 pid: indexPath.row,
                 autor: post.autor!,
                 descriptionText: post.desc!,
-                likes: "Likes: \(post.likes)",
-                views: "Views: \(post.views)",
+                likes: "\(post.likes)",
+                views: "\(post.views)",
                 image: "\(post.img!)"
             )
             cell.setup(with: PostViewModel)
