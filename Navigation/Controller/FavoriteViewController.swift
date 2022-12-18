@@ -52,9 +52,13 @@ class FavoriteViewController : UIViewController {
     }
 
     @objc func search() {
-        coreDataModel.getResults(query: "vedmak.official")
-        self.tableView.reloadData()
 
+        showInputDialog(title: "query:", actionHandler:  { text in
+            if let result = text {
+                self.coreDataModel.getResults(query: result)
+                self.tableView.reloadData()
+            }
+        })
     }
 
     @objc func clear() {
@@ -119,5 +123,33 @@ extension FavoriteViewController : UITableViewDataSource{
 
         return cell
 
+    }
+}
+
+extension UIViewController {
+    func showInputDialog(title:String? = nil,
+                         subtitle:String? = nil,
+                         actionTitle:String? = "Search",
+                         cancelTitle:String? = "Cancel",
+                         inputPlaceholder:String? = nil,
+                         inputKeyboardType:UIKeyboardType = UIKeyboardType.default,
+                         cancelHandler: ((UIAlertAction) -> Swift.Void)? = nil,
+                         actionHandler: ((_ text: String?) -> Void)? = nil) {
+
+        let alert = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
+        alert.addTextField { (textField:UITextField) in
+            textField.placeholder = inputPlaceholder
+            textField.keyboardType = inputKeyboardType
+        }
+        alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: { (action:UIAlertAction) in
+            guard let textField =  alert.textFields?.first else {
+                actionHandler?(nil)
+                return
+            }
+            actionHandler?(textField.text)
+        }))
+        alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: cancelHandler))
+
+        self.present(alert, animated: true, completion: nil)
     }
 }
