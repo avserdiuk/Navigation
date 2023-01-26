@@ -50,13 +50,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         tabBarController.viewControllers = [feedTabNavigationController, mediaTabNavigationController, loginTabNavigationController, favoriteTabNavigationController, mapTabNavigationController]
 
-        
         // cтилизация контейнеров
-        let item1 = UITabBarItem(title: "Feed", image: UIImage(systemName: "text.bubble"), tag: 0)
-        let item2 = UITabBarItem(title: "Media", image: UIImage(systemName: "play.square"), tag: 1)
-        let item3 = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 2)
-        let item4 = UITabBarItem(title: "Favorite", image: UIImage(systemName: "star.bubble"), tag: 3)
-        let item5 = UITabBarItem(title: "Map", image: UIImage(systemName: "map"), tag: 4)
+        let item1 = UITabBarItem(title: String(localized: "tabBar1Title"), image: UIImage(systemName: "text.bubble"), tag: 0)
+        let item2 = UITabBarItem(title: String(localized: "tabBar2Title"), image: UIImage(systemName: "play.square"), tag: 1)
+        let item3 = UITabBarItem(title: String(localized: "tabBar3Title"), image: UIImage(systemName: "person.fill"), tag: 2)
+        let item4 = UITabBarItem(title: String(localized: "tabBar4Title"), image: UIImage(systemName: "star.bubble"), tag: 3)
+        let item5 = UITabBarItem(title: String(localized: "tabBar5Title"), image: UIImage(systemName: "map"), tag: 4)
         
         feedTabNavigationController.tabBarItem = item1
         mediaTabNavigationController.tabBarItem = item2

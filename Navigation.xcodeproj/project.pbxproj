@@ -13,6 +13,8 @@
 		4152698E28A8411800D5CFEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4152698D28A8411800D5CFEC /* AppDelegate.swift */; };
 		4152699028A8411800D5CFEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4152698F28A8411800D5CFEC /* SceneDelegate.swift */; };
 		4152699728A8411900D5CFEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4152699628A8411900D5CFEC /* Assets.xcassets */; };
+		41677FB42982C545001A91A0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 41677FB62982C545001A91A0 /* Localizable.strings */; };
+		41677FBA29832458001A91A0 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 41677FBC29832458001A91A0 /* Localizable.stringsdict */; };
 		416AA99428EB76B400077493 /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = 416AA99328EB76B400077493 /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		416AA99728EB76B400077493 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 416AA99128EB76B400077493 /* StorageService.framework */; };
 		416AA99828EB76B400077493 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 416AA99128EB76B400077493 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -77,6 +79,10 @@
 		4152698F28A8411800D5CFEC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4152699628A8411900D5CFEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4152699B28A8411900D5CFEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41677FB52982C545001A91A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		41677FB72982C54A001A91A0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		41677FBB29832458001A91A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		41677FBE29832728001A91A0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		416AA99128EB76B400077493 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		416AA99328EB76B400077493 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
 		41729E8C28A9027300EF8DC5 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +167,8 @@
 		4152698C28A8411800D5CFEC /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				41677FBC29832458001A91A0 /* Localizable.stringsdict */,
+				41677FB62982C545001A91A0 /* Localizable.strings */,
 				41CC08D7290805E400430351 /* Application layer */,
 				41D8D57C28C1EF5300E62F40 /* Model */,
 				4149C4C628AB633400E3C87A /* View */,
@@ -314,6 +322,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 4152698128A8411800D5CFEC;
 			packageReferences = (
@@ -337,7 +346,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4152699728A8411900D5CFEC /* Assets.xcassets in Resources */,
+				41677FB42982C545001A91A0 /* Localizable.strings in Resources */,
 				41C0357E292B54E400E5C52A /* Queen.mp3 in Resources */,
+				41677FBA29832458001A91A0 /* Localizable.stringsdict in Resources */,
 				41F70A0E2937B50600FF8142 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,6 +412,27 @@
 			targetProxy = 416AA99528EB76B400077493 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		41677FB62982C545001A91A0 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				41677FB52982C545001A91A0 /* en */,
+				41677FB72982C54A001A91A0 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		41677FBC29832458001A91A0 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				41677FBB29832458001A91A0 /* en */,
+				41677FBE29832728001A91A0 /* ru */,
+			);
+			name = Localizable.stringsdict;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4152699C28A8411900D5CFEC /* Debug */ = {
