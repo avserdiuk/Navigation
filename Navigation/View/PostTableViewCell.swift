@@ -116,7 +116,11 @@ class PostTableViewCell: UITableViewCell {
     public func setup(with viewModel: ViewModel) {
         self.autor.text = viewModel.autor
         self.descriptionText.text = viewModel.descriptionText
-        self.likes.text = "Likes: \(viewModel.likes)"
+
+        let formattedString = NSLocalizedString("showLikesCount", comment: "")
+        let string = String(format: formattedString, Int(viewModel.likes) ?? 0)
+
+        self.likes.text = string
         self.views.text = "Views: \(viewModel.views)"
         self.img.image = UIImage(named: "\(viewModel.image)")
 

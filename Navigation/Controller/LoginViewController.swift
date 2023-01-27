@@ -50,6 +50,7 @@ class LoginViewController : UIViewController {
     private lazy var emailTextField : UITextField = {
         let textField = UITextField()
         textField.placeholder = "Email or phone"
+        textField.text = "test@test.ru"
         textField.font = UIFont(name: "system", size: 16.0)
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textField.frame.height))
         textField.leftViewMode = .always
@@ -69,6 +70,7 @@ class LoginViewController : UIViewController {
     private lazy var passwordTextField : UITextField = {
         let textField = UITextField()
         textField.placeholder = "Password"
+        textField.text = "test123"
         textField.font = UIFont(name: "system", size: 16.0)
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textField.frame.height))
         textField.leftViewMode = .always
@@ -240,9 +242,6 @@ class LoginViewController : UIViewController {
     func addBtnActions() {
 
         loginButton.btnAction =  {
-
-
-
 
             // берем то что вводит пользователь в поле "email"
             let enteredUserLogin = self.emailTextField.text!

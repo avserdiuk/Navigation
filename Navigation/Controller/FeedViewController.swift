@@ -16,21 +16,21 @@ class FeedViewController : UIViewController {
     var postTitle : PostFeed = PostFeed(title: "Post Title")
 
     // создаем КАСТОМНЫЕ кнопки
-    private lazy var button1 = CustomButton(title: " My custom button 1 ")
-    private lazy var button2 = CustomButton(title: " My custom button 2 ")
+    private lazy var button1 = CustomButton(title: String(localized: "btn1Title"))
+    private lazy var button2 = CustomButton(title: String(localized: "btn2Title"))
 
     // создаем новое поле ввода и кнопку
     private lazy var textField : UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Set your password.."
+        textField.placeholder = String(localized: "inputPasswordPlaceholder")
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftViewMode = .always
         textField.translatesAutoresizingMaskIntoConstraints = false
         //textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         return textField
     }()
-    private lazy var checkGuessButton = CustomButton(title: " checkGuessButton ")
-    private lazy var resultButton = CustomButton(title: " resultButton ")
+    private lazy var checkGuessButton = CustomButton(title: String(localized: "btn3Title"))
+    private lazy var resultButton = CustomButton(title: String(localized: "btn4Title"))
 
     // создаем стеквью
     private let stackViewButton : UIStackView = {
@@ -47,7 +47,7 @@ class FeedViewController : UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        self.title = "Feed"
+        self.title = String(localized: "tabBar1Title")
 
         // собираем и добавляем на экран
         addView()
@@ -97,10 +97,10 @@ class FeedViewController : UIViewController {
             let result : Bool = FeedModel().check(word: input)
             if result == true {
                 self.resultButton.backgroundColor = .green
-                self.resultButton.setTitle(" True ", for: .normal)
+                self.resultButton.setTitle(String(localized: "resultTrue"), for: .normal)
             } else {
                 self.resultButton.backgroundColor = .red
-                self.resultButton.setTitle(" False ", for: .normal)
+                self.resultButton.setTitle(String(localized: "resultFalse"), for: .normal)
             }
         }
     }

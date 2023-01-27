@@ -67,7 +67,7 @@ class MediaViewController : UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Media Player"
+        self.title = String(localized: "tabBar2Title")
         view.backgroundColor = .white
 
         view.addSubview(titleLable)
