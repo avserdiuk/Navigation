@@ -34,7 +34,7 @@ class ProfileHeaderView : UITableViewHeaderFooterView {
     private let fullNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Hipster Cat"
-        label.textColor = .black
+        label.textColor = colorTextColor
         label.font = UIFont(name: "HelveticaNeue-Bold", size: 18.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

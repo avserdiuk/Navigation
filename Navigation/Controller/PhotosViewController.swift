@@ -30,6 +30,7 @@ class PhotosViewController : UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = colorMainBackground
         return collectionView
     }()
 
@@ -41,8 +42,6 @@ class PhotosViewController : UIViewController {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = false
         self.title = "Photo Gallery"
-
-        view.backgroundColor = .white
 
         addViews()
         addConstraints()
