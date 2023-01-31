@@ -62,7 +62,7 @@ class LoginViewController : UIViewController {
     // создаем разделитель между текстовыми полями (для соответствия макету)
     private lazy var horizontalLine : UIView = {
         let horizontalLine = UIView()
-        horizontalLine.backgroundColor = .lightGray
+        horizontalLine.backgroundColor = colorBorder
         return horizontalLine
     }()
 
@@ -86,10 +86,10 @@ class LoginViewController : UIViewController {
         stackView.axis = .vertical
         stackView.distribution = .equalCentering
         stackView.alignment = .center
-        stackView.backgroundColor = .systemGray6
+        stackView.backgroundColor = colorSecondaryBackground
         stackView.layer.cornerRadius = 10
         stackView.layer.borderWidth = 0.5
-        stackView.layer.borderColor = UIColor.lightGray.cgColor
+        stackView.layer.borderColor = colorBorder.cgColor
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -99,7 +99,7 @@ class LoginViewController : UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = colorMainBackground
         self.setupGestures()
         self.navigationController?.navigationBar.isHidden = true
 

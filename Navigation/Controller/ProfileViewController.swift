@@ -14,6 +14,8 @@ import CoreData
 
 class ProfileViewController : UIViewController {
 
+
+
     // создаем пользователя по заданию
     var user_1 : User = User(fio: "", avatar: UIImage() ,status: "")
     
@@ -28,13 +30,14 @@ class ProfileViewController : UIViewController {
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "postTableCellIdentifier")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "defaultTableCellIdentifier")
         tableView.isUserInteractionEnabled = true
+        tableView.backgroundColor = colorSecondaryBackground
 
         return tableView
     }()
 
     private lazy var hiddenView : UIView = {
         var view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = colorMainBackground
         view.alpha = 0
         view.isHidden = true
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -79,10 +82,13 @@ class ProfileViewController : UIViewController {
             view.backgroundColor = UIColor(red: 245/255.0, green: 248/255.0, blue: 250/255.0, alpha: 1)
         #endif
 
+
         addViews()
         addConstraints()
         addGestures()
         addNotification()
+
+
 
 
     }
@@ -264,6 +270,8 @@ extension ProfileViewController : UITableViewDataSource{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "defaultTableCellIdentifier", for: indexPath)
                 return cell
             }
+
+            //cell.backgroundColor = colorMainBackground
 
             let post = posts[indexPath.row]
 

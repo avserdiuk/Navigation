@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		410CFC3B298537C300B88E71 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CFC3A298537C300B88E71 /* Extensions.swift */; };
 		411311002902B9240025DD7C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411310FF2902B9240025DD7C /* CustomButton.swift */; };
 		4149C4C828AB635000E3C87A /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4149C4C728AB635000E3C87A /* ProfileTableHederView.swift */; };
 		414D654B28FDB41A008C062A /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 414D654A28FDB41A008C062A /* iOSIntPackage */; };
@@ -72,6 +73,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		410CFC3A298537C300B88E71 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		411310FF2902B9240025DD7C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		4149C4C728AB635000E3C87A /* ProfileTableHederView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHederView.swift; sourceTree = "<group>"; };
 		4152698A28A8411800D5CFEC /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,6 +237,7 @@
 				41F70A0B2937587500FF8142 /* CheckerService.swift */,
 				4181F5EA2947611600BA4FDF /* RealmAuthModel.swift */,
 				419B94CC294A3701001B2E67 /* CoreDataModel.swift */,
+				410CFC3A298537C300B88E71 /* Extensions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				419B94D4294B2C45001B2E67 /* Navigator.xcdatamodeld in Sources */,
 				419B94CD294A3701001B2E67 /* CoreDataModel.swift in Sources */,
 				411311002902B9240025DD7C /* CustomButton.swift in Sources */,
+				410CFC3B298537C300B88E71 /* Extensions.swift in Sources */,
 				4181F5EB2947611600BA4FDF /* RealmAuthModel.swift in Sources */,
 				41BE9FC328FB1ABE0085DEDB /* Checker.swift in Sources */,
 				41A2FCD028F884E1009E3E57 /* UserModel.swift in Sources */,
@@ -560,7 +564,9 @@
 				DEVELOPMENT_TEAM = M59369L9JK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "$(MARKETING_VERSION)";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = 1.0;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -590,7 +596,9 @@
 				DEVELOPMENT_TEAM = M59369L9JK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "$(MARKETING_VERSION)";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = 1.0;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

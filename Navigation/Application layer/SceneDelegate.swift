@@ -64,8 +64,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         mapTabNavigationController.tabBarItem = item5
         
         // стилизация TabBar'a
-        UITabBar.appearance().tintColor = .systemBlue
-        UITabBar.appearance().backgroundColor = UIColor(red: 245/255.0, green: 248/255.0, blue: 250/255.0, alpha: 1)
+        UITabBar.appearance().tintColor = colorTabBarTint
+        UITabBar.appearance().backgroundColor = colorTabBarMainBackground
         
         // Запускаем созданный TabBarController как основное view представление
         let window = UIWindow(windowScene: windowScene)

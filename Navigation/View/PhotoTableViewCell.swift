@@ -16,7 +16,7 @@ class PhotoTableViewCell: UITableViewCell {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = "Photos"
-        titleLabel.textColor = .black
+        titleLabel.textColor = colorTextColor
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
         return titleLabel
     }()
@@ -25,7 +25,7 @@ class PhotoTableViewCell: UITableViewCell {
         let img = UIImageView()
         img.image = UIImage(systemName: "arrow.right")
         img.translatesAutoresizingMaskIntoConstraints = false
-        img.tintColor = .black
+        img.tintColor = colorTextColor
         return img
     }()
 

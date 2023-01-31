@@ -30,7 +30,7 @@ class PostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "vedmak.official"
-        label.textColor = .black
+        label.textColor = colorTextColor
         label.font = UIFont.boldSystemFont(ofSize: 20.0)
         label.numberOfLines = 2
         return label
@@ -59,7 +59,7 @@ class PostTableViewCell: UITableViewCell {
         let likes = UILabel()
         likes.translatesAutoresizingMaskIntoConstraints = false
         likes.text = "Likes: 643"
-        likes.textColor = .black
+        likes.textColor = colorTextColor
         likes.font = UIFont.systemFont(ofSize: 16.0)
         return likes
     }()
@@ -68,7 +68,7 @@ class PostTableViewCell: UITableViewCell {
         let views = UILabel()
         views.translatesAutoresizingMaskIntoConstraints = false
         views.text = "Views: 893"
-        views.textColor = .black
+        views.textColor = colorTextColor
         views.font = UIFont.systemFont(ofSize: 16.0)
         return views
     }()
