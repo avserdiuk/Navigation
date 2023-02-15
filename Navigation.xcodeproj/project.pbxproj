@@ -40,6 +40,7 @@
 		41C03577292B536200E5C52A /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C03576292B536200E5C52A /* MediaViewController.swift */; };
 		41C0357E292B54E400E5C52A /* Queen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 41C0357D292B54E400E5C52A /* Queen.mp3 */; };
 		41C03DC6297D2B7000B03174 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C03DC5297D2B7000B03174 /* MapViewController.swift */; };
+		41CBE529299BBE5E008D129B /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CBE528299BBE5E008D129B /* LocalAuthorizationService.swift */; };
 		41D2D77428BE2E5A00905066 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D2D77328BE2E5A00905066 /* LoginViewController.swift */; };
 		41D8D57E28C1EFDC00E62F40 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8D57D28C1EFDC00E62F40 /* PostTableViewCell.swift */; };
 		41DFC364292D0AB3009E746D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DFC363292D0AB3009E746D /* NetworkManager.swift */; };
@@ -105,6 +106,7 @@
 		41C03576292B536200E5C52A /* MediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 		41C0357D292B54E400E5C52A /* Queen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Queen.mp3; sourceTree = "<group>"; };
 		41C03DC5297D2B7000B03174 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		41CBE528299BBE5E008D129B /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		41D2D77328BE2E5A00905066 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		41D8D57A28C1E92500E62F40 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		41D8D57D28C1EFDC00E62F40 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 		41D8D57C28C1EF5300E62F40 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				41CBE528299BBE5E008D129B /* LocalAuthorizationService.swift */,
 				41B6EC6B28ACCC7B00BF4C5A /* FeedModel.swift */,
 				41B6792F28C7BA3E00F36950 /* PhotoModel.swift */,
 				41A2FCCF28F884E1009E3E57 /* UserModel.swift */,
@@ -379,6 +382,7 @@
 				41D2D77428BE2E5A00905066 /* LoginViewController.swift in Sources */,
 				4152698E28A8411800D5CFEC /* AppDelegate.swift in Sources */,
 				41C03DC6297D2B7000B03174 /* MapViewController.swift in Sources */,
+				41CBE529299BBE5E008D129B /* LocalAuthorizationService.swift in Sources */,
 				41B6793028C7BA3E00F36950 /* PhotoModel.swift in Sources */,
 				41C03577292B536200E5C52A /* MediaViewController.swift in Sources */,
 				41729E9428AA3FEB00EF8DC5 /* InfoViewController.swift in Sources */,
@@ -566,6 +570,7 @@
 				INFOPLIST_FILE = Navigation/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Нужно разрешения для выполнения ДЗ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = 1.0;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -598,6 +603,7 @@
 				INFOPLIST_FILE = Navigation/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Нужно разрешения для выполнения ДЗ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = 1.0;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
