@@ -50,7 +50,7 @@ class LoginViewController : UIViewController {
     private lazy var emailTextField : UITextField = {
         let textField = UITextField()
         textField.placeholder = "Email or phone"
-        textField.text = "test@test.ru"
+        textField.text = "test123@test.ru"
         textField.font = UIFont(name: "system", size: 16.0)
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textField.frame.height))
         textField.leftViewMode = .always
@@ -70,7 +70,7 @@ class LoginViewController : UIViewController {
     private lazy var passwordTextField : UITextField = {
         let textField = UITextField()
         textField.placeholder = "Password"
-        textField.text = "test123"
+        textField.text = "123123"
         textField.font = UIFont(name: "system", size: 16.0)
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textField.frame.height))
         textField.leftViewMode = .always
@@ -97,6 +97,8 @@ class LoginViewController : UIViewController {
     // добавляем кнопку Login
     private lazy var loginButton: CustomButton = CustomButton(title: "Log In", backgroundColor:  UIColor(patternImage: UIImage(named: "blue_pixel.png")!), cornerRadius: 10)
 
+    private lazy var loginButtonBiometry: CustomButton = CustomButton(title: " Log In with ", backgroundColor:  UIColor(patternImage: UIImage(named: "blue_pixel.png")!), cornerRadius: 10)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = colorMainBackground
@@ -111,9 +113,6 @@ class LoginViewController : UIViewController {
         // добавляем события для алерта
         alertController.addAction(UIAlertAction(title: "Повторить", style: .default))
 
-
-
-
     }
 
     // ------------------------------------------------------------------------------------------------
@@ -122,6 +121,16 @@ class LoginViewController : UIViewController {
     // обработка открытия и закрытия клавиатуры
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        let type = LocalAuthorizationService().canEvaluate()
+
+        if type == 2 {
+            loginButtonBiometry.setImage(UIImage(systemName: "faceid"),for: .normal)
+        } else if type == 1 {
+            loginButtonBiometry.setImage(UIImage(systemName: "touchid"),for: .normal)
+        } else {
+            loginButtonBiometry.isHidden = true
+        }
 
 #if DEBUG
         userLogin = TestUserService(user: User(fio: "Ivan Testov", avatar: UIImage(named: "avatarTest") ?? UIImage(), status: "Testing app..."))
@@ -241,29 +250,31 @@ class LoginViewController : UIViewController {
     // функция нажатия логин
     func addBtnActions() {
 
-        loginButton.btnAction =  {
+        func auth(){
 
             // берем то что вводит пользователь в поле "email"
             let enteredUserLogin = self.emailTextField.text!
             let enteredUserPassword = self.passwordTextField.text!
 
+
             CheckerService().checkCredentials(email: enteredUserLogin, password: enteredUserPassword) { result in
                 if result == "Success authorization" {
 
-                    let realm = try! Realm()
-                    let users = realm.objects(RealmUser.self)
+//                    let realm = try! Realm()
+//                    let users = realm.objects(RealmUser.self)
+//
+//
+//                    let user = users.where {
+//                        $0.login == enteredUserLogin && $0.password == enteredUserPassword
+//                    }
+//
+//                    print(user)
+//                    try! realm.write {
+//                        user[0].lastAuth = NSDate().timeIntervalSince1970
+//                        UserDefaults.standard.set(user[0].login, forKey: "userLogin")
+//                    }
+//                    print(user)
 
-                    let user = users.where {
-                        $0.login == enteredUserLogin && $0.password == enteredUserPassword
-                    }
-
-                    print(user)
-                    try! realm.write {
-                        user[0].lastAuth = NSDate().timeIntervalSince1970
-                        UserDefaults.standard.set(user[0].login, forKey: "userLogin")
-                    }
-                    print(user)
-                    
                     let profileViewController = ProfileViewController()
                     profileViewController.user_1 = self.userLogin!.user
                     self.navigationController?.pushViewController(profileViewController, animated: true)
@@ -330,7 +341,18 @@ class LoginViewController : UIViewController {
             //            } else {
             //                self.present(self.alertController, animated: true, completion: nil)
             //            }
+        }
 
+        loginButtonBiometry.btnAction = {
+                    LocalAuthorizationService().authorizeIfPossible { Bool, Error in
+                        if Bool {
+                            auth()
+                        }
+                    }
+        }
+
+        loginButton.btnAction =  {
+            auth()
         }
     }
 
@@ -347,6 +369,7 @@ class LoginViewController : UIViewController {
         scrollView.addSubview(stackViewTextFields)
 
         scrollView.addSubview(loginButton)
+        scrollView.addSubview(loginButtonBiometry)
     }
 
     func addConstraints(){
@@ -382,6 +405,11 @@ class LoginViewController : UIViewController {
             loginButton.centerXAnchor.constraint(equalTo: super.view.centerXAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
             loginButton.leftAnchor.constraint(equalTo: super.view.leftAnchor, constant: 16),
+
+            loginButtonBiometry.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
+            loginButtonBiometry.centerXAnchor.constraint(equalTo: super.view.centerXAnchor),
+            loginButtonBiometry.heightAnchor.constraint(equalToConstant: 50),
+            loginButtonBiometry.leftAnchor.constraint(equalTo: super.view.leftAnchor, constant: 16),
         ])
     }
 }
