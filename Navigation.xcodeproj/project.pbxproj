@@ -17,8 +17,8 @@
 		41677FB42982C545001A91A0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 41677FB62982C545001A91A0 /* Localizable.strings */; };
 		41677FBA29832458001A91A0 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 41677FBC29832458001A91A0 /* Localizable.stringsdict */; };
 		416AA99428EB76B400077493 /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = 416AA99328EB76B400077493 /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		416AA99728EB76B400077493 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 416AA99128EB76B400077493 /* StorageService.framework */; };
-		416AA99828EB76B400077493 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 416AA99128EB76B400077493 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		416AA99728EB76B400077493 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 416AA99128EB76B400077493 /* StorageService.framework */; platformFilter = ios; };
+		416AA99828EB76B400077493 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 416AA99128EB76B400077493 /* StorageService.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		416AA99D28EB76DA00077493 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8D57A28C1E92500E62F40 /* PostModel.swift */; };
 		41729E8D28A9027300EF8DC5 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41729E8C28A9027300EF8DC5 /* FeedViewController.swift */; };
 		41729E8F28A902C700EF8DC5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41729E8E28A902C700EF8DC5 /* ProfileViewController.swift */; };
@@ -420,6 +420,7 @@
 /* Begin PBXTargetDependency section */
 		416AA99628EB76B400077493 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 416AA99028EB76B400077493 /* StorageService */;
 			targetProxy = 416AA99528EB76B400077493 /* PBXContainerItemProxy */;
 		};
@@ -588,9 +589,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = aserdiuk.Navigation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -621,9 +625,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = aserdiuk.Navigation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -15,7 +15,6 @@ import CoreData
 class ProfileViewController : UIViewController {
 
 
-
     // создаем пользователя по заданию
     var user_1 : User = User(fio: "", avatar: UIImage() ,status: "")
     
@@ -31,6 +30,9 @@ class ProfileViewController : UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "defaultTableCellIdentifier")
         tableView.isUserInteractionEnabled = true
         tableView.backgroundColor = colorSecondaryBackground
+        tableView.dragInteractionEnabled = true
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
 
         return tableView
     }()
@@ -67,9 +69,6 @@ class ProfileViewController : UIViewController {
         return img
     }()
 
-    
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -82,15 +81,15 @@ class ProfileViewController : UIViewController {
             view.backgroundColor = UIColor(red: 245/255.0, green: 248/255.0, blue: 250/255.0, alpha: 1)
         #endif
 
-
         addViews()
         addConstraints()
         addGestures()
         addNotification()
 
+    }
 
-
-
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
     }
 
     @objc func didAvatarClick(notification: Notification) {
@@ -107,9 +106,8 @@ class ProfileViewController : UIViewController {
         closeAnimation()
     }
 
-
     // функция анимации аватарки
-    private func showAnimation() {
+    func showAnimation() {
 
         // вычисляем ширину коэфициент на который нужно соскейлить аватарку
         let scaleCoef = self.hiddenView.frame.width / self.hiddenAvatar.frame.width
@@ -137,31 +135,27 @@ class ProfileViewController : UIViewController {
     }
 
     // анимация при закрытии
-    private func closeAnimation() {
+    func closeAnimation() {
 
-        UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseInOut) {
-            // возвращаем аву и ее размеры на место
-            self.hiddenAvatar.transform = CGAffineTransform(scaleX: 1, y: 1)
+    UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseInOut) {
+        // возвращаем аву и ее размеры на место
+        self.hiddenAvatar.transform = CGAffineTransform(scaleX: 1, y: 1)
 
-            // возвращаем аватарку на стартовую позицию по заранее известным точкам так как аватарка у нас статичка и ее размер не изменяется. НО вообще можно было бы сделать динамическое вычисление этих точек, но пока не додумался что то(
-            self.hiddenAvatar.center = CGPoint(x: 66, y: 86)
+        // возвращаем аватарку на стартовую позицию по заранее известным точкам так как аватарка у нас статичка и ее размер не изменяется. НО вообще можно было бы сделать динамическое вычисление этих точек, но пока не додумался что то(
+        self.hiddenAvatar.center = CGPoint(x: 66, y: 86)
 
-            self.hiddenView.alpha = 0 // скрываем бекграунд
+        self.hiddenView.alpha = 0 // скрываем бекграунд
 
-            self.hiddenCloseView.isHidden = true // скрываем кнопку закрыть
+        self.hiddenCloseView.isHidden = true // скрываем кнопку закрыть
 
-            self.hiddenAvatar.isUserInteractionEnabled = true // скрываем возможность кликать на скрытую аватарку пока она увеличена
+        self.hiddenAvatar.isUserInteractionEnabled = true // скрываем возможность кликать на скрытую аватарку пока она увеличена
 
-        } completion: { _ in
-            // по окончанию отправяем уведомления о закрытии
-            NotificationCenter.default.post(name: Notification.Name("closeClick!"), object: nil)
-            self.hiddenAvatar.isHidden = true
-        }
+    } completion: { _ in
+        // по окончанию отправяем уведомления о закрытии
+        NotificationCenter.default.post(name: Notification.Name("closeClick!"), object: nil)
+        self.hiddenAvatar.isHidden = true
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.isHidden = true
-    }
+}
 
     func addNotification(){
         // уведомление о клике на аватарку, что бы скрыть основную и показать все скрытое
@@ -281,7 +275,7 @@ extension ProfileViewController : UITableViewDataSource{
                 descriptionText: post.description,
                 likes: "\(post.likes)",
                 views: "\(post.views)",
-                image: "\(post.image)"
+                image: post.image
             )
             cell.setup(with: PostViewModel)
             return cell
@@ -289,5 +283,69 @@ extension ProfileViewController : UITableViewDataSource{
         } else {
             return tableView.dequeueReusableCell(withIdentifier: "defaultTableCellIdentifier", for: indexPath)
         }
+    }
+}
+
+extension ProfileViewController : UITableViewDragDelegate {
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+
+        let description = posts[indexPath.row].description
+        let image = posts[indexPath.row].image
+
+        let itemDescription = NSItemProvider(object: NSString(string: description))
+        let itemImage = NSItemProvider(object: image ?? UIImage())
+
+        let dragItem1 = UIDragItem(itemProvider: itemDescription)
+        let dragItem2 = UIDragItem(itemProvider: itemImage)
+
+        return [dragItem2, dragItem1]
+    }
+}
+
+extension ProfileViewController : UITableViewDropDelegate {
+
+    func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
+        let img = session.canLoadObjects(ofClass: UIImage.self)
+        let str = session.canLoadObjects(ofClass: NSString.self)
+
+        return img || str
+    }
+
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        return UITableViewDropProposal(operation: .copy, intent: .insertAtDestinationIndexPath)
+    }
+
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+
+        let destinationIndexPath = IndexPath(item: tableView.numberOfRows(inSection: 1), section: 1)
+        var newPost = postSample
+
+                for item in coordinator.items {
+                    item.dragItem.itemProvider.loadObject(ofClass: NSString.self, completionHandler: { string, error in
+                        if let desc = string {
+                            newPost.description = desc as! String
+
+                            posts.append(newPost)
+
+                            DispatchQueue.main.async {
+                                tableView.insertRows(at: [destinationIndexPath], with: .automatic)
+                            }
+                        }
+                    })
+
+                    item.dragItem.itemProvider.loadObject(ofClass: UIImage.self, completionHandler: { image, error in
+
+                        if let img = image {
+                            newPost.image = img as? UIImage
+
+                            posts.append(newPost)
+
+                            DispatchQueue.main.async {
+                                tableView.insertRows(at: [destinationIndexPath], with: .automatic)
+                            }
+                        }
+                    })
+                }
+
     }
 }
