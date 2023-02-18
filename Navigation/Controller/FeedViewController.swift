@@ -57,6 +57,12 @@ class FeedViewController : UIViewController {
 
         // проставляем действия на кнопки
         addBtnActions()
+        //print("🎄11")
+
+//        LocalAuthorizationService().authorizeIfPossible { type in
+////            print(type)
+////            print("🎄🎄11")
+//        }
 
     }
     

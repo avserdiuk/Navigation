@@ -23,7 +23,7 @@ class PostTableViewCell: UITableViewCell {
         let descriptionText: String
         let likes : String
         let views: String
-        let image: String
+        let image: UIImage?
     }
 
     private lazy var autor : UILabel = {
@@ -122,10 +122,10 @@ class PostTableViewCell: UITableViewCell {
 
         self.likes.text = string
         self.views.text = "Views: \(viewModel.views)"
-        self.img.image = UIImage(named: "\(viewModel.image)")
+        self.img.image = viewModel.image
 
         self.pid = viewModel.pid
-        self.imgPost = viewModel.image
+        self.imgPost = "viewModel.image"
         self.likesPost = Int(viewModel.likes) ?? 0
         self.viewsPost = Int(viewModel.views) ?? 0
 

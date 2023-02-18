@@ -109,17 +109,17 @@ extension FavoriteViewController : UITableViewDataSource{
             return cell
         }
 
-        let post = coreDataModel.favoritePosts[indexPath.row]
-
-        let PostViewModel = PostTableViewCell.ViewModel(
-            pid: indexPath.row,
-            autor: post.autor ?? "",
-            descriptionText: post.desc ?? "",
-            likes: "\(post.likes)",
-            views: "\(post.views)",
-            image: "\(post.img ?? "")"
-        )
-        cell.setup(with: PostViewModel)
+//        let post = coreDataModel.favoritePosts[indexPath.row]
+//
+//        let PostViewModel = PostTableViewCell.ViewModel(
+//            pid: indexPath.row,
+//            autor: post.autor ?? "",
+//            descriptionText: post.desc ?? "",
+//            likes: "\(post.likes)",
+//            views: "\(post.views)",
+//            image: "\(post.img ?? "")"
+//        )
+//        cell.setup(with: PostViewModel)
 
         return cell
 
